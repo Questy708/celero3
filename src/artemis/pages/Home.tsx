@@ -472,9 +472,12 @@ function MissionBridge() {
 
 /* Live countdown hook — ticks every second toward a target date */
 function useCountdown(targetDate: Date) {
+  const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
+    setMounted(true);
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -485,7 +488,7 @@ function useCountdown(targetDate: Date) {
   const minutes = Math.floor((diff % 3600000) / 60000);
   const seconds = Math.floor((diff % 60000) / 1000);
 
-  return { days, hours, minutes, seconds, elapsed: diff === 0 };
+  return { days, hours, minutes, seconds, elapsed: diff === 0, mounted };
 }
 
 /* Pad a number to 2 digits */
@@ -499,7 +502,7 @@ function BentoGrid() {
 
   // Year One launch: March 15, 2027 — first cohort departs the Gulf of Guinea
   const launchDate = new Date("2027-03-15T00:00:00Z");
-  const { days, hours, minutes, seconds } = useCountdown(launchDate);
+  const { days, hours, minutes, seconds, mounted } = useCountdown(launchDate);
 
   const pillars = [
     {
@@ -568,7 +571,7 @@ function BentoGrid() {
                 }`}
               >
                 <span className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white leading-none tabular-nums">
-                  {pad2(unit.value)}
+                  {mounted ? pad2(unit.value) : "--"}
                 </span>
                 <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
                   {unit.label}
