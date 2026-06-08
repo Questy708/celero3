@@ -471,8 +471,8 @@ function HeroSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative bg-white text-[#111111] pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
-      <div ref={ref} className="w-full max-w-[1400px] mx-auto text-center">
+    <section className="relative bg-white text-[#111111] pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
+      <div ref={ref} className="w-full max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -536,13 +536,13 @@ function PreambleSection() {
       ref={ref}
       className="py-20 md:py-28 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10"
     >
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl leading-[1.8] text-[#111111]/60 font-medium max-w-3xl">
+          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl leading-[1.8] text-[#111111]/60 font-medium">
             <p>
               It&apos;s a diagram of political cages. Lines drawn by men who never
               walked the terrain.
@@ -577,7 +577,7 @@ function PreambleSection() {
             </p>
           </div>
 
-          <div className="mt-14 pt-14 border-t border-[#111111]/10 max-w-3xl">
+          <div className="mt-14 pt-14 border-t border-[#111111]/10">
             <p className="text-[20px] sm:text-[24px] md:text-[30px] font-display font-medium tracking-[-0.02em] leading-[1.25] text-[#111111]">
               You can&apos;t prototype civilization from a desk.{" "}
               <span className="text-[#FF4D00]">
