@@ -467,51 +467,59 @@ function MissionBridge() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   BENTO GRID: Modern asymmetric grid layout
+   THE PLATFORM: Editorial split — thesis + four pillars
    ══════════════════════════════════════════════════════════════════════════ */
 function BentoGrid() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const bentoCards = [
+  const pillars = [
     {
-      title: "40+ Ventures",
-      description: "From energy to space, building critical technology for the next century",
+      number: "01",
+      title: "Infrastructure",
+      description: "190 hub locations across 39 countries — physical spaces, legal frameworks, and shared systems that let ventures deploy faster and compound across borders.",
+      icon: Building2,
+      link: "/platform",
+    },
+    {
+      number: "02",
+      title: "Ventures",
+      description: "40+ companies building critical technology — from energy to space — designed for the markets that need it most and the century that demands it.",
       icon: Rocket,
       link: "/ventures",
-      className: "md:col-span-7 md:row-span-2",
-      image: "https://images.unsplash.com/photo-1653565684985-0b1a64cf7afc?auto=format&fit=crop&w=1200&q=80",
-      accent: true,
     },
     {
-      title: "190 Hubs",
-      description: "Projected physical infrastructure across 39+ countries on the Route",
-      icon: Globe2,
-      link: "/routes",
-      className: "md:col-span-5",
-      image: null,
-      accent: false,
-    },
-    {
-      title: "6 Investment Vehicles",
-      description: "From $500 to $250K+, aligned capital designed for every stage",
+      number: "03",
+      title: "Capital",
+      description: "6 investment vehicles from $500 to $250K+, aligned capital designed for every stage — so breakthroughs don't stall for funding.",
       icon: Coins,
       link: "/capital",
-      className: "md:col-span-5",
-      image: null,
-      accent: false,
     },
+    {
+      number: "04",
+      title: "Community",
+      description: "XCitizens, fellows, operators, and builders moving through the Route together — a mobile university for civilizational prototyping.",
+      icon: Users,
+      link: "/programs",
+    },
+  ];
+
+  const keyNumbers = [
+    { value: "190", label: "Hubs" },
+    { value: "39", label: "Countries" },
+    { value: "40+", label: "Ventures" },
+    { value: "6", label: "Capital Vehicles" },
   ];
 
   return (
     <section ref={ref} className="pt-8 md:pt-12 pb-20 md:pb-32 px-6 md:px-12 lg:px-20">
       <div className="w-full max-w-[1400px] mx-auto">
-        {/* Section header */}
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-12 md:mb-16"
+          className="mb-16 md:mb-24"
         >
           <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-4 block">
             The Platform
@@ -523,76 +531,93 @@ function BentoGrid() {
           </h2>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="grid md:grid-cols-12 gap-4 md:gap-5">
-          {bentoCards.map((card, i) => {
-            const Icon = card.icon;
+        {/* ── Thesis + Key Numbers split ── */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-20 md:mb-28">
+          {/* Left: Thesis text */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="lg:col-span-7"
+          >
+            <p className="text-[19px] sm:text-[22px] md:text-[26px] leading-[1.45] font-display font-medium tracking-[-0.015em] text-[#111111]/70 mb-6">
+              Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South, with the youngest populations, fastest-growing markets, and boldest ambitions.
+            </p>
+            <p className="text-[15px] md:text-[17px] leading-[1.7] text-[#111111]/50 font-medium max-w-xl">
+              But isolated breakthroughs won&apos;t compound on their own.{" "}
+              <span className="text-[#111111] font-semibold">Connected ones can.</span> xCelero is designed to unite 190 hubs across 39 countries into one commercialization engine: infrastructure, ventures, capital, and community — so prosperity doesn&apos;t remain a promise but can become a product.
+            </p>
+          </motion.div>
+
+          {/* Right: Key numbers */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.35, ease: "easeOut" }}
+            className="lg:col-span-5"
+          >
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:pt-2">
+              {keyNumbers.map((stat, i) => (
+                <div key={stat.label}>
+                  <span className="text-[44px] md:text-[56px] font-display font-medium tracking-[-0.03em] text-[#111111] leading-none">
+                    {stat.value}
+                  </span>
+                  <span className="block text-[10px] font-mono font-bold tracking-[0.22em] uppercase text-[#111111]/35 mt-2">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Four Pillars ── */}
+        <div className="border-t border-[#111111]/10">
+          {pillars.map((pillar, i) => {
+            const Icon = pillar.icon;
             return (
               <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={pillar.number}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className={`${card.className}`}
+                transition={{ duration: 0.7, delay: 0.4 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                <Link to={card.link} className="group block h-full">
-                  <div className={`bento-card h-full p-6 md:p-8 rounded-lg relative overflow-hidden grain ${
-                    card.accent ? "min-h-[300px] md:min-h-[400px]" : "min-h-[200px] md:min-h-[240px]"
+                <Link
+                  to={pillar.link}
+                  className="group block"
+                >
+                  <div className={`py-10 md:py-14 grid md:grid-cols-12 gap-6 md:gap-10 items-start hover:bg-[#111111]/[0.02] transition-colors duration-300 ${
+                    i < pillars.length - 1 ? "border-b border-[#111111]/10" : ""
                   }`}>
-                    {/* Background image */}
-                    {card.image && (
-                      <div className="absolute inset-0 z-0">
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
+                    {/* Number + Icon */}
+                    <div className="md:col-span-1 flex items-center gap-4 md:gap-0 md:flex-col md:items-start">
+                      <span className="text-[13px] font-mono font-bold tracking-[0.15em] text-[#FF4D00]">
+                        {pillar.number}
+                      </span>
+                      <div className="w-9 h-9 shrink-0 flex items-center justify-center border border-[#111111]/10 group-hover:border-[#FF4D00]/40 transition-colors">
+                        <Icon className="w-4 h-4 text-[#111111]/30 group-hover:text-[#FF4D00] transition-colors" strokeWidth={1.5} />
                       </div>
-                    )}
+                    </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 flex flex-col h-full justify-between">
-                      <div className="flex items-start justify-between">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          card.accent ? "bg-[#FF4D00]/10" : "bg-[#111111]/5"
-                        }`}>
-                          <Icon className="w-5 h-5 text-[#FF4D00]" strokeWidth={1.5} />
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-[#111111]/20 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all" />
-                      </div>
+                    {/* Title */}
+                    <div className="md:col-span-3">
+                      <h3 className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-[#111111] group-hover:text-[#FF4D00] transition-colors leading-tight flex items-center gap-3">
+                        {pillar.title}
+                        <ArrowRight className="w-4 h-4 text-[#111111]/10 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all" />
+                      </h3>
+                    </div>
 
-                      <div>
-                        <h3 className="text-[24px] md:text-[32px] font-display font-medium tracking-tight mb-2 group-hover:text-[#FF4D00] transition-colors">
-                          {card.title}
-                        </h3>
-                        <p className="text-[14px] text-[#111111]/50 font-medium leading-[1.6]">
-                          {card.description}
-                        </p>
-                      </div>
+                    {/* Description */}
+                    <div className="md:col-span-8">
+                      <p className="text-[14px] md:text-[15px] leading-[1.8] text-[#111111]/45 font-medium group-hover:text-[#111111]/65 transition-colors">
+                        {pillar.description}
+                      </p>
                     </div>
                   </div>
                 </Link>
               </motion.div>
             );
           })}
-
-          {/* Intro text card: spans full width */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-12"
-          >
-            <div className="bento-card p-8 md:p-12 rounded-lg grain">
-              <p className="text-[18px] sm:text-[22px] md:text-[26px] leading-[1.5] font-medium text-[#111111]/80 text-balance max-w-4xl">
-                Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South, with the youngest populations, fastest-growing markets, and boldest ambitions. But isolated breakthroughs won&apos;t compound on their own.{" "}
-                <span className="text-[#111111]">
-                  Connected ones can. xCelero is designed to unite 190 hubs across 39 countries into one commercialization engine: infrastructure, ventures, capital, and community — so prosperity doesn&apos;t remain a promise but can become a product.
-                </span>
-              </p>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

@@ -108,61 +108,66 @@ function RoutesBridge() {
 
   return (
     <section ref={ref} className="border-b border-[#111111]/10">
-      {/* ── Cinematic hero image ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full h-[55vh] md:h-[68vh] overflow-hidden"
-      >
-        <img
-          src={routesBridgeImages[0].src}
-          alt={routesBridgeImages[0].alt}
-          className="w-full h-full object-cover grayscale"
-        />
-        {/* gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
-        {/* overlaid label + title */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-20 pb-10 md:pb-14">
+      {/* ── Contained hero image + stat strip ── */}
+      <div className="px-6 md:px-12 lg:px-20">
+        <div className="max-w-[1400px] mx-auto overflow-hidden rounded-sm">
+          {/* ── Cinematic hero image ── */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full h-[55vh] md:h-[68vh] overflow-hidden"
           >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-3 block">
-              Ba-Hanse Network
-            </span>
-            <h2 className="text-[42px] sm:text-[60px] md:text-[76px] lg:text-[92px] font-display font-medium leading-none tracking-[-0.03em] text-white">
-              The world operates<br />
-              in <span className="italic text-[#FF4D00]">flow</span>.
-            </h2>
+            <img
+              src={routesBridgeImages[0].src}
+              alt={routesBridgeImages[0].alt}
+              className="w-full h-full object-cover grayscale"
+            />
+            {/* gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
+            {/* overlaid label + title */}
+            <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-20 pb-10 md:pb-14">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-3 block">
+                  Ba-Hanse Network
+                </span>
+                <h2 className="text-[42px] sm:text-[60px] md:text-[76px] lg:text-[92px] font-display font-medium leading-none tracking-[-0.03em] text-white">
+                  The world operates<br />
+                  in <span className="italic text-[#FF4D00]">flow</span>.
+                </h2>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* ── Stat strip ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-2 md:grid-cols-4"
+          >
+            {bridgeStats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={`px-6 md:px-10 lg:px-14 py-7 md:py-9 flex flex-col gap-1 ${
+                  i < bridgeStats.length - 1 ? "border-r border-[#111111]/10" : ""
+                }`}
+              >
+                <span className="text-[36px] md:text-[44px] font-display font-medium tracking-[-0.03em] text-[#111111] leading-none">
+                  {stat.value}
+                </span>
+                <span className="text-[10px] font-mono font-bold tracking-[0.22em] uppercase text-[#111111]/40">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
         </div>
-      </motion.div>
-
-      {/* ── Stat strip ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="grid grid-cols-2 md:grid-cols-4 border-b border-[#111111]/10"
-      >
-        {bridgeStats.map((stat, i) => (
-          <div
-            key={stat.label}
-            className={`px-6 md:px-10 lg:px-14 py-7 md:py-9 flex flex-col gap-1 ${
-              i < bridgeStats.length - 1 ? "border-r border-[#111111]/10" : ""
-            }`}
-          >
-            <span className="text-[36px] md:text-[44px] font-display font-medium tracking-[-0.03em] text-[#111111] leading-none">
-              {stat.value}
-            </span>
-            <span className="text-[10px] font-mono font-bold tracking-[0.22em] uppercase text-[#111111]/40">
-              {stat.label}
-            </span>
-          </div>
-        ))}
-      </motion.div>
+      </div>
 
       {/* ── Editorial text + dotted map ── */}
       <div className="px-6 md:px-12 lg:px-20 py-16 md:py-24">
@@ -299,7 +304,8 @@ function BaHanseFormatSection() {
   ];
 
   return (
-    <section ref={ref} className="bg-[#111111] border-b border-white/10">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20">
+      <div className="max-w-[1400px] mx-auto bg-[#111111] rounded-sm overflow-hidden">
       {/* Header row */}
       <div className="px-6 md:px-12 lg:px-20 pt-16 md:pt-24 pb-12 md:pb-16 border-b border-white/10">
         <div className="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -328,7 +334,7 @@ function BaHanseFormatSection() {
       </div>
 
       {/* Numbered list */}
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full">
         {formatItems.map((item, i) => (
           <motion.div
             key={item.number}
@@ -373,10 +379,11 @@ function BaHanseFormatSection() {
         transition={{ duration: 0.7, delay: 0.7, ease: "easeOut" }}
         className="px-6 md:px-12 lg:px-20 py-10 md:py-12 border-t border-white/10"
       >
-        <p className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-white/20 max-w-[1400px] mx-auto">
+        <p className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-white/20">
           Hosting events · Convening conversations · Pushing for policy · Building ventures at every port
         </p>
       </motion.div>
+      </div>
     </section>
   );
 }

@@ -50,3 +50,25 @@ Work Log:
 Stage Summary:
 - All 5 alignment deviations fixed in RoutesPage.tsx
 - Routes page now uses consistent `max-w-[1400px]` containers matching the site standard
+
+---
+Task ID: 3
+Agent: Main Agent
+Task: Fix full-bleed backgrounds on Routes page (The Format + Ba-Hanse Network) + Redesign The Platform section on homepage
+
+Work Log:
+- Fixed RoutesBridge section: wrapped hero image + stat strip in `px-6 md:px-12 lg:px-20` > `max-w-[1400px] mx-auto overflow-hidden rounded-sm` container, matching site footer pattern
+- Fixed BaHanseFormatSection: restructured from `<section className="bg-[#111111]">` (full-bleed) to `<section className="px-6 md:px-12 lg:px-20">` > `<div className="max-w-[1400px] mx-auto bg-[#111111] rounded-sm overflow-hidden">` pattern
+- Removed redundant `max-w-[1400px]` from inner elements in Format section since the wrapper now handles containment
+- Redesigned The Platform section (BentoGrid) on homepage with new editorial layout:
+  - Header: "The Platform" label + "Four engines, one thesis." heading
+  - Thesis split: 7/5 column grid with thesis text left, key numbers (190 Hubs, 39 Countries, 40+ Ventures, 6 Capital Vehicles) right
+  - Four pillars: editorial list format with numbered items (01-04), icons, titles, and descriptions, separated by border dividers
+  - Each pillar is a clickable link with hover effects
+  - Includes the user's requested text about critical technology and the Global South
+- Verified both fixes with Agent Browser + VLM: Ba-Hanse Network image and stats contained within margins, Format section dark bg contained within margins, Platform section renders correctly with all four pillars visible
+- Lint passes cleanly
+
+Stage Summary:
+- Routes page: Both full-bleed sections now contained within `max-w-[1400px]` matching footer alignment
+- Homepage: Platform section redesigned from bento grid to editorial split layout with thesis text + four pillars list
