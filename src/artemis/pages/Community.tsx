@@ -21,7 +21,6 @@ import {
   CheckCircle,
   Fingerprint,
   ShieldCheck,
-  Activity,
   Lightbulb,
   Sparkles,
   MessageSquare,
@@ -216,13 +215,59 @@ const passportBenefits = [
   },
 ];
 
-/* ── Town Square Discussions ── */
+/* ── Town Square Data ── */
+const townSquareCommunities = [
+  {
+    name: "Energy & Infrastructure",
+    members: 280,
+    threads: 94,
+    color: "bg-[#FF4D00]",
+    description: "Mini-grids, solar, battery storage, grid infrastructure. Unit economics from real deployments.",
+  },
+  {
+    name: "Digital Finance",
+    members: 210,
+    threads: 67,
+    color: "bg-amber-600",
+    description: "Payments, lending, remittance corridors. Regulatory playbooks and cross-border infrastructure.",
+  },
+  {
+    name: "Life Sciences",
+    members: 145,
+    threads: 38,
+    color: "bg-emerald-600",
+    description: "Diagnostics, therapeutics, lab access. Regulatory pathways from pilot to market.",
+  },
+  {
+    name: "Capital & Deals",
+    members: 320,
+    threads: 112,
+    color: "bg-rose-600",
+    description: "SPV deployment, portfolio construction, co-investment. Deal memos and allocation updates.",
+  },
+  {
+    name: "Route Operations",
+    members: 175,
+    threads: 53,
+    color: "bg-cyan-700",
+    description: "Hub management, program operations, talent pipeline. The how-to of running the machine.",
+  },
+  {
+    name: "Founders Corner",
+    members: 190,
+    threads: 71,
+    color: "bg-violet-700",
+    description: "Founder-only space. Honest conversations about burn, hiring, pivots, and the emotional weight of building.",
+  },
+];
+
 const previewDiscussions = [
   {
     community: "Energy & Infrastructure",
     title: "Mini-grid economics in Northern Nigeria: unit economics from Cohort 7",
     author: "Yusuf Hassan",
     upvotes: 142,
+    comments: 23,
     color: "bg-[#FF4D00]",
   },
   {
@@ -230,6 +275,7 @@ const previewDiscussions = [
     title: "Cross-border payments infrastructure: what we learned building across 3 corridors",
     author: "Fatima Al-Rashid",
     upvotes: 204,
+    comments: 41,
     color: "bg-amber-600",
   },
   {
@@ -237,6 +283,7 @@ const previewDiscussions = [
     title: "SPV deployment update: Q1 2026 portfolio construction",
     author: "Amara Diallo",
     upvotes: 312,
+    comments: 58,
     color: "bg-rose-600",
   },
 ];
@@ -332,7 +379,7 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   2. GALLERY COLLAGE — Masonry photo grid (light bg)
+   2. GALLERY COLLAGE
    ══════════════════════════════════════════════════════════════════════════ */
 function GalleryCollage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -391,7 +438,7 @@ function GalleryCollage() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   3. PILLARS — Light bg, editorial thesis + 4-column axiom grid
+   3. PILLARS
    ══════════════════════════════════════════════════════════════════════════ */
 function PillarsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -485,7 +532,7 @@ function PillarsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   4. ARCHETYPE CARDS — Light gray bg, dark accent cards
+   4. ARCHETYPE CARDS
    ══════════════════════════════════════════════════════════════════════════ */
 function ArchetypeCardsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -604,7 +651,7 @@ function ArchetypeCardsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   5. CADENCE + EVENTS — Image-based event cards on light bg
+   5. CADENCE + EVENTS — Image-based event cards
    ══════════════════════════════════════════════════════════════════════════ */
 function CadenceEventsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -633,7 +680,6 @@ function CadenceEventsSection() {
     <>
       <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
         <div className="w-full max-w-[1400px] mx-auto">
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -654,7 +700,6 @@ function CadenceEventsSection() {
             </p>
           </motion.div>
 
-          {/* Cadence strip */}
           <div className="mb-12 md:mb-16">
             <div className="relative">
               <div className="absolute top-4 left-0 right-0 h-px bg-[#111111]/10" />
@@ -690,7 +735,6 @@ function CadenceEventsSection() {
             </div>
           </div>
 
-          {/* Events — Image-based cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {upcomingEvents.map((event, i) => (
               <motion.div
@@ -709,7 +753,6 @@ function CadenceEventsSection() {
                     : "border-[#111111]/10 hover:border-[#111111]/20"
                 }`}
               >
-                {/* Event image */}
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <img
                     src={event.image}
@@ -717,7 +760,6 @@ function CadenceEventsSection() {
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  {/* Type badge */}
                   <div className="absolute top-3 left-3">
                     <span
                       className={`text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-1 ${eventTypeColor[event.type] || "bg-[#111111]/10 text-[#111111]"}`}
@@ -733,7 +775,6 @@ function CadenceEventsSection() {
                       </span>
                     </div>
                   )}
-                  {/* Date overlay */}
                   <div className="absolute bottom-3 left-3">
                     <div className="text-[11px] font-mono font-bold tracking-[0.05em] text-white flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-[#FF4D00]" />
@@ -741,8 +782,6 @@ function CadenceEventsSection() {
                     </div>
                   </div>
                 </div>
-
-                {/* Content below image */}
                 <div className="p-4 md:p-5">
                   <h3 className="text-[15px] md:text-[17px] font-display font-medium tracking-tight leading-tight mb-2 group-hover:text-[#FF4D00] transition-colors">
                     {event.title}
@@ -771,7 +810,6 @@ function CadenceEventsSection() {
         </div>
       </section>
 
-      {/* Event Detail Modal */}
       <AnimatePresence>
         {selectedEvent && (
           <EventDetailModal
@@ -866,28 +904,19 @@ function EventDetailModal({
         >
           <X className="w-5 h-5" />
         </button>
-
         <div className="relative aspect-[16/9] overflow-hidden">
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full h-full object-cover"
-          />
+          <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           <div className="absolute top-3 left-3">
-            <span
-              className={`inline-block text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2.5 py-1 ${eventTypeColor[event.type] || "bg-[#111111]/10 text-[#111111]"}`}
-            >
+            <span className={`inline-block text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2.5 py-1 ${eventTypeColor[event.type] || "bg-[#111111]/10 text-[#111111]"}`}>
               {event.type}
             </span>
           </div>
         </div>
-
         <div className="p-6 md:p-8">
           <h2 className="text-[24px] md:text-[28px] font-display font-medium tracking-tight leading-[1.15] mb-6">
             {event.title}
           </h2>
-
           <div className="space-y-3 mb-6">
             <div className="flex items-center gap-3 text-[13px] font-medium">
               <Calendar className="w-4 h-4 text-[#FF4D00] flex-shrink-0" />
@@ -902,16 +931,11 @@ function EventDetailModal({
               <span>{event.location}</span>
             </div>
           </div>
-
-          <p className="text-[14px] md:text-[15px] text-[#111111]/60 leading-[1.7] font-medium mb-6">
-            {event.description}
-          </p>
-
+          <p className="text-[14px] md:text-[15px] text-[#111111]/60 leading-[1.7] font-medium mb-6">{event.description}</p>
           <div className="flex items-center gap-2 text-[12px] font-medium text-[#111111]/40 mb-8 pb-6 border-b border-[#111111]/10">
             <Users className="w-4 h-4" />
             <span>{event.spots}</span>
           </div>
-
           {rsvpSubmitted ? (
             <div className="w-full py-3.5 bg-[#111111] text-white text-[12px] font-bold uppercase tracking-[0.12em] text-center flex items-center justify-center gap-2">
               <CheckCircle className="w-4 h-4" />
@@ -935,11 +959,7 @@ function EventDetailModal({
                   {rsvpLoading ? "..." : "RSVP"}
                 </button>
               </div>
-              {rsvpError && (
-                <p className="text-[11px] text-red-500 font-medium">
-                  {rsvpError}
-                </p>
-              )}
+              {rsvpError && <p className="text-[11px] text-red-500 font-medium">{rsvpError}</p>}
             </div>
           )}
         </div>
@@ -949,7 +969,7 @@ function EventDetailModal({
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   6. DISPATCHES — Light bg, editorial pull-quotes
+   6. DISPATCHES — Horizontal sliding cards
    ══════════════════════════════════════════════════════════════════════════ */
 function DispatchesSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -962,7 +982,7 @@ function DispatchesSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-12 md:mb-16"
+          className="mb-10 md:mb-14"
         >
           <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-4 block">
             Signal from the Field
@@ -973,52 +993,55 @@ function DispatchesSection() {
           </h2>
         </motion.div>
 
-        <div className="divide-y divide-[#111111]/10">
-          {dispatches.map((d, i) => (
-            <motion.div
-              key={d.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: 0.15 + i * 0.12,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="group py-10 md:py-14 hover:bg-white transition-colors duration-300"
-            >
-              <div
-                className={`grid lg:grid-cols-12 gap-6 lg:gap-10 items-start ${i % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
+        {/* Horizontal sliding cards */}
+        <div className="relative">
+          <div
+            className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {dispatches.map((d, i) => (
+              <motion.div
+                key={d.name}
+                initial={{ opacity: 0, x: 60 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.15 + i * 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[460px] snap-start bg-white border border-[#111111]/10 p-6 md:p-8 hover:border-[#111111]/20 transition-colors group"
               >
-                <div
-                  className={`lg:col-span-8 ${i % 2 === 1 ? "lg:col-start-5" : ""}`}
-                >
-                  <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60 mb-4">
-                    {d.tag}
-                  </span>
-                  <p className="text-[17px] sm:text-[20px] md:text-[24px] leading-[1.5] font-display font-medium tracking-[-0.01em] text-[#111111]/65 mb-6">
-                    &ldquo;{d.signal}&rdquo;
-                  </p>
-                </div>
-
-                <div
-                  className={`lg:col-span-4 ${i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""} flex lg:justify-end`}
-                >
-                  <div className="lg:text-right">
-                    <div className="w-8 h-px bg-[#FF4D00] mb-4 lg:ml-auto" />
-                    <div className="text-[14px] font-display font-medium text-[#111111]/80">
-                      {d.name}
+                <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60 mb-5">
+                  {d.tag}
+                </span>
+                <p className="text-[16px] md:text-[18px] leading-[1.55] font-display font-medium tracking-[-0.01em] text-[#111111]/70 mb-8">
+                  &ldquo;{d.signal}&rdquo;
+                </p>
+                <div className="mt-auto pt-6 border-t border-[#111111]/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-[#FF4D00]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[11px] font-bold text-[#FF4D00]">
+                        {d.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
                     </div>
-                    <div className="text-[11px] text-[#111111]/40 font-medium mt-1">
-                      {d.role}
-                    </div>
-                    <div className="text-[10px] text-[#111111]/30 font-medium">
-                      {d.location}
+                    <div>
+                      <div className="text-[13px] font-display font-medium text-[#111111]/80">
+                        {d.name}
+                      </div>
+                      <div className="text-[11px] text-[#111111]/40 font-medium">
+                        {d.role} · {d.location}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+          {/* Scroll hint gradient */}
+          <div className="absolute top-0 right-0 bottom-4 w-12 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
@@ -1026,145 +1049,194 @@ function DispatchesSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   7. TOWN SQUARE — Forum preview with discussion cards
+   7. TOWN SQUARE — Detailed forum with community cards
    ══════════════════════════════════════════════════════════════════════════ */
 function TownSquareSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      ref={ref}
-      className="py-20 md:py-28 px-6 md:px-12 lg:px-20 border-t border-[#111111]/10"
-    >
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
       <div className="w-full max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
-          {/* Left: Copy + CTA */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00] mb-6 block">
-              Town Square
-            </span>
-            <h2 className="text-[32px] md:text-[48px] lg:text-[56px] font-display font-medium tracking-tight leading-[1.05] mb-6">
-              Where the network{" "}
-              <em className="italic font-serif text-[#FF4D00]">talks</em>.
-            </h2>
-            <p className="text-[17px] md:text-[19px] text-[#111111]/50 font-medium leading-relaxed mb-6">
-              The XCitizen forum. Real-time discussions on deals, infrastructure,
-              regulations, hiring, and hard-won lessons from the Route. No noise.
-              No cold pitches. Just builders sharing what they know.
-            </p>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-12 md:mb-16"
+        >
+          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-6 block">
+            Town Square
+          </span>
+          <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[56px] leading-[1.06] font-display font-medium tracking-[-0.03em] text-[#111111]/90 mb-4">
+            The forum where builders{" "}
+            <em className="italic font-serif text-[#FF4D00]">share</em>.
+          </h2>
+          <p className="text-[15px] md:text-[17px] leading-[1.75] text-[#111111]/45 font-medium max-w-2xl">
+            Town Square is the XCitizen forum — 6 sector-specific communities
+            where operators, founders, investors, and mentors share deal memos,
+            regulatory playbooks, hiring leads, and hard-won lessons from the
+            Route. No noise. No cold pitches. No LinkedIn posts. Just signal.
+          </p>
+        </motion.div>
 
-            <div className="flex flex-wrap gap-3 mb-8">
-              {[
-                "Energy & Infrastructure",
-                "Life Sciences",
-                "Digital Finance",
-                "Route Operations",
-                "Capital & Deals",
-                "Founders Corner",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 text-[10px] font-mono font-bold tracking-[0.1em] uppercase border border-[#111111]/10 text-[#111111]/40"
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Left — Community cards */}
+          <div className="lg:col-span-7">
+            <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
+              {townSquareCommunities.map((comm, i) => (
+                <motion.div
+                  key={comm.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.15 + i * 0.07,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="group border border-[#111111]/10 p-4 md:p-5 hover:border-[#FF4D00]/20 hover:bg-[#FAFAFA] transition-all cursor-pointer"
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-4 items-center">
-              <Link
-                to="/townsquare"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF4D00] text-white text-[12px] font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" />
-                Enter Town Square
-              </Link>
-              <span className="text-[12px] text-[#111111]/30 font-medium">
-                Free account required · takes 60 seconds
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Right: Preview cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-3"
-          >
-            {/* Mock forum header */}
-            <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-[#111111]/10">
-              <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <div className="text-[14px] font-display font-medium tracking-tight">
-                  Town Square
-                </div>
-                <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
-                  XCitizen Forum
-                </div>
-              </div>
-              <div className="ml-auto flex items-center gap-2 text-[10px] text-[#111111]/25 font-mono font-bold">
-                <span>1,200+ members</span>
-                <span>·</span>
-                <span>6 communities</span>
-              </div>
-            </div>
-
-            {previewDiscussions.map((discussion, i) => (
-              <motion.div
-                key={discussion.title}
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.3 + i * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group border border-[#111111]/10 p-4 hover:border-[#FF4D00]/20 hover:bg-[#FAFAFA] transition-all cursor-pointer"
-              >
-                <div className="flex items-center gap-2 text-[11px] text-[#111111]/35 mb-2">
-                  <div
-                    className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${discussion.color}`}
-                  >
-                    <span className="text-[7px] font-bold text-white uppercase">
-                      {discussion.community[0]}
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <div
+                      className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${comm.color}`}
+                    >
+                      <span className="text-[8px] font-bold text-white uppercase">
+                        {comm.name[0]}
+                      </span>
+                    </div>
+                    <span className="text-[13px] font-display font-medium text-[#111111]/80 group-hover:text-[#FF4D00] transition-colors">
+                      {comm.name}
                     </span>
                   </div>
-                  <span className="font-bold text-[#111111]/50">
-                    {discussion.community}
-                  </span>
-                  <span>·</span>
-                  <span>{discussion.author}</span>
-                </div>
-                <h4 className="text-[14px] md:text-[15px] font-display font-medium tracking-tight text-[#111111]/80 leading-snug group-hover:text-[#FF4D00] transition-colors">
-                  {discussion.title}
-                </h4>
-                <div className="flex items-center gap-3 mt-2.5 text-[10px] text-[#111111]/25 font-mono font-bold">
-                  <span className="flex items-center gap-1">
-                    <ArrowUp className="w-3 h-3 text-[#FF4D00]" />
-                    {discussion.upvotes}
-                  </span>
-                  <span>6 comments</span>
-                  <span className="ml-auto flex items-center gap-1 group-hover:text-[#FF4D00] transition-colors">
-                    View discussion
-                    <ArrowRight className="w-3 h-3" />
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Bottom fade hint */}
-            <div className="relative h-8 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+                  <p className="text-[12px] leading-[1.65] text-[#111111]/40 font-medium mb-3">
+                    {comm.description}
+                  </p>
+                  <div className="flex items-center gap-3 text-[9px] font-mono font-bold tracking-[0.1em] uppercase text-[#111111]/25">
+                    <span>{comm.members} members</span>
+                    <span>·</span>
+                    <span>{comm.threads} threads</span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+          </div>
+
+          {/* Right — Live discussion preview + CTA */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {/* Forum header */}
+              <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-[#111111]/10">
+                <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center">
+                  <MessageSquare className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="text-[14px] font-display font-medium tracking-tight">
+                    Town Square
+                  </div>
+                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
+                    XCitizen Forum
+                  </div>
+                </div>
+                <div className="ml-auto flex items-center gap-2 text-[10px] text-[#111111]/25 font-mono font-bold">
+                  <span>1,200+ members</span>
+                  <span>·</span>
+                  <span>6 communities</span>
+                </div>
+              </div>
+
+              {/* Live discussions */}
+              <div className="space-y-2.5 mb-6">
+                {previewDiscussions.map((discussion, i) => (
+                  <motion.div
+                    key={discussion.title}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.3 + i * 0.1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="group border border-[#111111]/10 p-3.5 hover:border-[#FF4D00]/20 hover:bg-[#FAFAFA] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 text-[10px] text-[#111111]/35 mb-1.5">
+                      <div
+                        className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 ${discussion.color}`}
+                      >
+                        <span className="text-[6px] font-bold text-white uppercase">
+                          {discussion.community[0]}
+                        </span>
+                      </div>
+                      <span className="font-bold text-[#111111]/50">
+                        {discussion.community}
+                      </span>
+                      <span>·</span>
+                      <span>{discussion.author}</span>
+                    </div>
+                    <h4 className="text-[13px] font-display font-medium tracking-tight text-[#111111]/75 leading-snug group-hover:text-[#FF4D00] transition-colors">
+                      {discussion.title}
+                    </h4>
+                    <div className="flex items-center gap-3 mt-2 text-[9px] text-[#111111]/25 font-mono font-bold">
+                      <span className="flex items-center gap-1">
+                        <ArrowUp className="w-2.5 h-2.5 text-[#FF4D00]" />
+                        {discussion.upvotes}
+                      </span>
+                      <span>{discussion.comments} comments</span>
+                      <span className="ml-auto flex items-center gap-0.5 group-hover:text-[#FF4D00] transition-colors">
+                        View
+                        <ChevronRight className="w-2.5 h-2.5" />
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* How it works */}
+              <div className="border-t border-[#111111]/10 pt-5 mb-6">
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#111111]/30 mb-3 block">
+                  How it works
+                </span>
+                <div className="space-y-2.5">
+                  {[
+                    "Apply for an xCitizen Passport ($25 setup)",
+                    "Get access to all 6 sector communities",
+                    "Post questions, share playbooks, close deals",
+                    "Average response time: under 4 hours",
+                  ].map((step, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <div className="w-4 h-4 flex-shrink-0 flex items-center justify-center mt-0.5">
+                        <Check className="w-3 h-3 text-[#FF4D00]" />
+                      </div>
+                      <span className="text-[12px] text-[#111111]/50 font-medium">
+                        {step}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                <Link
+                  to="/townsquare"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  Enter Town Square
+                </Link>
+                <span className="text-[11px] text-[#111111]/30 font-medium">
+                  Passport required · 60-second setup
+                </span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -1172,22 +1244,22 @@ function TownSquareSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   8. PASSPORT — Detailed benefits + passport visual
+   8. PASSPORT — Contained dark bg (footer rule), detailed benefits + visual
    ══════════════════════════════════════════════════════════════════════════ */
 function PassportSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#0A0A0A]">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 md:py-28">
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+        <div className="grid lg:grid-cols-12">
           {/* Left — Passport identity + visual */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 flex flex-col"
+            className="lg:col-span-5 px-8 md:px-14 lg:px-16 py-14 md:py-20 lg:border-r border-b lg:border-b-0 border-white/[0.06] flex flex-col"
           >
             <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
               xCitizen Passport
@@ -1205,7 +1277,7 @@ function PassportSection() {
 
             {/* Passport visual */}
             <div className="relative mt-auto">
-              <div className="relative overflow-hidden rounded-sm border border-white/[0.08] group">
+              <div className="relative overflow-hidden border border-white/[0.08] group">
                 <img
                   src="/passport-visual.png"
                   alt="xCitizen Passport — your access card to the Route"
@@ -1244,8 +1316,8 @@ function PassportSection() {
             </div>
           </motion.div>
 
-          {/* Right — Benefits grid with detail */}
-          <div className="lg:col-span-7">
+          {/* Right — Benefits grid */}
+          <div className="lg:col-span-7 px-8 md:px-14 lg:px-16 py-14 md:py-20">
             <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
               {passportBenefits.map((benefit, i) => {
                 const BIcon = benefit.icon;
@@ -1277,7 +1349,6 @@ function PassportSection() {
               })}
             </div>
 
-            {/* Bottom note */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
@@ -1303,7 +1374,7 @@ function PassportSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   9. CTA — Dark closing statement
+   9. CTA
    ══════════════════════════════════════════════════════════════════════════ */
 function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
