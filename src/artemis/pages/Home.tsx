@@ -472,23 +472,23 @@ function MissionBridge() {
 
 /* Live countdown hook — ticks every second toward a target date */
 function useCountdown(targetDate: Date) {
-  const [mounted, setMounted] = useState(false);
-  const [now, setNow] = useState(() => Date.now());
+  const [tick, setTick] = useState(0);
+  const mountedRef = useRef(false);
 
   useEffect(() => {
-    setMounted(true);
-    setNow(Date.now());
-    const id = setInterval(() => setNow(Date.now()), 1000);
+    mountedRef.current = true;
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
     return () => clearInterval(id);
   }, []);
 
+  const now = mountedRef.current ? Date.now() : targetDate.getTime();
   const diff = Math.max(0, targetDate.getTime() - now);
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
   const minutes = Math.floor((diff % 3600000) / 60000);
   const seconds = Math.floor((diff % 60000) / 1000);
 
-  return { days, hours, minutes, seconds, elapsed: diff === 0, mounted };
+  return { days, hours, minutes, seconds, elapsed: diff === 0, mounted: mountedRef.current };
 }
 
 /* Pad a number to 2 digits */

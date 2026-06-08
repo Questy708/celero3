@@ -19,6 +19,9 @@ import {
   Check,
   Route,
   Sparkles,
+  Rocket,
+  Building2,
+  Coins,
   X,
 } from "lucide-react";
 import { Link } from "@/artemis/router";
@@ -532,69 +535,240 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   PREAMBLE SECTION, Continuation of the hero thesis
+   PREAMBLE SECTION: Dark immersive Ba-Hanse manifesto
    ══════════════════════════════════════════════════════════════════════════ */
 function PreambleSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      ref={ref}
-      className="py-20 md:py-28 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10"
-    >
-      <div className="w-full max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl leading-[1.8] text-[#111111]/60 font-medium">
-            <p>
-              It&apos;s a diagram of political cages. Lines drawn by men who never
-              walked the terrain.
-            </p>
-            <p>
-              The Hanseatic League understood this in 1356. They didn&apos;t build a
-              nation, they built a network of 190 cities connected by shared
-              covenants for trade, law, and mutual defense. The League lasted 300
-              years and made its member cities the wealthiest in Europe. Not
-              through conquest, but through <span className="text-[#111111] font-semibold">flow</span>.
-            </p>
-            <p>
-              We are not rebuilding the League. We are birthing something inspired by it
-              for a different continent, a different philosophy, a different century.
-              The Ba-Hanse: a union of micro-cities, borderless, interdependent,
-              prosperous by design. Where deals are not transactions but acts of
-              <span className="text-[#111111] font-semibold"> mutual flourishing</span>.
-              Where a prototype in one city becomes infrastructure for ten.
-              Where talent, capital, and knowledge circulate like water.
-              Where Próspera&apos;s ethos of wealth creation for everyone meets
-              Praxis&apos;s pursuit of heroism, truth, and beauty — and xCelero
-              carries it all toward the next epoch of human civilization.
-            </p>
-            <p>
-              Think of it as Semester at Sea with a twist: cohorts of 10-100 XCitizens
-              moving through the regions, countries, and historical innovation periods
-              that will define the next century. Not tourists. Not consultants.
-              A mobile university for civilizational prototyping — hosting events,
-              convening conversations, pushing for policy, and building ventures
-              at every port. Six legs. 190+ hubs. {routeMetrics.countries} countries.
-              Four pillars: Ventures, Infrastructure, Capital, Community.
-            </p>
-          </div>
+    <section ref={ref} className="px-6 md:px-12 lg:px-20">
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
 
-          <div className="mt-14 pt-14 border-t border-[#111111]/10">
-            <p className="text-[20px] sm:text-[24px] md:text-[30px] font-display font-medium tracking-[-0.02em] leading-[1.25] text-[#111111]">
-              You can&apos;t prototype civilization from a desk.{" "}
-              <span className="text-[#FF4D00]">
-                {routeMetrics.countries} countries.
-              </span>{" "}
-              <span className="text-[#FF4D00]">{routeMetrics.hubs} hubs.</span>{" "}
-              One cohort. Civilizational prototyping, at micro-scale.
+        {/* ── Opening statement: political cages ── */}
+        <div className="px-8 md:px-14 lg:px-20 pt-16 md:pt-24 pb-12 md:pb-16 border-b border-white/[0.06]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
+              The Ba-Hanse Manifesto
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[62px] font-display font-medium leading-[1.08] tracking-[-0.03em] text-white max-w-4xl">
+              It&apos;s a diagram of <span className="italic text-[#FF4D00]">political cages</span>. Lines drawn by men who never walked the terrain.
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* ── Historical parallel + map: split grid ── */}
+        <div className="grid lg:grid-cols-12 border-b border-white/[0.06]">
+          {/* Left: Hanseatic League narrative */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 px-8 md:px-14 lg:px-20 py-14 md:py-20 lg:border-r border-white/[0.06]"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D00]" />
+              <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-white/30">
+                Historical Parallel · 1356
+              </span>
+            </div>
+            <p className="text-[18px] md:text-[22px] lg:text-[26px] leading-[1.35] font-display font-medium tracking-[-0.02em] text-white/90 mb-8">
+              The Hanseatic League understood this in 1356. They didn&apos;t build a nation — they built a network of 190 cities connected by shared covenants for trade, law, and mutual defense.
             </p>
-          </div>
-        </motion.div>
+            <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/40 font-medium mb-10">
+              The League lasted 300 years and made its member cities the wealthiest in Europe. Not through conquest, but through <span className="text-white font-semibold">flow</span>.
+            </p>
+
+            {/* Key stats row */}
+            <div className="grid grid-cols-3 gap-px bg-white/[0.06]">
+              {[
+                { value: "190", label: "Cities" },
+                { value: "300", label: "Years" },
+                { value: "1", label: "Covenant" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-[#0A0A0A] px-4 py-5 text-center">
+                  <span className="text-[24px] md:text-[30px] font-display font-medium tracking-[-0.02em] text-white leading-none">
+                    {stat.value}
+                  </span>
+                  <span className="block text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mt-1.5">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: Dot map */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6 px-8 md:px-14 lg:px-20 py-14 md:py-20 flex flex-col justify-between"
+          >
+            <div className="mb-8">
+              <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00]/50 mb-3 block">
+                The Ba-Hanse Circuit
+              </span>
+              <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/30 font-medium max-w-sm">
+                From the Gulf of Guinea to the Horn, through the Sahel and along the Swahili Coast — the Ba-Hanse traces the routes where civilizations have always exchanged goods, ideas, and people.
+              </p>
+            </div>
+            <div className="relative w-full">
+              <svg
+                viewBox="0 0 60 30"
+                className="w-full h-auto"
+                style={{ imageRendering: "auto" }}
+              >
+                {routesWorldDots.map((dot, i) => (
+                  <circle
+                    key={i}
+                    cx={dot.col * 1}
+                    cy={dot.row * 1}
+                    r="0.35"
+                    className="fill-white/[0.07]"
+                  />
+                ))}
+                {routesWorldDots
+                  .filter(
+                    (d) =>
+                      d.col >= 23 && d.col <= 33 && d.row >= 3 && d.row <= 21
+                  )
+                  .map((dot, i) => (
+                    <circle
+                      key={`af-${i}`}
+                      cx={dot.col * 1}
+                      cy={dot.row * 1}
+                      r="0.45"
+                      className="fill-[#FF4D00]"
+                    />
+                  ))}
+              </svg>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/15">
+                  Ba-Hanse Circuit — {routeMetrics.countries} Countries
+                </span>
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60">
+                  6 Legs · {routeMetrics.hubs} Hubs
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── The Ba-Hanse definition: full-width manifesto ── */}
+        <div className="px-8 md:px-14 lg:px-20 py-14 md:py-20 border-b border-white/[0.06]">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl"
+          >
+            <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-white/20 mb-6 block">
+              Definition
+            </span>
+            <p className="text-[16px] md:text-[19px] lg:text-[22px] leading-[1.5] font-display font-medium tracking-[-0.015em] text-white/80 mb-6">
+              We are not rebuilding the League. We are birthing something inspired by it for a different continent, a different philosophy, a different century.
+            </p>
+            <p className="text-[15px] md:text-[17px] leading-[1.8] text-white/35 font-medium mb-8">
+              The Ba-Hanse: a union of micro-cities, borderless, interdependent, prosperous by design. Where deals are not transactions but acts of <span className="text-white/70 font-semibold">mutual flourishing</span>. Where a prototype in one city becomes infrastructure for ten. Where talent, capital, and knowledge circulate like water.
+            </p>
+            {/* Flow attributes */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { icon: Sparkles, text: "Próspera's ethos of wealth creation for everyone" },
+                { icon: Compass, text: "Praxis's pursuit of heroism, truth, and beauty" },
+              ].map((attr) => (
+                <div key={attr.text} className="flex items-start gap-3 px-5 py-4 border border-white/[0.06] hover:border-[#FF4D00]/20 transition-colors">
+                  <attr.icon className="w-4 h-4 text-[#FF4D00]/60 mt-0.5 shrink-0" />
+                  <span className="text-[13px] leading-[1.6] text-white/40 font-medium">
+                    {attr.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/25 font-medium mt-6">
+              — and xCelero carries it all toward the next epoch of human civilization.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ── Semester at Sea + closing ── */}
+        <div className="grid lg:grid-cols-12">
+          {/* Left: Semester at Sea narrative */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 px-8 md:px-14 lg:px-20 py-14 md:py-20 lg:border-r border-white/[0.06]"
+          >
+            <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-white/20 mb-6 block">
+              The Format
+            </span>
+            <p className="text-[16px] md:text-[19px] leading-[1.7] text-white/50 font-medium mb-6">
+              Think of it as Semester at Sea with a twist: cohorts of 10–100 XCitizens moving through the regions, countries, and historical innovation periods that will define the next century.
+            </p>
+            <p className="text-[14px] md:text-[16px] leading-[1.75] text-white/30 font-medium mb-8">
+              Not tourists. Not consultants. A mobile university for civilizational prototyping — hosting events, convening conversations, pushing for policy, and building ventures at every port.
+            </p>
+            {/* Four pillars strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.06]">
+              {[
+                { label: "Ventures", icon: Rocket },
+                { label: "Infrastructure", icon: Building2 },
+                { label: "Capital", icon: Coins },
+                { label: "Community", icon: Users },
+              ].map((pillar) => (
+                <div key={pillar.label} className="bg-[#0A0A0A] px-4 py-5 flex flex-col items-center gap-2">
+                  <pillar.icon className="w-4 h-4 text-[#FF4D00]/50" />
+                  <span className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/30">
+                    {pillar.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: Closing statement + stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 px-8 md:px-14 lg:px-20 py-14 md:py-20 flex flex-col justify-between"
+          >
+            <div>
+              <h3 className="text-[22px] md:text-[28px] lg:text-[34px] font-display font-medium leading-[1.15] tracking-[-0.02em] text-white mb-6">
+                You can&apos;t prototype civilization from a desk.
+              </h3>
+              <p className="text-[14px] leading-[1.75] text-white/30 font-medium">
+                {routeMetrics.countries} countries. {routeMetrics.hubs} hubs. One cohort. Civilizational prototyping, at micro-scale.
+              </p>
+            </div>
+
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-px bg-white/[0.06] mt-10">
+              {[
+                { value: routeMetrics.countries, label: "Countries" },
+                { value: String(routeMetrics.hubs), label: "Hubs" },
+                { value: "6", label: "Legs" },
+                { value: "10–100", label: "XCitizens" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-[#0A0A0A] px-5 py-6">
+                  <span className="text-[28px] md:text-[34px] font-display font-medium tracking-[-0.03em] text-[#FF4D00] leading-none">
+                    {stat.value}
+                  </span>
+                  <span className="block text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mt-2">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
