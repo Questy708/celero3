@@ -76,20 +76,25 @@ Stage Summary:
 ---
 Task ID: 4
 Agent: Main Agent
-Task: Redesign The Platform section with a more modern layout
+Task: Redesign The Platform section with another modern layout
 
 Work Log:
-- Replaced the editorial split layout (thesis + numbered pillar list) with a dark cinematic section
-- New layout: contained dark `bg-[#111111] rounded-sm` card with two zones:
-  - Top: thesis banner with heading "Four engines, one thesis." + user's requested paragraph about critical technology and the Global South
-  - Bottom: 2×2 card grid with four pillars (Infrastructure, Ventures, Capital, Community)
-- Each card has: icon box, arrow, large stat number (190, 40+, 6, 100), stat label in orange, title, description
-- Cards separated by thin white/10 border lines, hover effects on each card
-- Dark section is contained within `max-w-[1400px]` with padding, matching site alignment
-- Verified with Agent Browser + VLM: all 4 cards visible, thesis text present, dark bg contained within margins
+- Replaced editorial split layout with a modern cinematic dark section design
+- New layout features:
+  1. Horizontal stat ticker bar at top (190 Hubs, 39 Countries, 40+ Ventures, 6 Vehicles, $4B Capital Target, 264 Days Faster) — horizontally scrollable with subtle borders
+  2. Bold thesis heading "Four engines, one thesis." with larger typography (up to 72px)
+  3. Two-paragraph thesis text with the requested critical technology / Global South content
+  4. 2×2 grid of pillar cards with modern design:
+     - Ghost watermark numbers (01-04) in background
+     - Icon boxes with hover accent color transitions
+     - Large stat numbers (190, 40+, 6, 100) with orange labels
+     - Title + description with hover reveal animations
+     - Subtle accent gradient overlay on hover (from-[#FF4D00]/opacity)
+     - Scale + fade entrance animations
+  5. Dark background (#0A0A0A) contained within max-w-[1400px] with rounded corners
+- Verified with Agent Browser + VLM: ticker bar, thesis, and all four cards render correctly
 - Lint passes cleanly
 
 Stage Summary:
-- Platform section now uses a modern dark cinematic layout with thesis banner + 2×2 stat card grid
-- Includes user's requested text about critical technology and Global South
-- Consistent with site's contained `max-w-[1400px]` alignment pattern
+- Platform section now uses a modern cinematic dark layout with stat ticker + thesis + 2×2 card grid
+- Design is cohesive and professional with smooth hover animations and accent gradients

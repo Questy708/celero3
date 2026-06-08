@@ -467,7 +467,7 @@ function MissionBridge() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   THE PLATFORM: Dark cinematic section with thesis + 2×2 card grid
+   THE PLATFORM: Modern cinematic — ticker + thesis + staggered pillar cards
    ══════════════════════════════════════════════════════════════════════════ */
 function BentoGrid() {
   const ref = useRef<HTMLDivElement>(null);
@@ -481,6 +481,7 @@ function BentoGrid() {
       description: "Physical spaces, legal frameworks, and shared systems that let ventures deploy faster and compound across borders.",
       icon: Building2,
       link: "/platform",
+      accent: "from-[#FF4D00]/20 to-transparent",
     },
     {
       title: "Ventures",
@@ -489,6 +490,7 @@ function BentoGrid() {
       description: "From energy to space — critical technology designed for the markets that need it most and the century that demands it.",
       icon: Rocket,
       link: "/ventures",
+      accent: "from-[#FF4D00]/15 to-transparent",
     },
     {
       title: "Capital",
@@ -497,6 +499,7 @@ function BentoGrid() {
       description: "From $500 to $250K+, aligned capital designed for every stage — so breakthroughs don't stall for funding.",
       icon: Coins,
       link: "/capital",
+      accent: "from-[#FF4D00]/12 to-transparent",
     },
     {
       title: "Community",
@@ -505,14 +508,48 @@ function BentoGrid() {
       description: "Operators and builders moving through the Route together — a mobile university for civilizational prototyping.",
       icon: Users,
       link: "/programs",
+      accent: "from-[#FF4D00]/10 to-transparent",
     },
+  ];
+
+  const tickerStats = [
+    { value: "190", label: "Hubs" },
+    { value: "39", label: "Countries" },
+    { value: "40+", label: "Ventures" },
+    { value: "6", label: "Vehicles" },
+    { value: "$4B", label: "Capital Target" },
+    { value: "264", label: "Days Faster" },
   ];
 
   return (
     <section ref={ref} className="py-20 md:py-32 px-6 md:px-12 lg:px-20">
-      <div className="max-w-[1400px] mx-auto bg-[#111111] rounded-sm overflow-hidden">
-        {/* ── Thesis banner ── */}
-        <div className="px-8 md:px-16 lg:px-24 pt-16 md:pt-24 pb-12 md:pb-16 border-b border-white/10">
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+        {/* ── Stat ticker bar ── */}
+        <div className="border-b border-white/[0.06]">
+          <div className="flex overflow-x-auto scrollbar-none">
+            {tickerStats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
+                className={`flex items-center gap-3 px-6 md:px-10 py-5 shrink-0 ${
+                  i < tickerStats.length - 1 ? "border-r border-white/[0.06]" : ""
+                }`}
+              >
+                <span className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white leading-none">
+                  {stat.value}
+                </span>
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
+                  {stat.label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Thesis statement ── */}
+        <div className="px-8 md:px-16 lg:px-24 pt-14 md:pt-20 pb-10 md:pb-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -521,65 +558,76 @@ function BentoGrid() {
             <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-6 block">
               The Platform
             </span>
-            <h2 className="text-[32px] sm:text-[48px] md:text-[64px] font-display font-medium tracking-[-0.03em] leading-[0.95] text-white mb-10 md:mb-14">
-              Four engines,
-              <br />
+            <h2 className="text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] font-display font-medium tracking-[-0.035em] leading-[0.92] text-white mb-8 md:mb-12">
+              Four engines,{" "}
               <em className="italic font-serif text-[#FF4D00]">one thesis</em>.
             </h2>
-            <p className="text-[16px] md:text-[18px] lg:text-[20px] leading-[1.65] text-white/50 font-medium max-w-3xl">
-              Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South, with the youngest populations, fastest-growing markets, and boldest ambitions. But isolated breakthroughs won&apos;t compound on their own.{" "}
-              <span className="text-white/90 font-semibold">Connected ones can.</span> xCelero is designed to unite 190 hubs across 39 countries into one commercialization engine: infrastructure, ventures, capital, and community — so prosperity doesn&apos;t remain a promise but can become a product.
-            </p>
+            <div className="max-w-2xl space-y-5">
+              <p className="text-[17px] md:text-[19px] leading-[1.6] text-white/45 font-medium">
+                Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South — youngest populations, fastest-growing markets, boldest ambitions.
+              </p>
+              <p className="text-[15px] md:text-[17px] leading-[1.65] text-white/30 font-medium">
+                But isolated breakthroughs won&apos;t compound on their own.{" "}
+                <span className="text-white/80 font-semibold">Connected ones can.</span> xCelero unites 190 hubs across 39 countries into one commercialization engine — infrastructure, ventures, capital, community — so prosperity doesn&apos;t remain a promise but can become a product.
+              </p>
+            </div>
           </motion.div>
         </div>
 
-        {/* ── 2×2 Card Grid ── */}
-        <div className="grid md:grid-cols-2">
-          {pillars.map((pillar, i) => {
-            const Icon = pillar.icon;
-            return (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.3 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className={`group relative ${
-                  i < 2 ? "border-b border-white/10" : ""
-                } ${
-                  i % 2 === 0 ? "border-r border-white/10" : ""
-                }`}
-              >
-                <Link
-                  to={pillar.link}
-                  className="block p-8 md:p-12 lg:p-14 h-full hover:bg-white/[0.03] transition-colors duration-300"
+        {/* ── Staggered pillar cards ── */}
+        <div className="px-4 md:px-8 lg:px-12 pb-14 md:pb-20">
+          <div className="grid md:grid-cols-2 gap-3 md:gap-4">
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                  transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* Top: icon + arrow */}
-                  <div className="flex items-start justify-between mb-8 md:mb-10">
-                    <div className="w-11 h-11 flex items-center justify-center border border-white/10 group-hover:border-[#FF4D00]/50 transition-colors">
-                      <Icon className="w-5 h-5 text-white/30 group-hover:text-[#FF4D00] transition-colors" strokeWidth={1.5} />
+                  <Link
+                    to={pillar.link}
+                    className="group block relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-[#FF4D00]/20 transition-all duration-500"
+                  >
+                    {/* Accent gradient on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${pillar.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                    <div className="relative p-7 md:p-10">
+                      {/* Top row: icon + number watermark */}
+                      <div className="flex items-start justify-between mb-8">
+                        <div className="w-10 h-10 flex items-center justify-center border border-white/10 group-hover:border-[#FF4D00]/40 transition-colors duration-300">
+                          <Icon className="w-[18px] h-[18px] text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" strokeWidth={1.5} />
+                        </div>
+                        <span className="text-[64px] md:text-[80px] font-display font-medium tracking-[-0.04em] text-white/[0.04] leading-none select-none -mt-2 -mr-1">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      {/* Stat */}
+                      <div className="mb-6">
+                        <span className="text-[40px] md:text-[52px] font-display font-medium tracking-[-0.03em] text-white leading-none">
+                          {pillar.stat}
+                        </span>
+                        <span className="block text-[9px] font-mono font-bold tracking-[0.22em] uppercase text-[#FF4D00]/50 mt-2">
+                          {pillar.statLabel}
+                        </span>
+                      </div>
+
+                      {/* Title + desc */}
+                      <h3 className="text-[18px] md:text-[22px] font-display font-medium tracking-[-0.015em] text-white group-hover:text-[#FF4D00] transition-colors duration-300 mb-3 flex items-center gap-2">
+                        {pillar.title}
+                        <ArrowRight className="w-3.5 h-3.5 text-white/0 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all duration-300" />
+                      </h3>
+                      <p className="text-[13px] leading-[1.7] text-white/25 group-hover:text-white/45 transition-colors duration-300 max-w-sm">
+                        {pillar.description}
+                      </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-white/10 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all mt-1" />
-                  </div>
-
-                  {/* Stat */}
-                  <span className="text-[48px] md:text-[60px] font-display font-medium tracking-[-0.03em] text-white leading-none block mb-2">
-                    {pillar.stat}
-                  </span>
-                  <span className="text-[10px] font-mono font-bold tracking-[0.22em] uppercase text-[#FF4D00]/60 block mb-6 md:mb-8">
-                    {pillar.statLabel}
-                  </span>
-
-                  {/* Title + description */}
-                  <h3 className="text-[20px] md:text-[24px] font-display font-medium tracking-[-0.02em] text-white group-hover:text-[#FF4D00] transition-colors mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/35 font-medium group-hover:text-white/55 transition-colors">
-                    {pillar.description}
-                  </p>
-                </Link>
-              </motion.div>
-            );
-          })}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
