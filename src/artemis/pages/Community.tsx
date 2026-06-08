@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUp,
   Calendar,
   MapPin,
   Users,
@@ -21,9 +22,9 @@ import {
   Fingerprint,
   ShieldCheck,
   Activity,
-  Handshake,
   Lightbulb,
   Sparkles,
+  MessageSquare,
 } from "lucide-react";
 import { Link } from "@/artemis/router";
 
@@ -181,14 +182,63 @@ const dispatches = [
   },
 ];
 
-/* ── Passport Benefits ── */
+/* ── Passport Benefits (expanded) ── */
 const passportBenefits = [
-  "Access to all 190 hubs across 39 countries",
-  "Curated deal flow & peer circle invitations",
-  "XCitizen-only events: summits, demo days, masterclasses",
-  "Direct introductions to founders, operators & investors",
-  "Route directory: talent, vendors, co-founders",
-  "Voting rights at the annual xCitizen Assembly",
+  {
+    title: "Hub Access",
+    description: "Walk into any of 190 co-working, lab, and maker spaces across 39 countries. One scan, full entry.",
+    icon: Globe,
+  },
+  {
+    title: "Curated Deal Flow",
+    description: "Investor-grade deal memos delivered monthly. Pre-vetted by operators on the ground, not cold pitches from LinkedIn.",
+    icon: Coins,
+  },
+  {
+    title: "XCitizen-Only Events",
+    description: "Demo days, summits, masterclasses, and town halls. No public tickets. No tourists. Builders only.",
+    icon: Calendar,
+  },
+  {
+    title: "Warm Introductions",
+    description: "Direct introductions to founders, operators, and investors — vouched by two degrees of XCitizen verification.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Route Directory",
+    description: "Talent, vendors, co-founders, regulators, lab access — searchable by sector, hub, and availability.",
+    icon: Rocket,
+  },
+  {
+    title: "Assembly Vote",
+    description: "Voting rights at the annual xCitizen Assembly. Shape the Route's thesis, priorities, and next-year strategy.",
+    icon: CheckCircle,
+  },
+];
+
+/* ── Town Square Discussions ── */
+const previewDiscussions = [
+  {
+    community: "Energy & Infrastructure",
+    title: "Mini-grid economics in Northern Nigeria: unit economics from Cohort 7",
+    author: "Yusuf Hassan",
+    upvotes: 142,
+    color: "bg-[#FF4D00]",
+  },
+  {
+    community: "Digital Finance",
+    title: "Cross-border payments infrastructure: what we learned building across 3 corridors",
+    author: "Fatima Al-Rashid",
+    upvotes: 204,
+    color: "bg-amber-600",
+  },
+  {
+    community: "Capital & Deals",
+    title: "SPV deployment update: Q1 2026 portfolio construction",
+    author: "Amara Diallo",
+    upvotes: 312,
+    color: "bg-rose-600",
+  },
 ];
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -203,6 +253,7 @@ export function Community() {
       <ArchetypeCardsSection />
       <CadenceEventsSection />
       <DispatchesSection />
+      <TownSquareSection />
       <PassportSection />
       <CTASection />
     </div>
@@ -281,7 +332,7 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   2. GALLERY COLLAGE — Masonry photo grid (light bg, from original)
+   2. GALLERY COLLAGE — Masonry photo grid (light bg)
    ══════════════════════════════════════════════════════════════════════════ */
 function GalleryCollage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -293,7 +344,6 @@ function GalleryCollage() {
       className="py-16 md:py-24 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10"
     >
       <div className="w-full max-w-[1400px] mx-auto">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -309,7 +359,6 @@ function GalleryCollage() {
           </h2>
         </motion.div>
 
-        {/* Masonry grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[200px]">
           {galleryImages.map((img, i) => (
             <motion.div
@@ -328,7 +377,6 @@ function GalleryCollage() {
                 alt={img.alt}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
               />
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <span className="text-white text-[11px] font-mono font-bold tracking-[0.15em] uppercase">
                   {img.alt}
@@ -354,32 +402,31 @@ function PillarsSection() {
       icon: Fingerprint,
       title: "Every node is placed",
       description:
-        "XCitizens aren't added to a directory — they're positioned in the architecture. A founder in energy sits beside investors who deploy in energy. Placement, not enrollment.",
+        "XCitizens aren't added to a directory — they're positioned in the architecture. A founder in energy sits beside investors who deploy in energy. An operator in logistics is paired with ventures that need supply-chain velocity. Placement, not enrollment.",
     },
     {
       icon: ShieldCheck,
       title: "Trust is the currency",
       description:
-        "Reputation isn't a badge — it's a ledger. Every introduction carries the weight of the vouching chain behind it. Cold outreach is noise. Warm introduction is signal. The network self-regulates.",
+        "Reputation isn't a badge — it's a ledger. Every introduction carries the weight of the vouching chain behind it. Cold outreach is noise. A warm introduction through two degrees of XCitizen verification is signal. The network self-regulates.",
     },
     {
       icon: Lightbulb,
       title: "Knowledge that routes",
       description:
-        "Workshops, playbooks, and field reports from ventures that have scaled. Hard-won lessons flow back into the network in real time. Information doesn't broadcast — it routes.",
+        "Workshops, playbooks, and field reports from ventures that have scaled. Hard-won lessons flow back into the network in real time. Information doesn't broadcast — it routes to the person who needs it, when they need it.",
     },
     {
       icon: Sparkles,
       title: "Every cycle compounds",
       description:
-        "Weekly peer circles tighten bonds. Monthly masterclasses seed collaborations. Quarterly summits close deals. Each cycle makes the next one faster and higher-leverage.",
+        "Weekly peer circles tighten bonds. Monthly masterclasses seed collaborations. Quarterly summits close deals. Each cycle makes the next one faster and higher-leverage. The flywheel doesn't spin — it accelerates.",
     },
   ];
 
   return (
     <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
       <div className="w-full max-w-[1400px] mx-auto">
-        {/* Thesis */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -402,7 +449,6 @@ function PillarsSection() {
           </p>
         </motion.div>
 
-        {/* Pillars grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-[#111111]/10">
           {pillars.map((pillar, i) => {
             const PIcon = pillar.icon;
@@ -439,7 +485,7 @@ function PillarsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   4. ARCHETYPE CARDS — Light bg header, dark accent cards
+   4. ARCHETYPE CARDS — Light gray bg, dark accent cards
    ══════════════════════════════════════════════════════════════════════════ */
 function ArchetypeCardsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -479,7 +525,6 @@ function ArchetypeCardsSection() {
   return (
     <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA]">
       <div className="max-w-[1400px] mx-auto">
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -502,7 +547,6 @@ function ArchetypeCardsSection() {
           </div>
         </motion.div>
 
-        {/* Four vertical cards — dark cards on light bg */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {archetypes.map((arch, i) => {
             const AIcon = arch.icon;
@@ -518,7 +562,6 @@ function ArchetypeCardsSection() {
                 }}
                 className="bg-[#0A0A0A] rounded-sm overflow-hidden group"
               >
-                {/* Card top — callsign + icon */}
                 <div className="px-6 md:px-7 pt-8 md:pt-10 pb-6 border-b border-white/[0.06]">
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
@@ -532,8 +575,6 @@ function ArchetypeCardsSection() {
                     {arch.transforms}
                   </p>
                 </div>
-
-                {/* Card body — feeds + draws */}
                 <div className="px-6 md:px-7 py-6 md:py-8 space-y-5">
                   <div>
                     <span className="text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mb-2 block">
@@ -563,7 +604,7 @@ function ArchetypeCardsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   5. CADENCE + EVENTS — Dark container for rhythm contrast
+   5. CADENCE + EVENTS — Image-based event cards on light bg
    ══════════════════════════════════════════════════════════════════════════ */
 function CadenceEventsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -581,45 +622,42 @@ function CadenceEventsSection() {
 
   const eventTypeColor: Record<string, string> = {
     "Demo Day": "bg-[#FF4D00] text-white",
-    Summit: "bg-white/10 text-white",
+    Summit: "bg-[#111111] text-white",
     Masterclass: "bg-[#FF4D00]/10 text-[#FF4D00]",
-    Fellowship: "bg-white/5 text-white/60",
+    Fellowship: "bg-[#111111]/10 text-[#111111]",
     "Investor Event": "bg-[#FF4D00] text-white",
-    "Town Hall": "bg-white/5 text-white/60",
+    "Town Hall": "bg-[#111111]/10 text-[#111111]",
   };
 
   return (
     <>
-      <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 md:py-28">
-        <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+      <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
+        <div className="w-full max-w-[1400px] mx-auto">
           {/* Header */}
-          <div className="px-8 md:px-14 lg:px-20 pt-14 md:pt-20 pb-10 md:pb-14">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-                The Pulse
-              </span>
-              <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mb-4">
-                The bloodstream has a{" "}
-                <span className="italic text-[#FF4D00]">rhythm</span>.
-              </h2>
-              <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/35 font-medium max-w-2xl">
-                Communities that meet annually are acquaintances. Communities
-                that convene weekly are a force. Every pulse cycle tightens the
-                mesh.
-              </p>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl mb-10 md:mb-14"
+          >
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-6 block">
+              The Pulse
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[58px] leading-[1.06] font-display font-medium tracking-[-0.03em] text-[#111111]/90 mb-4">
+              Weekly peer circles. Monthly deal flow. Quarterly{" "}
+              <span className="italic text-[#FF4D00]">closings</span>.
+            </h2>
+            <p className="text-[15px] md:text-[17px] leading-[1.75] text-[#111111]/45 font-medium max-w-2xl">
+              Communities that meet once a year are acquaintances. Communities
+              that convene weekly close deals. Every cadence cycle — from
+              peer circles to the annual Assembly — compounds the one before it.
+            </p>
+          </motion.div>
 
-          {/* Cadence — horizontal timeline with dots */}
-          <div className="px-8 md:px-14 lg:px-20 pb-10 md:pb-14">
+          {/* Cadence strip */}
+          <div className="mb-12 md:mb-16">
             <div className="relative">
-              {/* Connecting line */}
-              <div className="absolute top-4 left-0 right-0 h-px bg-white/[0.06]" />
-
+              <div className="absolute top-4 left-0 right-0 h-px bg-[#111111]/10" />
               <div className="grid grid-cols-4 gap-4 md:gap-6">
                 {cadenceItems.map((c, i) => {
                   const CIcon = c.icon;
@@ -635,7 +673,6 @@ function CadenceEventsSection() {
                       }}
                       className="relative"
                     >
-                      {/* Dot on the line */}
                       <div className="w-2 h-2 rounded-full bg-[#FF4D00] mb-6 relative z-10" />
                       <div className="flex items-center gap-2 mb-2">
                         <CIcon className="w-3 h-3 text-[#FF4D00]/50 hidden sm:block" />
@@ -643,7 +680,7 @@ function CadenceEventsSection() {
                           {c.period}
                         </span>
                       </div>
-                      <p className="text-[12px] md:text-[13px] font-display font-medium text-white/50 leading-[1.5]">
+                      <p className="text-[12px] md:text-[13px] font-display font-medium text-[#111111]/50 leading-[1.5]">
                         {c.title}
                       </p>
                     </motion.div>
@@ -653,53 +690,83 @@ function CadenceEventsSection() {
             </div>
           </div>
 
-          {/* Events — 2-column card grid */}
-          <div className="border-t border-white/[0.06] px-8 md:px-14 lg:px-20 py-10 md:py-14">
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
-                Upcoming
-              </span>
-              <span className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/15">
-                Click to RSVP
-              </span>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
-              {upcomingEvents.map((event, i) => (
-                <motion.div
-                  key={event.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.3 + i * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  onClick={() => setSelectedEvent(event)}
-                  className="group bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-300 cursor-pointer p-5 md:p-6"
-                >
-                  <div className="flex items-center gap-2 mb-3">
+          {/* Events — Image-based cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {upcomingEvents.map((event, i) => (
+              <motion.div
+                key={event.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.3 + i * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                onClick={() => setSelectedEvent(event)}
+                className={`group border bg-white overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer ${
+                  event.featured
+                    ? "border-[#FF4D00]/30 hover:border-[#FF4D00]/60"
+                    : "border-[#111111]/10 hover:border-[#111111]/20"
+                }`}
+              >
+                {/* Event image */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {/* Type badge */}
+                  <div className="absolute top-3 left-3">
                     <span
-                      className={`inline-block text-[7px] font-mono font-bold tracking-[0.15em] uppercase px-2 py-0.5 ${eventTypeColor[event.type] || "bg-white/10 text-white"}`}
+                      className={`text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-1 ${eventTypeColor[event.type] || "bg-[#111111]/10 text-[#111111]"}`}
                     >
                       {event.type}
                     </span>
-                    <span className="text-[9px] font-mono text-white/20">
-                      {event.date}
-                    </span>
                   </div>
-                  <h4 className="text-[14px] md:text-[15px] font-display font-medium text-white/70 group-hover:text-white transition-colors leading-[1.4] mb-3">
+                  {event.featured && (
+                    <div className="absolute top-3 right-3">
+                      <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-1 bg-[#FF4D00] text-white flex items-center gap-1">
+                        <Star className="w-3 h-3" />
+                        Featured
+                      </span>
+                    </div>
+                  )}
+                  {/* Date overlay */}
+                  <div className="absolute bottom-3 left-3">
+                    <div className="text-[11px] font-mono font-bold tracking-[0.05em] text-white flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-[#FF4D00]" />
+                      {event.date}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content below image */}
+                <div className="p-4 md:p-5">
+                  <h3 className="text-[15px] md:text-[17px] font-display font-medium tracking-tight leading-tight mb-2 group-hover:text-[#FF4D00] transition-colors">
                     {event.title}
-                  </h4>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] text-white/20 font-medium truncate pr-4">
+                  </h3>
+                  <p className="text-[12px] md:text-[13px] text-[#111111]/55 leading-[1.6] font-medium mb-3 line-clamp-2">
+                    {event.description}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3 text-[10px] text-[#111111]/40 font-medium">
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3 h-3" />
                       {event.location}
                     </span>
-                    <ChevronRight className="w-3.5 h-3.5 text-white/[0.06] group-hover:text-[#FF4D00]/50 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0" />
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {event.time}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="w-3 h-3" />
+                      {event.spots}
+                    </span>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -889,9 +956,8 @@ function DispatchesSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA]">
       <div className="max-w-[1400px] mx-auto">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -907,7 +973,6 @@ function DispatchesSection() {
           </h2>
         </motion.div>
 
-        {/* Dispatches — alternating layout on light bg */}
         <div className="divide-y divide-[#111111]/10">
           {dispatches.map((d, i) => (
             <motion.div
@@ -919,12 +984,11 @@ function DispatchesSection() {
                 delay: 0.15 + i * 0.12,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="group py-10 md:py-14 hover:bg-[#FAFAFA] transition-colors duration-300"
+              className="group py-10 md:py-14 hover:bg-white transition-colors duration-300"
             >
               <div
                 className={`grid lg:grid-cols-12 gap-6 lg:gap-10 items-start ${i % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
               >
-                {/* Quote */}
                 <div
                   className={`lg:col-span-8 ${i % 2 === 1 ? "lg:col-start-5" : ""}`}
                 >
@@ -936,7 +1000,6 @@ function DispatchesSection() {
                   </p>
                 </div>
 
-                {/* Attribution */}
                 <div
                   className={`lg:col-span-4 ${i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""} flex lg:justify-end`}
                 >
@@ -963,68 +1026,275 @@ function DispatchesSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   7. PASSPORT — Light bg, clean split layout
+   7. TOWN SQUARE — Forum preview with discussion cards
+   ══════════════════════════════════════════════════════════════════════════ */
+function TownSquareSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      className="py-20 md:py-28 px-6 md:px-12 lg:px-20 border-t border-[#111111]/10"
+    >
+      <div className="w-full max-w-[1400px] mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          {/* Left: Copy + CTA */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00] mb-6 block">
+              Town Square
+            </span>
+            <h2 className="text-[32px] md:text-[48px] lg:text-[56px] font-display font-medium tracking-tight leading-[1.05] mb-6">
+              Where the network{" "}
+              <em className="italic font-serif text-[#FF4D00]">talks</em>.
+            </h2>
+            <p className="text-[17px] md:text-[19px] text-[#111111]/50 font-medium leading-relaxed mb-6">
+              The XCitizen forum. Real-time discussions on deals, infrastructure,
+              regulations, hiring, and hard-won lessons from the Route. No noise.
+              No cold pitches. Just builders sharing what they know.
+            </p>
+
+            <div className="flex flex-wrap gap-3 mb-8">
+              {[
+                "Energy & Infrastructure",
+                "Life Sciences",
+                "Digital Finance",
+                "Route Operations",
+                "Capital & Deals",
+                "Founders Corner",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5 text-[10px] font-mono font-bold tracking-[0.1em] uppercase border border-[#111111]/10 text-[#111111]/40"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-4 items-center">
+              <Link
+                to="/townsquare"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF4D00] text-white text-[12px] font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Enter Town Square
+              </Link>
+              <span className="text-[12px] text-[#111111]/30 font-medium">
+                Free account required · takes 60 seconds
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Right: Preview cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-3"
+          >
+            {/* Mock forum header */}
+            <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-[#111111]/10">
+              <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center">
+                <MessageSquare className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <div className="text-[14px] font-display font-medium tracking-tight">
+                  Town Square
+                </div>
+                <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
+                  XCitizen Forum
+                </div>
+              </div>
+              <div className="ml-auto flex items-center gap-2 text-[10px] text-[#111111]/25 font-mono font-bold">
+                <span>1,200+ members</span>
+                <span>·</span>
+                <span>6 communities</span>
+              </div>
+            </div>
+
+            {previewDiscussions.map((discussion, i) => (
+              <motion.div
+                key={discussion.title}
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.3 + i * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="group border border-[#111111]/10 p-4 hover:border-[#FF4D00]/20 hover:bg-[#FAFAFA] transition-all cursor-pointer"
+              >
+                <div className="flex items-center gap-2 text-[11px] text-[#111111]/35 mb-2">
+                  <div
+                    className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${discussion.color}`}
+                  >
+                    <span className="text-[7px] font-bold text-white uppercase">
+                      {discussion.community[0]}
+                    </span>
+                  </div>
+                  <span className="font-bold text-[#111111]/50">
+                    {discussion.community}
+                  </span>
+                  <span>·</span>
+                  <span>{discussion.author}</span>
+                </div>
+                <h4 className="text-[14px] md:text-[15px] font-display font-medium tracking-tight text-[#111111]/80 leading-snug group-hover:text-[#FF4D00] transition-colors">
+                  {discussion.title}
+                </h4>
+                <div className="flex items-center gap-3 mt-2.5 text-[10px] text-[#111111]/25 font-mono font-bold">
+                  <span className="flex items-center gap-1">
+                    <ArrowUp className="w-3 h-3 text-[#FF4D00]" />
+                    {discussion.upvotes}
+                  </span>
+                  <span>6 comments</span>
+                  <span className="ml-auto flex items-center gap-1 group-hover:text-[#FF4D00] transition-colors">
+                    View discussion
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* Bottom fade hint */}
+            <div className="relative h-8 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. PASSPORT — Detailed benefits + passport visual
    ══════════════════════════════════════════════════════════════════════════ */
 function PassportSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA]">
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#0A0A0A]">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Left — Passport identity */}
+          {/* Left — Passport identity + visual */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 flex flex-col justify-center"
+            className="lg:col-span-5 flex flex-col"
           >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-6 block">
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
               xCitizen Passport
             </span>
-            <h2 className="text-[28px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-[#111111]/90 mb-6">
-              Your access to the{" "}
-              <span className="italic text-[#FF4D00]">Route</span>.
+            <h2 className="text-[28px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-white/90 mb-4">
+              One passport.{" "}
+              <span className="italic text-[#FF4D00]">Full access</span>.
             </h2>
-            <p className="text-[15px] md:text-[17px] text-[#111111]/45 font-medium leading-[1.75] mb-8">
-              One passport. Full network. The xCitizen Passport isn&apos;t
-              membership — it&apos;s clearance. Access to every hub, every deal
-              room, every peer circle on the Route.
+            <p className="text-[15px] md:text-[17px] text-white/35 font-medium leading-[1.75] mb-8">
+              The xCitizen Passport isn&apos;t membership — it&apos;s clearance.
+              $25 one-time setup. $9/year after that. Access to every hub, every
+              deal room, every peer circle on the Route. No tiers. No gates
+              inside the gate.
             </p>
-            <Link
-              to="/join"
-              className="group inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] hover:text-[#111111] transition-colors"
-            >
-              Apply for the Passport
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
-            </Link>
+
+            {/* Passport visual */}
+            <div className="relative mt-auto">
+              <div className="relative overflow-hidden rounded-sm border border-white/[0.08] group">
+                <img
+                  src="/passport-visual.png"
+                  alt="xCitizen Passport — your access card to the Route"
+                  className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/40 to-transparent" />
+              </div>
+              <div className="flex items-center justify-between mt-4">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25 block">
+                      Setup fee
+                    </span>
+                    <span className="text-[20px] font-display font-medium text-white/70">
+                      $25
+                    </span>
+                  </div>
+                  <div className="w-px h-8 bg-white/[0.06]" />
+                  <div>
+                    <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25 block">
+                      Annual
+                    </span>
+                    <span className="text-[20px] font-display font-medium text-white/70">
+                      $9/yr
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  to="/join"
+                  className="group/link inline-flex items-center gap-2 px-6 py-3 bg-[#FF4D00] text-white text-[11px] font-mono font-bold tracking-[0.12em] uppercase hover:bg-[#FF4D00]/90 transition-colors"
+                >
+                  Apply
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform duration-200" />
+                </Link>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Right — Benefits grid */}
-          <div className="lg:col-span-7 flex items-center">
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 w-full">
-              {passportBenefits.map((benefit, i) => (
-                <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.2 + i * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="flex items-start gap-3"
-                >
-                  <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center mt-0.5">
-                    <Check className="w-3.5 h-3.5 text-[#FF4D00]" />
-                  </div>
-                  <span className="text-[13px] md:text-[14px] font-medium text-[#111111]/65 leading-[1.5]">
-                    {benefit}
-                  </span>
-                </motion.div>
-              ))}
+          {/* Right — Benefits grid with detail */}
+          <div className="lg:col-span-7">
+            <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
+              {passportBenefits.map((benefit, i) => {
+                const BIcon = benefit.icon;
+                return (
+                  <motion.div
+                    key={benefit.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.15 + i * 0.07,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="border border-white/[0.06] p-5 md:p-6 hover:border-white/[0.12] hover:bg-white/[0.02] transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
+                        <BIcon className="w-3.5 h-3.5 text-[#FF4D00]/70 group-hover:text-[#FF4D00] transition-colors duration-300" />
+                      </div>
+                      <h3 className="text-[14px] md:text-[15px] font-display font-medium text-white/80 group-hover:text-white transition-colors duration-300">
+                        {benefit.title}
+                      </h3>
+                    </div>
+                    <p className="text-[12px] md:text-[13px] leading-[1.7] text-white/30 font-medium group-hover:text-white/45 transition-colors duration-300">
+                      {benefit.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
+
+            {/* Bottom note */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-6 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            >
+              <p className="text-[11px] text-white/20 font-medium">
+                No tiers. No hidden fees. Every XCitizen gets the same access.
+              </p>
+              <Link
+                to="/join"
+                className="group inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] hover:text-white transition-colors"
+              >
+                Full passport details
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -1033,51 +1303,50 @@ function PassportSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   8. CTA — Dark closing statement
+   9. CTA — Dark closing statement
    ══════════════════════════════════════════════════════════════════════════ */
 function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 pb-20 md:pb-28">
-      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        <div className="px-8 md:px-14 lg:px-20 py-16 md:py-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-              The organism is forming
-            </span>
-            <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[60px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mx-auto mb-6">
-              Your seat is{" "}
-              <span className="italic text-[#FF4D00]">waiting</span>.
-            </h2>
-            <p className="text-[15px] md:text-[17px] text-white/35 font-medium leading-[1.75] max-w-xl mx-auto mb-10">
-              The network is assembling. The flywheel is spinning. Every
-              archetype has a role in the machine — and the machine needs all
-              four.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                to="/join"
-                className="group inline-flex items-center gap-2 px-8 py-4 bg-[#FF4D00] text-white text-[11px] font-mono font-bold tracking-[0.12em] uppercase hover:bg-[#FF4D00]/90 transition-colors"
-              >
-                Join as Founder
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
-              </Link>
-              <Link
-                to="/join"
-                className="group inline-flex items-center gap-2 px-8 py-4 border border-white/[0.12] text-white text-[11px] font-mono font-bold tracking-[0.12em] uppercase hover:border-white/30 hover:bg-white/[0.04] transition-all"
-              >
-                Join as Investor
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
-              </Link>
-            </div>
-          </motion.div>
-        </div>
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
+      <div className="max-w-[1400px] mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-6 block">
+            The network is live
+          </span>
+          <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[60px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-[#111111]/90 mb-6">
+            1,200 builders. 190 hubs. Your seat is{" "}
+            <span className="italic text-[#FF4D00]">waiting</span>.
+          </h2>
+          <p className="text-[15px] md:text-[17px] text-[#111111]/45 font-medium leading-[1.75] max-w-xl mx-auto mb-10">
+            The network is assembling. The flywheel is spinning. Every
+            archetype — founder, operator, investor, mentor — has a role in the
+            machine. The machine needs all four.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/join"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-[#FF4D00] text-white text-[11px] font-mono font-bold tracking-[0.12em] uppercase hover:bg-[#FF4D00]/90 transition-colors"
+            >
+              Join as Founder
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Link>
+            <Link
+              to="/join"
+              className="group inline-flex items-center gap-2 px-8 py-4 border border-[#111111]/15 text-[#111111] text-[11px] font-mono font-bold tracking-[0.12em] uppercase hover:border-[#111111]/40 hover:bg-[#FAFAFA] transition-all"
+            >
+              Join as Investor
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
