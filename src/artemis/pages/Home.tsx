@@ -467,7 +467,7 @@ function MissionBridge() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   THE PLATFORM: Modern cinematic — ticker + thesis + staggered pillar cards
+   THE PLATFORM: Modern — ticker + thesis + staggered pillar cards
    ══════════════════════════════════════════════════════════════════════════ */
 function BentoGrid() {
   const ref = useRef<HTMLDivElement>(null);
@@ -481,7 +481,6 @@ function BentoGrid() {
       description: "Physical spaces, legal frameworks, and shared systems that let ventures deploy faster and compound across borders.",
       icon: Building2,
       link: "/platform",
-      accent: "from-[#FF4D00]/20 to-transparent",
     },
     {
       title: "Ventures",
@@ -490,7 +489,6 @@ function BentoGrid() {
       description: "From energy to space — critical technology designed for the markets that need it most and the century that demands it.",
       icon: Rocket,
       link: "/ventures",
-      accent: "from-[#FF4D00]/15 to-transparent",
     },
     {
       title: "Capital",
@@ -499,7 +497,6 @@ function BentoGrid() {
       description: "From $500 to $250K+, aligned capital designed for every stage — so breakthroughs don't stall for funding.",
       icon: Coins,
       link: "/capital",
-      accent: "from-[#FF4D00]/12 to-transparent",
     },
     {
       title: "Community",
@@ -508,7 +505,6 @@ function BentoGrid() {
       description: "Operators and builders moving through the Route together — a mobile university for civilizational prototyping.",
       icon: Users,
       link: "/programs",
-      accent: "from-[#FF4D00]/10 to-transparent",
     },
   ];
 
@@ -548,80 +544,87 @@ function BentoGrid() {
           </div>
         </div>
 
-        {/* ── Thesis statement ── */}
-        <div className="px-8 md:px-16 lg:px-24 pt-14 md:pt-20 pb-10 md:pb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-6 block">
-              The Platform
-            </span>
-            <h2 className="text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] font-display font-medium tracking-[-0.035em] leading-[0.92] text-white mb-8 md:mb-12">
-              Four engines,{" "}
-              <em className="italic font-serif text-[#FF4D00]">one thesis</em>.
-            </h2>
-            <div className="max-w-2xl space-y-5">
-              <p className="text-[17px] md:text-[19px] leading-[1.6] text-white/45 font-medium">
-                Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South — youngest populations, fastest-growing markets, boldest ambitions.
-              </p>
-              <p className="text-[15px] md:text-[17px] leading-[1.65] text-white/30 font-medium">
-                But isolated breakthroughs won&apos;t compound on their own.{" "}
-                <span className="text-white/80 font-semibold">Connected ones can.</span> xCelero unites 190 hubs across 39 countries into one commercialization engine — infrastructure, ventures, capital, community — so prosperity doesn&apos;t remain a promise but can become a product.
-              </p>
-            </div>
-          </motion.div>
-        </div>
+        {/* ── Thesis + Pillars: side-by-side on desktop ── */}
+        <div className="grid lg:grid-cols-12">
+          {/* Left: Thesis statement — sticky on scroll */}
+          <div className="lg:col-span-5 px-8 md:px-14 lg:px-20 py-14 md:py-20 lg:py-24 lg:sticky lg:top-[80px] lg:self-start border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-6 block">
+                The Platform
+              </span>
+              <h2 className="text-[32px] sm:text-[44px] md:text-[56px] lg:text-[64px] font-display font-medium tracking-[-0.035em] leading-[0.92] text-white mb-8 md:mb-10">
+                Four engines,{" "}
+                <em className="italic font-serif text-[#FF4D00]">one thesis</em>.
+              </h2>
+              <div className="space-y-5">
+                <p className="text-[17px] md:text-[19px] leading-[1.6] text-white/40 font-medium">
+                  Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South — youngest populations, fastest-growing markets, boldest ambitions.
+                </p>
+                <p className="text-[14px] md:text-[16px] leading-[1.65] text-white/25 font-medium">
+                  But isolated breakthroughs won&apos;t compound on their own.{" "}
+                  <span className="text-white/70 font-semibold">Connected ones can.</span> xCelero unites 190 hubs across 39 countries into one commercialization engine — infrastructure, ventures, capital, community — so prosperity doesn&apos;t remain a promise but can become a product.
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
-        {/* ── Staggered pillar cards ── */}
-        <div className="px-4 md:px-8 lg:px-12 pb-14 md:pb-20">
-          <div className="grid md:grid-cols-2 gap-3 md:gap-4">
+          {/* Right: Pillar cards stacked vertically */}
+          <div className="lg:col-span-7">
             {pillars.map((pillar, i) => {
               const Icon = pillar.icon;
               return (
                 <motion.div
                   key={pillar.title}
-                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                  transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.3 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Link
                     to={pillar.link}
-                    className="group block relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] hover:border-[#FF4D00]/20 transition-all duration-500"
+                    className="group block"
                   >
-                    {/* Accent gradient on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${pillar.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                    <div className={`relative overflow-hidden px-8 md:px-14 py-10 md:py-14 hover:bg-white/[0.02] transition-colors duration-500 ${
+                      i < pillars.length - 1 ? "border-b border-white/[0.06]" : ""
+                    }`}>
+                      {/* Watermark number */}
+                      <span className="absolute top-6 right-8 text-[72px] md:text-[96px] font-display font-medium tracking-[-0.04em] text-white/[0.03] leading-none select-none pointer-events-none">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
 
-                    <div className="relative p-7 md:p-10">
-                      {/* Top row: icon + number watermark */}
-                      <div className="flex items-start justify-between mb-8">
-                        <div className="w-10 h-10 flex items-center justify-center border border-white/10 group-hover:border-[#FF4D00]/40 transition-colors duration-300">
-                          <Icon className="w-[18px] h-[18px] text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" strokeWidth={1.5} />
+                      <div className="relative flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
+                        {/* Icon */}
+                        <div className="w-11 h-11 shrink-0 flex items-center justify-center border border-white/10 group-hover:border-[#FF4D00]/30 transition-colors duration-300">
+                          <Icon className="w-[18px] h-[18px] text-white/20 group-hover:text-[#FF4D00] transition-colors duration-300" strokeWidth={1.5} />
                         </div>
-                        <span className="text-[64px] md:text-[80px] font-display font-medium tracking-[-0.04em] text-white/[0.04] leading-none select-none -mt-2 -mr-1">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </div>
 
-                      {/* Stat */}
-                      <div className="mb-6">
-                        <span className="text-[40px] md:text-[52px] font-display font-medium tracking-[-0.03em] text-white leading-none">
-                          {pillar.stat}
-                        </span>
-                        <span className="block text-[9px] font-mono font-bold tracking-[0.22em] uppercase text-[#FF4D00]/50 mt-2">
-                          {pillar.statLabel}
-                        </span>
-                      </div>
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline gap-4 mb-4">
+                            <h3 className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white group-hover:text-[#FF4D00] transition-colors duration-300">
+                              {pillar.title}
+                            </h3>
+                            <ArrowRight className="w-4 h-4 text-white/0 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all duration-300 shrink-0" />
+                          </div>
 
-                      {/* Title + desc */}
-                      <h3 className="text-[18px] md:text-[22px] font-display font-medium tracking-[-0.015em] text-white group-hover:text-[#FF4D00] transition-colors duration-300 mb-3 flex items-center gap-2">
-                        {pillar.title}
-                        <ArrowRight className="w-3.5 h-3.5 text-white/0 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all duration-300" />
-                      </h3>
-                      <p className="text-[13px] leading-[1.7] text-white/25 group-hover:text-white/45 transition-colors duration-300 max-w-sm">
-                        {pillar.description}
-                      </p>
+                          <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/20 group-hover:text-white/40 transition-colors duration-300 mb-6 max-w-md">
+                            {pillar.description}
+                          </p>
+
+                          {/* Stat badge */}
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-[32px] md:text-[40px] font-display font-medium tracking-[-0.03em] text-white/80 leading-none">
+                              {pillar.stat}
+                            </span>
+                            <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/40">
+                              {pillar.statLabel}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 </motion.div>
