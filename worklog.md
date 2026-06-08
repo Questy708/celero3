@@ -72,3 +72,24 @@ Work Log:
 Stage Summary:
 - Routes page: Both full-bleed sections now contained within `max-w-[1400px]` matching footer alignment
 - Homepage: Platform section redesigned from bento grid to editorial split layout with thesis text + four pillars list
+
+---
+Task ID: 4
+Agent: Main Agent
+Task: Redesign The Platform section with a more modern layout
+
+Work Log:
+- Replaced the editorial split layout (thesis + numbered pillar list) with a dark cinematic section
+- New layout: contained dark `bg-[#111111] rounded-sm` card with two zones:
+  - Top: thesis banner with heading "Four engines, one thesis." + user's requested paragraph about critical technology and the Global South
+  - Bottom: 2×2 card grid with four pillars (Infrastructure, Ventures, Capital, Community)
+- Each card has: icon box, arrow, large stat number (190, 40+, 6, 100), stat label in orange, title, description
+- Cards separated by thin white/10 border lines, hover effects on each card
+- Dark section is contained within `max-w-[1400px]` with padding, matching site alignment
+- Verified with Agent Browser + VLM: all 4 cards visible, thesis text present, dark bg contained within margins
+- Lint passes cleanly
+
+Stage Summary:
+- Platform section now uses a modern dark cinematic layout with thesis banner + 2×2 stat card grid
+- Includes user's requested text about critical technology and Global South
+- Consistent with site's contained `max-w-[1400px]` alignment pattern
