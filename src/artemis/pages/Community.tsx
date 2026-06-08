@@ -11,9 +11,6 @@ import {
   Clock,
   Star,
   Globe,
-  Handshake,
-  Lightbulb,
-  Sparkles,
   Heart,
   Check,
   X,
@@ -21,13 +18,9 @@ import {
   Building2,
   Coins,
   CheckCircle,
-  Zap,
-  CircleDot,
-  Flame,
-  Network,
-  Activity,
   Fingerprint,
   ShieldCheck,
+  Activity,
 } from "lucide-react";
 import { Link } from "@/artemis/router";
 
@@ -113,7 +106,7 @@ const upcomingEvents = [
   },
 ];
 
-/* ── Dispatches (testimonials) ── */
+/* ── Dispatches ── */
 const dispatches = [
   {
     signal:
@@ -159,9 +152,10 @@ export function Community() {
     <div className="bg-white text-[#111111]">
       <HeroSection />
       <NerveSection />
-      <MetabolismSection />
-      <PulseSection />
-      <DispatchesPassportSection />
+      <ArchetypeCardsSection />
+      <CadenceEventsSection />
+      <DispatchesSection />
+      <PassportSection />
       <CTASection />
     </div>
   );
@@ -239,7 +233,7 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   2. THE NERVE — Why this community operates differently
+   2. THE NERVE — Asymmetric bento: big thesis left, axiom stack right
    ══════════════════════════════════════════════════════════════════════════ */
 function NerveSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -266,25 +260,23 @@ function NerveSection() {
   return (
     <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
       <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        {/* Thesis block */}
-        <div className="px-8 md:px-14 lg:px-20 pt-16 md:pt-24 pb-14 md:pb-20 border-b border-white/[0.06]">
+        <div className="grid lg:grid-cols-12">
+          {/* Left — Thesis (7 cols) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 px-8 md:px-14 lg:px-16 py-14 md:py-20 lg:py-28 lg:border-r border-b lg:border-b-0 border-white/[0.06] flex flex-col justify-center"
           >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-8 block">
               The Nerve
             </span>
-            <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[54px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-4xl mb-8">
+            <h2 className="text-[28px] sm:text-[38px] md:text-[50px] lg:text-[60px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-white/90 max-w-xl mb-8">
               Infrastructure is the skeleton. Capital is the fuel. Community is
               the{" "}
-              <span className="italic text-[#FF4D00]">
-                signal path
-              </span>
-              .
+              <span className="italic text-[#FF4D00]">signal path</span>.
             </h2>
-            <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-[1.75] text-white/35 font-medium max-w-3xl">
+            <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-[1.75] text-white/35 font-medium max-w-lg">
               Most networks are directories — names, titles, LinkedIn links. The
               Route is a neural architecture. Information doesn&apos;t broadcast; it
               routes. Connections don&apos;t scatter; they close loops. The difference
@@ -292,40 +284,38 @@ function NerveSection() {
               learns.
             </p>
           </motion.div>
-        </div>
 
-        {/* Three axioms */}
-        <div className="grid lg:grid-cols-3">
-          {axioms.map((axiom, i) => {
-            const AIcon = axiom.icon;
-            return (
-              <motion.div
-                key={axiom.label}
-                initial={{ opacity: 0, y: 24 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.2 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className={`px-8 md:px-12 lg:px-10 py-12 md:py-16 ${
-                  i > 0
-                    ? "lg:border-l border-t lg:border-t-0 border-white/[0.06]"
-                    : ""
-                }`}
-              >
-                <div className="w-10 h-10 flex items-center justify-center border border-white/[0.08] mb-6">
-                  <AIcon className="w-4.5 h-4.5 text-[#FF4D00]" />
-                </div>
-                <h3 className="text-[17px] md:text-[19px] font-display font-medium tracking-tight text-white/90 mb-4">
-                  {axiom.label}
-                </h3>
-                <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/30 font-medium">
-                  {axiom.body}
-                </p>
-              </motion.div>
-            );
-          })}
+          {/* Right — Axiom stack (5 cols) */}
+          <div className="lg:col-span-5 divide-y divide-white/[0.06]">
+            {axioms.map((axiom, i) => {
+              const AIcon = axiom.icon;
+              return (
+                <motion.div
+                  key={axiom.label}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.2 + i * 0.12,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="group px-8 md:px-12 lg:px-10 py-10 md:py-12 hover:bg-white/[0.02] transition-colors duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
+                      <AIcon className="w-3.5 h-3.5 text-[#FF4D00]" />
+                    </div>
+                    <h3 className="text-[15px] md:text-[17px] font-display font-medium tracking-tight text-white/90">
+                      {axiom.label}
+                    </h3>
+                  </div>
+                  <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/30 font-medium">
+                    {axiom.body}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -333,13 +323,13 @@ function NerveSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   3. THE METABOLISM — How value transforms inside the network
+   3. ARCHETYPE CARDS — Vertical cards, each self-contained
    ══════════════════════════════════════════════════════════════════════════ */
-function MetabolismSection() {
+function ArchetypeCardsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const organisms = [
+  const archetypes = [
     {
       callsign: "FOUNDER",
       icon: Rocket,
@@ -380,80 +370,78 @@ function MetabolismSection() {
 
   return (
     <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
-      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        {/* Header */}
-        <div className="px-8 md:px-14 lg:px-20 pt-16 md:pt-24 pb-10 md:pb-14 border-b border-white/[0.06]">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-              The Metabolism
-            </span>
-            <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 mb-6">
+      <div className="max-w-[1400px] mx-auto">
+        {/* Section header — outside the cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8 md:mb-10"
+        >
+          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
+            The Metabolism
+          </span>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-[#111111]/90">
               Four transformations. One{" "}
               <span className="italic text-[#FF4D00]">engine</span>.
             </h2>
-            <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/35 font-medium max-w-2xl">
-              The organism doesn&apos;t function unless every transformation
-              happens. Founders without operators are visionaries without
-              execution. Capital without mentors is deployment without
-              judgment. Remove one, and the whole system slows.
+            <p className="text-[14px] md:text-[15px] leading-[1.7] text-[#111111]/40 font-medium max-w-sm">
+              Remove one transformation, and the whole system slows. Founders without operators are visionaries without execution. Capital without mentors is deployment without judgment.
             </p>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
-        {/* Organism rows */}
-        <div className="divide-y divide-white/[0.06]">
-          {organisms.map((org, i) => {
-            const OIcon = org.icon;
+        {/* Four vertical cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          {archetypes.map((arch, i) => {
+            const AIcon = arch.icon;
             return (
               <motion.div
-                key={org.callsign}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                key={arch.callsign}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  duration: 0.6,
-                  delay: 0.15 + i * 0.1,
+                  duration: 0.7,
+                  delay: 0.1 + i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group grid md:grid-cols-12 gap-6 md:gap-8 px-8 md:px-14 lg:px-20 py-8 md:py-10 hover:bg-white/[0.02] transition-colors duration-300"
+                className="bg-[#0A0A0A] rounded-sm overflow-hidden group"
               >
-                {/* Callsign + Icon */}
-                <div className="md:col-span-3 flex items-center gap-4">
-                  <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
-                    <OIcon className="w-4 h-4 text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" />
+                {/* Card top — callsign + icon */}
+                <div className="px-6 md:px-7 pt-8 md:pt-10 pb-6 border-b border-white/[0.06]">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
+                      {arch.callsign}
+                    </span>
+                    <div className="w-9 h-9 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
+                      <AIcon className="w-4 h-4 text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" />
+                    </div>
                   </div>
+                  <p className="text-[14px] md:text-[15px] font-mono tracking-[0.05em] text-white/50">
+                    {arch.transforms}
+                  </p>
+                </div>
+
+                {/* Card body — feeds + draws */}
+                <div className="px-6 md:px-7 py-6 md:py-8 space-y-5">
                   <div>
-                    <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70 block">
-                      {org.callsign}
+                    <span className="text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mb-2 block">
+                      Feeds in
                     </span>
-                    <span className="text-[10px] font-mono tracking-[0.1em] text-white/15">
-                      {org.transforms}
-                    </span>
+                    <p className="text-[12px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
+                      {arch.feeds}
+                    </p>
                   </div>
-                </div>
-
-                {/* Feeds */}
-                <div className="md:col-span-4 lg:col-span-4">
-                  <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mb-2 block">
-                    Feeds in
-                  </span>
-                  <p className="text-[13px] md:text-[14px] leading-[1.7] text-white/40 font-medium">
-                    {org.feeds}
-                  </p>
-                </div>
-
-                {/* Draws */}
-                <div className="md:col-span-5 lg:col-span-5">
-                  <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/30 mb-2 block">
-                    Draws out
-                  </span>
-                  <p className="text-[13px] md:text-[14px] leading-[1.7] text-white/40 font-medium">
-                    {org.draws}
-                  </p>
+                  <div className="w-full h-px bg-white/[0.04]" />
+                  <div>
+                    <span className="text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/30 mb-2 block">
+                      Draws out
+                    </span>
+                    <p className="text-[12px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
+                      {arch.draws}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             );
@@ -465,16 +453,16 @@ function MetabolismSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   4. THE PULSE — Cadence + Events
+   4. CADENCE + EVENTS — Timeline strip + event card grid
    ══════════════════════════════════════════════════════════════════════════ */
-function PulseSection() {
+function CadenceEventsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [selectedEvent, setSelectedEvent] = useState<
     (typeof upcomingEvents)[number] | null
   >(null);
 
-  const cadenceRow = [
+  const cadenceItems = [
     { period: "Weekly", title: "Office Hours & Peer Circles", icon: Clock },
     { period: "Monthly", title: "Deal Flow & Masterclasses", icon: Calendar },
     { period: "Quarterly", title: "Demo Days & Route Summits", icon: Star },
@@ -495,7 +483,7 @@ function PulseSection() {
       <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
         <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
           {/* Header */}
-          <div className="px-8 md:px-14 lg:px-20 pt-16 md:pt-24 pb-10 md:pb-14 border-b border-white/[0.06]">
+          <div className="px-8 md:px-14 lg:px-20 pt-14 md:pt-20 pb-10 md:pb-14">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -504,54 +492,59 @@ function PulseSection() {
               <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
                 The Pulse
               </span>
-              <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mb-6">
+              <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mb-4">
                 The bloodstream has a{" "}
                 <span className="italic text-[#FF4D00]">rhythm</span>.
               </h2>
               <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/35 font-medium max-w-2xl">
                 Communities that meet annually are acquaintances. Communities
                 that convene weekly are a force. Every pulse cycle tightens the
-                mesh — more signal, less noise, faster loops.
+                mesh.
               </p>
             </motion.div>
           </div>
 
-          {/* Cadence strip */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-white/[0.06]">
-            {cadenceRow.map((c, i) => {
-              const CIcon = c.icon;
-              return (
-                <motion.div
-                  key={c.period}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.15 + i * 0.08,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`px-8 md:px-10 lg:px-8 py-6 md:py-8 ${
-                    i > 0
-                      ? "border-l border-t lg:border-t-0 border-white/[0.06]"
-                      : "border-t lg:border-t-0 border-white/[0.06]"
-                  }`}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <CIcon className="w-3.5 h-3.5 text-[#FF4D00]/50" />
-                    <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
-                      {c.period}
-                    </span>
-                  </div>
-                  <p className="text-[13px] md:text-[14px] font-display font-medium text-white/60">
-                    {c.title}
-                  </p>
-                </motion.div>
-              );
-            })}
+          {/* Cadence — horizontal timeline with dots */}
+          <div className="px-8 md:px-14 lg:px-20 pb-10 md:pb-14">
+            <div className="relative">
+              {/* Connecting line */}
+              <div className="absolute top-4 left-0 right-0 h-px bg-white/[0.06]" />
+
+              <div className="grid grid-cols-4 gap-4 md:gap-6">
+                {cadenceItems.map((c, i) => {
+                  const CIcon = c.icon;
+                  return (
+                    <motion.div
+                      key={c.period}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.15 + i * 0.08,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="relative"
+                    >
+                      {/* Dot on the line */}
+                      <div className="w-2 h-2 rounded-full bg-[#FF4D00] mb-6 relative z-10" />
+                      <div className="flex items-center gap-2 mb-2">
+                        <CIcon className="w-3 h-3 text-[#FF4D00]/50 hidden sm:block" />
+                        <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
+                          {c.period}
+                        </span>
+                      </div>
+                      <p className="text-[12px] md:text-[13px] font-display font-medium text-white/50 leading-[1.5]">
+                        {c.title}
+                      </p>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
-          {/* Upcoming events */}
-          <div className="px-8 md:px-14 lg:px-20 py-10 md:py-14">
+          {/* Events — 2-column card grid */}
+          <div className="border-t border-white/[0.06] px-8 md:px-14 lg:px-20 py-10 md:py-14">
             <div className="flex items-center justify-between mb-8">
               <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
                 Upcoming
@@ -561,53 +554,38 @@ function PulseSection() {
               </span>
             </div>
 
-            <div className="space-y-0">
+            <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
               {upcomingEvents.map((event, i) => (
                 <motion.div
                   key={event.title}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{
                     duration: 0.5,
                     delay: 0.3 + i * 0.06,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   onClick={() => setSelectedEvent(event)}
-                  className={`group grid md:grid-cols-12 gap-4 md:gap-6 px-4 md:px-6 py-5 md:py-6 hover:bg-white/[0.03] transition-colors duration-200 cursor-pointer ${
-                    i < upcomingEvents.length - 1
-                      ? "border-b border-white/[0.04]"
-                      : ""
-                  }`}
+                  className="group bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] hover:bg-white/[0.04] transition-all duration-300 cursor-pointer p-5 md:p-6"
                 >
-                  {/* Date */}
-                  <div className="md:col-span-2 flex items-center">
-                    <span className="text-[11px] font-mono font-medium text-white/30 group-hover:text-white/50 transition-colors">
-                      {event.date}
-                    </span>
-                  </div>
-
-                  {/* Title + type */}
-                  <div className="md:col-span-5 flex items-center gap-3">
+                  <div className="flex items-center gap-2 mb-3">
                     <span
-                      className={`inline-block text-[8px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-0.5 flex-shrink-0 ${eventTypeColor[event.type] || "bg-white/10 text-white"}`}
+                      className={`inline-block text-[7px] font-mono font-bold tracking-[0.15em] uppercase px-2 py-0.5 ${eventTypeColor[event.type] || "bg-white/10 text-white"}`}
                     >
                       {event.type}
                     </span>
-                    <span className="text-[14px] md:text-[15px] font-display font-medium text-white/70 group-hover:text-white transition-colors truncate">
-                      {event.title}
+                    <span className="text-[9px] font-mono text-white/20">
+                      {event.date}
                     </span>
                   </div>
-
-                  {/* Location */}
-                  <div className="md:col-span-3 flex items-center">
-                    <span className="text-[12px] text-white/20 font-medium truncate">
+                  <h4 className="text-[14px] md:text-[15px] font-display font-medium text-white/70 group-hover:text-white transition-colors leading-[1.4] mb-3">
+                    {event.title}
+                  </h4>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] text-white/20 font-medium truncate pr-4">
                       {event.location}
                     </span>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="md:col-span-2 flex items-center justify-end">
-                    <ChevronRight className="w-4 h-4 text-white/[0.06] group-hover:text-[#FF4D00]/50 group-hover:translate-x-0.5 transition-all duration-200" />
+                    <ChevronRight className="w-3.5 h-3.5 text-white/[0.06] group-hover:text-[#FF4D00]/50 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0" />
                   </div>
                 </motion.div>
               ))}
@@ -794,9 +772,85 @@ function EventDetailModal({
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   5. DISPATCHES + PASSPORT — Signal from the field + Access
+   5. DISPATCHES — Alternating pull-quotes, full-width dark
    ══════════════════════════════════════════════════════════════════════════ */
-function DispatchesPassportSection() {
+function DispatchesSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+        {/* Header */}
+        <div className="px-8 md:px-14 lg:px-20 pt-14 md:pt-20 pb-8 md:pb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
+              Signal from the Field
+            </span>
+            <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90">
+              Not testimonials.{" "}
+              <span className="italic text-[#FF4D00]">Readings</span>.
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Dispatches — alternating layout */}
+        <div className="divide-y divide-white/[0.06]">
+          {dispatches.map((d, i) => (
+            <motion.div
+              key={d.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: 0.15 + i * 0.12,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="group px-8 md:px-14 lg:px-20 py-10 md:py-14 hover:bg-white/[0.02] transition-colors duration-300"
+            >
+              <div className={`grid lg:grid-cols-12 gap-6 lg:gap-10 items-start ${i % 2 === 1 ? "lg:flex-row-reverse" : ""}`}>
+                {/* Quote */}
+                <div className={`lg:col-span-8 ${i % 2 === 1 ? "lg:col-start-5" : ""}`}>
+                  <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/50 mb-4">
+                    {d.tag}
+                  </span>
+                  <p className="text-[17px] sm:text-[20px] md:text-[24px] leading-[1.5] font-display font-medium tracking-[-0.01em] text-white/60 mb-6">
+                    &ldquo;{d.signal}&rdquo;
+                  </p>
+                </div>
+
+                {/* Attribution */}
+                <div className={`lg:col-span-4 ${i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""} flex lg:justify-end`}>
+                  <div className="lg:text-right">
+                    <div className="w-8 h-px bg-[#FF4D00]/40 mb-4 lg:ml-auto" />
+                    <div className="text-[14px] font-display font-medium text-white/80">
+                      {d.name}
+                    </div>
+                    <div className="text-[11px] text-white/30 font-medium mt-1">
+                      {d.role}
+                    </div>
+                    <div className="text-[10px] text-white/20 font-medium">
+                      {d.location}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. PASSPORT — Standalone section, bordered card inside dark container
+   ══════════════════════════════════════════════════════════════════════════ */
+function PassportSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -804,118 +858,57 @@ function DispatchesPassportSection() {
     <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
       <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
         <div className="grid lg:grid-cols-12">
-          {/* Left — Dispatches */}
-          <div className="lg:col-span-7 border-b lg:border-b-0 lg:border-r border-white/[0.06]">
-            <div className="px-8 md:px-14 lg:px-16 pt-14 md:pt-20 pb-6 md:pb-8 border-b border-white/[0.06]">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
-                  Signal from the Field
-                </span>
-                <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90 max-w-xl">
-                  Not testimonials.{" "}
-                  <span className="italic text-[#FF4D00]">Readings</span>.
-                </h2>
-              </motion.div>
-            </div>
+          {/* Left — Passport identity */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 px-8 md:px-14 lg:px-16 py-14 md:py-20 lg:border-r border-b lg:border-b-0 border-white/[0.06] flex flex-col justify-center"
+          >
+            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
+              xCitizen Passport
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.03em] text-white/90 mb-6">
+              Your access to the{" "}
+              <span className="italic text-[#FF4D00]">Route</span>.
+            </h2>
+            <p className="text-[15px] md:text-[17px] text-white/35 font-medium leading-[1.75] mb-8">
+              One passport. Full network. The xCitizen Passport isn&apos;t
+              membership — it&apos;s clearance. Access to every hub, every deal
+              room, every peer circle on the Route.
+            </p>
+            <Link
+              to="/join"
+              className="group inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] hover:text-white transition-colors"
+            >
+              Apply for the Passport
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Link>
+          </motion.div>
 
-            <div className="divide-y divide-white/[0.06]">
-              {dispatches.map((d, i) => (
+          {/* Right — Benefits grid */}
+          <div className="lg:col-span-7 px-8 md:px-14 lg:px-16 py-14 md:py-20">
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
+              {passportBenefits.map((benefit, i) => (
                 <motion.div
-                  key={d.name}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={benefit}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{
-                    duration: 0.6,
-                    delay: 0.15 + i * 0.12,
+                    duration: 0.5,
+                    delay: 0.2 + i * 0.06,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group px-8 md:px-14 lg:px-16 py-8 md:py-10 hover:bg-white/[0.02] transition-colors duration-300"
+                  className="flex items-start gap-3 py-4 border-t border-white/[0.06]"
                 >
-                  <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/50 mb-4">
-                    {d.tag}
+                  <span className="text-[20px] md:text-[24px] font-display font-medium text-[#FF4D00]/20 leading-none flex-shrink-0">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-[15px] md:text-[16px] leading-[1.7] text-white/45 font-medium mb-6">
-                    &ldquo;{d.signal}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-px h-6 bg-[#FF4D00]/30" />
-                    <div>
-                      <div className="text-[13px] font-display font-medium text-white/70">
-                        {d.name}
-                      </div>
-                      <div className="text-[10px] text-white/25 font-medium">
-                        {d.role} · {d.location}
-                      </div>
-                    </div>
-                  </div>
+                  <span className="text-[13px] md:text-[14px] text-white/50 font-medium leading-[1.5]">
+                    {benefit}
+                  </span>
                 </motion.div>
               ))}
-            </div>
-          </div>
-
-          {/* Right — Passport */}
-          <div className="lg:col-span-5">
-            <div className="px-8 md:px-12 lg:px-12 pt-14 md:pt-20 pb-6 md:pb-8 border-b border-white/[0.06]">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.9,
-                  delay: 0.15,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
-                  xCitizen Passport
-                </span>
-                <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90">
-                  Your access to the{" "}
-                  <span className="italic text-[#FF4D00]">Route</span>.
-                </h2>
-              </motion.div>
-            </div>
-
-            <div className="px-8 md:px-12 lg:px-12 py-10 md:py-14">
-              <p className="text-[14px] md:text-[15px] text-white/35 font-medium leading-[1.7] mb-8">
-                One passport. Full network. The xCitizen Passport isn&apos;t
-                membership — it&apos;s clearance. Access to every hub, every
-                deal room, every peer circle on the Route.
-              </p>
-
-              <div className="space-y-4">
-                {passportBenefits.map((benefit, i) => (
-                  <motion.div
-                    key={benefit}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.3 + i * 0.06,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="flex items-start gap-3"
-                  >
-                    <Check className="w-4 h-4 text-[#FF4D00] flex-shrink-0 mt-0.5" />
-                    <span className="text-[13px] md:text-[14px] text-white/50 font-medium leading-[1.5]">
-                      {benefit}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="mt-10 pt-6 border-t border-white/[0.06]">
-                <Link
-                  to="/join"
-                  className="group inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] hover:text-white transition-colors"
-                >
-                  Apply for the Passport
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
-                </Link>
-              </div>
             </div>
           </div>
         </div>
@@ -925,7 +918,7 @@ function DispatchesPassportSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   6. CTA — Dark closing
+   7. CTA — Dark closing
    ══════════════════════════════════════════════════════════════════════════ */
 function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
