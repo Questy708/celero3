@@ -651,7 +651,7 @@ function ArchetypeCardsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   5. CADENCE + EVENTS — Image-based event cards
+   5. CADENCE + EVENTS — Featured hero cards + compact strip
    ══════════════════════════════════════════════════════════════════════════ */
 function CadenceEventsSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -667,19 +667,23 @@ function CadenceEventsSection() {
     { period: "Annually", title: "xCitizen Assembly", icon: Globe },
   ];
 
-  const eventTypeColor: Record<string, string> = {
+  const eventTypeBadge: Record<string, string> = {
     "Demo Day": "bg-[#FF4D00] text-white",
-    Summit: "bg-[#111111] text-white",
-    Masterclass: "bg-[#FF4D00]/10 text-[#FF4D00]",
-    Fellowship: "bg-[#111111]/10 text-[#111111]",
+    Summit: "bg-white/20 text-white backdrop-blur-sm",
+    Masterclass: "bg-[#FF4D00]/20 text-[#FF4D00]",
+    Fellowship: "bg-white/10 text-white",
     "Investor Event": "bg-[#FF4D00] text-white",
-    "Town Hall": "bg-[#111111]/10 text-[#111111]",
+    "Town Hall": "bg-white/10 text-white",
   };
+
+  const featuredEvents = upcomingEvents.filter((e) => e.featured);
+  const regularEvents = upcomingEvents.filter((e) => !e.featured);
 
   return (
     <>
       <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20">
         <div className="w-full max-w-[1400px] mx-auto">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -700,6 +704,7 @@ function CadenceEventsSection() {
             </p>
           </motion.div>
 
+          {/* Cadence timeline */}
           <div className="mb-12 md:mb-16">
             <div className="relative">
               <div className="absolute top-4 left-0 right-0 h-px bg-[#111111]/10" />
@@ -735,74 +740,139 @@ function CadenceEventsSection() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {upcomingEvents.map((event, i) => (
+          {/* Featured events — large dark editorial cards */}
+          <div className="grid md:grid-cols-2 gap-4 md:gap-5 mb-5">
+            {featuredEvents.map((event, i) => (
               <motion.div
                 key={event.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.3 + i * 0.08,
+                  duration: 0.7,
+                  delay: 0.3 + i * 0.12,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 onClick={() => setSelectedEvent(event)}
-                className={`group border bg-white overflow-hidden hover:shadow-md transition-all duration-300 cursor-pointer ${
-                  event.featured
-                    ? "border-[#FF4D00]/30 hover:border-[#FF4D00]/60"
-                    : "border-[#111111]/10 hover:border-[#111111]/20"
-                }`}
+                className="group relative overflow-hidden cursor-pointer bg-[#0A0A0A] min-h-[340px] md:min-h-[400px] flex flex-col justify-end"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span
-                      className={`text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-1 ${eventTypeColor[event.type] || "bg-[#111111]/10 text-[#111111]"}`}
-                    >
-                      {event.type}
-                    </span>
-                  </div>
-                  {event.featured && (
-                    <div className="absolute top-3 right-3">
-                      <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2 py-1 bg-[#FF4D00] text-white flex items-center gap-1">
-                        <Star className="w-3 h-3" />
-                        Featured
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-3 left-3">
-                    <div className="text-[11px] font-mono font-bold tracking-[0.05em] text-white flex items-center gap-1.5">
+                {/* Background image */}
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/20" />
+
+                {/* Top badges */}
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+                  <span
+                    className={`text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2.5 py-1 ${eventTypeBadge[event.type] || "bg-white/10 text-white"}`}
+                  >
+                    {event.type}
+                  </span>
+                  <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase px-2.5 py-1 bg-[#FF4D00] text-white flex items-center gap-1">
+                    <Star className="w-3 h-3" />
+                    Featured
+                  </span>
+                </div>
+
+                {/* Content overlay */}
+                <div className="relative z-10 p-6 md:p-8">
+                  <div className="flex items-center gap-4 mb-3 text-[11px] font-mono font-bold tracking-[0.05em] text-white/50">
+                    <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-[#FF4D00]" />
                       {event.date}
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 md:p-5">
-                  <h3 className="text-[15px] md:text-[17px] font-display font-medium tracking-tight leading-tight mb-2 group-hover:text-[#FF4D00] transition-colors">
-                    {event.title}
-                  </h3>
-                  <p className="text-[12px] md:text-[13px] text-[#111111]/55 leading-[1.6] font-medium mb-3 line-clamp-2">
-                    {event.description}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-3 text-[10px] text-[#111111]/40 font-medium">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
-                      {event.location}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#FF4D00]/60" />
                       {event.time}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="w-3 h-3" />
-                      {event.spots}
+                  </div>
+                  <h3 className="text-[20px] md:text-[24px] font-display font-medium tracking-tight leading-[1.15] text-white mb-2 group-hover:text-[#FF4D00] transition-colors duration-300">
+                    {event.title}
+                  </h3>
+                  <p className="text-[13px] text-white/40 leading-[1.6] font-medium mb-4 line-clamp-2">
+                    {event.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3 text-[10px] text-white/30 font-medium">
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />
+                        {event.location}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        {event.spots}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      RSVP
+                      <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Regular events — compact horizontal strip */}
+          <div
+            className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {regularEvents.map((event, i) => (
+              <motion.div
+                key={event.title}
+                initial={{ opacity: 0, x: 40 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.5 + i * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                onClick={() => setSelectedEvent(event)}
+                className="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] snap-start border border-[#111111]/10 bg-white p-5 md:p-6 hover:border-[#FF4D00]/30 hover:shadow-md transition-all duration-300 cursor-pointer"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    className={`text-[8px] font-mono font-bold tracking-[0.15em] uppercase px-2 py-0.5 ${
+                      event.type === "Summit"
+                        ? "bg-[#111111] text-white"
+                        : event.type === "Masterclass"
+                        ? "bg-[#FF4D00]/10 text-[#FF4D00]"
+                        : event.type === "Fellowship"
+                        ? "bg-[#111111]/10 text-[#111111]"
+                        : "bg-[#111111]/10 text-[#111111]"
+                    }`}
+                  >
+                    {event.type}
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-display font-medium tracking-tight leading-snug mb-2 group-hover:text-[#FF4D00] transition-colors">
+                  {event.title}
+                </h3>
+                <p className="text-[12px] text-[#111111]/45 leading-[1.6] font-medium mb-3 line-clamp-2">
+                  {event.description}
+                </p>
+                <div className="flex flex-col gap-1.5 text-[10px] text-[#111111]/35 font-medium">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3 h-3 text-[#FF4D00]/60" />
+                    {event.date} · {event.time}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="w-3 h-3 text-[#FF4D00]/60" />
+                    {event.location}
+                  </span>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#111111]/8 flex items-center justify-between">
+                  <span className="text-[9px] text-[#111111]/25 font-medium">
+                    {event.spots}
+                  </span>
+                  <span className="text-[9px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Details
+                    <ChevronRight className="w-3 h-3" />
+                  </span>
                 </div>
               </motion.div>
             ))}
