@@ -15,9 +15,7 @@ import {
   Lightbulb,
   Sparkles,
   Heart,
-  Shield,
   Check,
-  MessageSquare,
   X,
   Rocket,
   Building2,
@@ -26,7 +24,10 @@ import {
   Zap,
   CircleDot,
   Flame,
-  ArrowUp,
+  Network,
+  Activity,
+  Fingerprint,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "@/artemis/router";
 
@@ -112,28 +113,31 @@ const upcomingEvents = [
   },
 ];
 
-/* ── Voices ── */
-const voices = [
+/* ── Dispatches (testimonials) ── */
+const dispatches = [
   {
-    quote:
-      "When the Route is fully operational, a Fellow could join in Cohort 3 and within six months be running operations for a venture in Kano. The network won't just connect you; it will place you where you're needed most.",
+    signal:
+      "A Fellow joins in Cohort 3. Six months later, they're running operations for a venture 3,000 km away. That's not networking — that's placement. The Route doesn't introduce you to opportunities. It puts you inside them.",
     name: "Chioma Adekunle",
     role: "Operations Lead, Helios",
     location: "Kano, Nigeria",
+    tag: "OPERATIONS",
   },
   {
-    quote:
-      "The peer network, at scale, will be transformative. Imagine needing a regulatory contact in Rwanda for a diagnostics pilot \u2014 an XCitizen in Kigali could make the intro within 24 hours. That's the flywheel we're building.",
+    signal:
+      "Need a regulatory contact in Rwanda for a diagnostics pilot? An XCitizen in Kigali makes the intro within 24 hours. That's not convenience — that's architecture. The flywheel isn't aspirational. It's operational.",
     name: "Dr. Kofi Mensah",
     role: "Co-Founder, Refract",
     location: "Cape Town, South Africa",
+    tag: "LIFE SCIENCES",
   },
   {
-    quote:
-      "As an investor, the deal flow could be unlike anything else. Six vehicles, vetted ventures, and the infrastructure to actually de-risk early-stage Africa. I could see deploying through multiple SPVs in a single year.",
+    signal:
+      "Six vehicles. Vetted ventures. Infrastructure that actually de-risks early-stage Africa. I could see deploying through multiple SPVs in a single year. This isn't a fund — it's a weapons system for conviction.",
     name: "Amara Diallo",
     role: "LP, xCelero Capital",
     location: "Dakar, Senegal",
+    tag: "CAPITAL",
   },
 ];
 
@@ -154,13 +158,10 @@ export function Community() {
   return (
     <div className="bg-white text-[#111111]">
       <HeroSection />
-      <ThesisSection />
-      <ArchetypesSection />
-      <ProtocolsSection />
-      <ConveningSection />
-      <VoicesSection />
-      <PassportSection />
-      <CommonsSection />
+      <NerveSection />
+      <MetabolismSection />
+      <PulseSection />
+      <DispatchesPassportSection />
       <CTASection />
     </div>
   );
@@ -238,34 +239,34 @@ function HeroSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   2. THE THESIS — Why community is structural, not social
+   2. THE NERVE — Why this community operates differently
    ══════════════════════════════════════════════════════════════════════════ */
-function ThesisSection() {
+function NerveSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const principles = [
+  const axioms = [
     {
-      icon: CircleDot,
-      heading: "Structure, not serendipity",
-      body: "The Route doesn't rely on chance encounters. Every hub, program, and event is engineered so that the right people meet at the right stage. A founder in Cohort 3 doesn't stumble onto their lead operator — the system places them.",
+      icon: Fingerprint,
+      label: "Every node is placed",
+      body: "XCitizens aren't added to a directory — they're positioned in the architecture. A founder in energy sits beside investors who deploy in energy. An operator in logistics is paired with ventures that need supply-chain velocity. Placement, not enrollment.",
     },
     {
-      icon: Flame,
-      heading: "Reciprocity as protocol",
-      body: "Cold pitches die here. Every introduction is earned through contribution. You share a contact, you get two back. You teach a masterclass, you gain deal flow. The protocol is simple: give first, compound later.",
+      icon: ShieldCheck,
+      label: "Trust is the currency",
+      body: "Reputation isn't a badge — it's a ledger. Every introduction carries the weight of the vouching chain behind it. Cold outreach is noise. A warm introduction through two degrees of XCitizen verification is signal. The network self-regulates.",
     },
     {
-      icon: Zap,
-      heading: "Density over scale",
-      body: "1,200 XCitizens across 190 hubs isn't a vanity metric — it's a density calculation. Enough founders in energy to fill a room. Enough investors with thesis alignment to close a round. Enough operators to run the machine.",
+      icon: Activity,
+      label: "Every cycle compounds",
+      body: "Weekly peer circles don't just share updates — they tighten bonds. Monthly masterclasses don't just teach — they seed collaborations. Quarterly summits don't just convene — they close deals. Each cycle makes the next one faster and higher-leverage.",
     },
   ];
 
   return (
     <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
       <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        {/* Opening thesis */}
+        {/* Thesis block */}
         <div className="px-8 md:px-14 lg:px-20 pt-16 md:pt-24 pb-14 md:pb-20 border-b border-white/[0.06]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -273,29 +274,33 @@ function ThesisSection() {
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-              The Thesis
+              The Nerve
             </span>
             <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[54px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-4xl mb-8">
-              Infrastructure builds the skeleton. Capital fuels the muscle.
-              Community is the{" "}
-              <span className="italic text-[#FF4D00]">nerve system</span>.
+              Infrastructure is the skeleton. Capital is the fuel. Community is
+              the{" "}
+              <span className="italic text-[#FF4D00]">
+                signal path
+              </span>
+              .
             </h2>
             <p className="text-[15px] md:text-[17px] lg:text-[18px] leading-[1.75] text-white/35 font-medium max-w-3xl">
-              Most networks are address books. xCelero is an operating system.
-              The difference isn't size — it's architecture. Every XCitizen is
-              placed, not added. Every connection is vetted, not random. Every
-              interaction compounds, not expires.
+              Most networks are directories — names, titles, LinkedIn links. The
+              Route is a neural architecture. Information doesn&apos;t broadcast; it
+              routes. Connections don&apos;t scatter; they close loops. The difference
+              between a contact list and a civilization is whether the system
+              learns.
             </p>
           </motion.div>
         </div>
 
-        {/* Three principles */}
+        {/* Three axioms */}
         <div className="grid lg:grid-cols-3">
-          {principles.map((p, i) => {
-            const PIcon = p.icon;
+          {axioms.map((axiom, i) => {
+            const AIcon = axiom.icon;
             return (
               <motion.div
-                key={p.heading}
+                key={axiom.label}
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -304,17 +309,19 @@ function ThesisSection() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className={`px-8 md:px-12 lg:px-10 py-12 md:py-16 ${
-                  i > 0 ? "lg:border-l border-t lg:border-t-0 border-white/[0.06]" : ""
+                  i > 0
+                    ? "lg:border-l border-t lg:border-t-0 border-white/[0.06]"
+                    : ""
                 }`}
               >
                 <div className="w-10 h-10 flex items-center justify-center border border-white/[0.08] mb-6">
-                  <PIcon className="w-4.5 h-4.5 text-[#FF4D00]" />
+                  <AIcon className="w-4.5 h-4.5 text-[#FF4D00]" />
                 </div>
                 <h3 className="text-[17px] md:text-[19px] font-display font-medium tracking-tight text-white/90 mb-4">
-                  {p.heading}
+                  {axiom.label}
                 </h3>
                 <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/30 font-medium">
-                  {p.body}
+                  {axiom.body}
                 </p>
               </motion.div>
             );
@@ -326,36 +333,48 @@ function ThesisSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   3. THE ARCHETYPES — What each role feeds into the flywheel
+   3. THE METABOLISM — How value transforms inside the network
    ══════════════════════════════════════════════════════════════════════════ */
-function ArchetypesSection() {
+function MetabolismSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const archetypes = [
+  const organisms = [
     {
       callsign: "FOUNDER",
       icon: Rocket,
-      gives: "Thesis → Companies. Raw conviction shaped into ventures that the Route can accelerate.",
-      receives: "Infrastructure, mentorship, capital, and operators pre-matched to their stage and sector.",
+      transforms: "Conviction → Companies",
+      feeds:
+        "Raw belief shaped into a venture the Route can accelerate. Without conviction, the flywheel has no starting torque.",
+      draws:
+        "Pre-matched operators. Thesis-aligned capital. Infrastructure built for their sector and stage. A co-founding team assembled, not recruited.",
     },
     {
       callsign: "OPERATOR",
       icon: Building2,
-      gives: "Effort → Momentum. The discipline to run hubs, manage programs, and turn chaos into cadence.",
-      receives: "Access to the venture pipeline, equity upside, and a seat at every strategic table on the Route.",
+      transforms: "Effort → Momentum",
+      feeds:
+        "The discipline to turn plans into cadence. Running hubs, managing programs, building the machine while everyone else talks about it.",
+      draws:
+        "Equity in what they build. A pipeline of ventures to operate. A network that treats execution as the scarcest resource — and prices it accordingly.",
     },
     {
       callsign: "INVESTOR",
       icon: Coins,
-      gives: "Conviction → Deployment. Capital placed with thesis alignment across six vehicles.",
-      receives: "Curated deal flow, de-risked ventures, and co-investment alongside operators who've already validated.",
+      transforms: "Conviction → Deployment",
+      feeds:
+        "Capital placed with thesis precision. Not spray-and-pray — concentrated bets across six vehicles with sector-aligned theses.",
+      draws:
+        "Deal flow no cold call can replicate. Ventures already de-risked by operators on the ground. Co-investment alongside peers who share their conviction.",
     },
     {
       callsign: "MENTOR",
       icon: Heart,
-      gives: "Experience → Acceleration. Hard-won domain expertise, contact books, and operational playbooks.",
-      receives: "Carry in the vehicles they advise, early access to talent, and the compound return of watching ventures they shaped succeed.",
+      transforms: "Experience → Acceleration",
+      feeds:
+        "Hard-won domain knowledge. Contact books that took decades to build. Operational playbooks that compress three years of mistakes into three sessions.",
+      draws:
+        "Carry in the vehicles they shape. First access to the next generation of talent. The compound return of watching something they touched succeed at scale.",
     },
   ];
 
@@ -371,27 +390,28 @@ function ArchetypesSection() {
             className="max-w-3xl"
           >
             <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-              The Archetypes
+              The Metabolism
             </span>
             <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 mb-6">
-              Four roles. One{" "}
-              <span className="italic text-[#FF4D00]">metabolism</span>.
+              Four transformations. One{" "}
+              <span className="italic text-[#FF4D00]">engine</span>.
             </h2>
             <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/35 font-medium max-w-2xl">
-              The flywheel doesn't spin without all four. Each archetype feeds
-              something the others need — and receives something only the others
-              can give. That's the metabolism.
+              The organism doesn&apos;t function unless every transformation
+              happens. Founders without operators are visionaries without
+              execution. Capital without mentors is deployment without
+              judgment. Remove one, and the whole system slows.
             </p>
           </motion.div>
         </div>
 
-        {/* Archetype rows */}
+        {/* Organism rows */}
         <div className="divide-y divide-white/[0.06]">
-          {archetypes.map((arch, i) => {
-            const AIcon = arch.icon;
+          {organisms.map((org, i) => {
+            const OIcon = org.icon;
             return (
               <motion.div
-                key={arch.callsign}
+                key={org.callsign}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{
@@ -404,30 +424,35 @@ function ArchetypesSection() {
                 {/* Callsign + Icon */}
                 <div className="md:col-span-3 flex items-center gap-4">
                   <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
-                    <AIcon className="w-4 h-4 text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" />
+                    <OIcon className="w-4 h-4 text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" />
                   </div>
-                  <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
-                    {arch.callsign}
-                  </span>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70 block">
+                      {org.callsign}
+                    </span>
+                    <span className="text-[10px] font-mono tracking-[0.1em] text-white/15">
+                      {org.transforms}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Gives */}
+                {/* Feeds */}
                 <div className="md:col-span-4 lg:col-span-4">
                   <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mb-2 block">
-                    Gives
+                    Feeds in
                   </span>
                   <p className="text-[13px] md:text-[14px] leading-[1.7] text-white/40 font-medium">
-                    {arch.gives}
+                    {org.feeds}
                   </p>
                 </div>
 
-                {/* Receives */}
+                {/* Draws */}
                 <div className="md:col-span-5 lg:col-span-5">
                   <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/30 mb-2 block">
-                    Receives
+                    Draws out
                   </span>
                   <p className="text-[13px] md:text-[14px] leading-[1.7] text-white/40 font-medium">
-                    {arch.receives}
+                    {org.draws}
                   </p>
                 </div>
               </motion.div>
@@ -440,113 +465,9 @@ function ArchetypesSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   4. THE PROTOCOLS — How the community actually operates
+   4. THE PULSE — Cadence + Events
    ══════════════════════════════════════════════════════════════════════════ */
-function ProtocolsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  const protocols = [
-    {
-      icon: Handshake,
-      label: "Vetted Introductions",
-      rule: "No cold outreach inside the network. Every intro flows through a trust chain — a mutual XCitizen vouches, the system verifies contribution history, and the introduction carries reputation weight.",
-    },
-    {
-      icon: Globe,
-      label: "Borderless by Default",
-      rule: "A regulatory contact in Kigali. A supply-chain lead in Mombasa. A co-founder in Dakar. The Route's 190-hub architecture means cross-border should feel like cross-desk. If it doesn't, the protocol is broken.",
-    },
-    {
-      icon: Lightbulb,
-      label: "Knowledge Returns",
-      rule: "Every masterclass, every post-mortem, every field report loops back into the commons. Knowledge hoarded is knowledge wasted. The system is designed so that what one XCitizen learns, every XCitizen can access.",
-    },
-    {
-      icon: Sparkles,
-      label: "Compound, Don't Extract",
-      rule: "The measure of a healthy network isn't how much you take — it's how much stronger the whole becomes after your participation. Deals close faster because trust compounds. Talent gets deeper because mentors return. Capital gets smarter because operators stay.",
-    },
-  ];
-
-  return (
-    <section ref={ref} className="py-16 md:py-24 px-6 md:px-12 lg:px-20">
-      <div className="w-full max-w-[1400px] mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mb-14 md:mb-20"
-        >
-          <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00] mb-6 block">
-            The Protocols
-          </span>
-          <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.02em] mb-6">
-            Not rules.{" "}
-            <span className="italic font-serif text-[#FF4D00]">
-              Operating principles
-            </span>
-            .
-          </h2>
-          <p className="text-[16px] md:text-[18px] leading-[1.7] text-[#111111]/50 font-medium max-w-2xl">
-            Every network has culture. Ours has protocols — explicit,
-            enforceable, and designed to keep the bloodstream circulating.
-          </p>
-        </motion.div>
-
-        {/* Protocol items — stacked editorial rows */}
-        <div className="space-y-0">
-          {protocols.map((proto, i) => {
-            const PIcon = proto.icon;
-            return (
-              <motion.div
-                key={proto.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.1 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="group grid md:grid-cols-12 gap-5 md:gap-8 py-8 md:py-10 border-t border-[#111111]/10"
-              >
-                {/* Number + Icon */}
-                <div className="md:col-span-2 flex items-center gap-4">
-                  <span className="text-[36px] md:text-[44px] font-display font-medium tracking-[-0.03em] leading-none text-[#111111]/[0.07]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="w-10 h-10 border border-[#111111]/10 flex items-center justify-center group-hover:border-[#FF4D00]/30 group-hover:text-[#FF4D00] transition-colors">
-                    <PIcon className="w-4 h-4" strokeWidth={1.5} />
-                  </div>
-                </div>
-
-                {/* Label */}
-                <div className="md:col-span-3 flex items-center">
-                  <h3 className="text-[17px] md:text-[20px] font-display font-medium tracking-tight group-hover:text-[#FF4D00] transition-colors">
-                    {proto.label}
-                  </h3>
-                </div>
-
-                {/* Rule */}
-                <div className="md:col-span-7 flex items-center">
-                  <p className="text-[14px] md:text-[15px] text-[#111111]/50 leading-[1.7] font-medium">
-                    {proto.rule}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   5. THE CONVENING — Events & cadence
-   ══════════════════════════════════════════════════════════════════════════ */
-function ConveningSection() {
+function PulseSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [selectedEvent, setSelectedEvent] = useState<
@@ -562,11 +483,11 @@ function ConveningSection() {
 
   const eventTypeColor: Record<string, string> = {
     "Demo Day": "bg-[#FF4D00] text-white",
-    Summit: "bg-[#111111] text-white",
+    Summit: "bg-white/10 text-white",
     Masterclass: "bg-[#FF4D00]/10 text-[#FF4D00]",
-    Fellowship: "bg-[#111111]/10 text-[#111111]",
+    Fellowship: "bg-white/5 text-white/60",
     "Investor Event": "bg-[#FF4D00] text-white",
-    "Town Hall": "bg-[#111111]/10 text-[#111111]",
+    "Town Hall": "bg-white/5 text-white/60",
   };
 
   return (
@@ -581,16 +502,16 @@ function ConveningSection() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-                The Convening
+                The Pulse
               </span>
               <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mb-6">
-                The bloodstream{" "}
-                <span className="italic text-[#FF4D00]">circulates</span>.
+                The bloodstream has a{" "}
+                <span className="italic text-[#FF4D00]">rhythm</span>.
               </h2>
               <p className="text-[15px] md:text-[17px] leading-[1.75] text-white/35 font-medium max-w-2xl">
-                The community compounds because it convenes on cadence. Every
-                cycle is a pressure cycle — building, presenting, reviewing,
-                scaling.
+                Communities that meet annually are acquaintances. Communities
+                that convene weekly are a force. Every pulse cycle tightens the
+                mesh — more signal, less noise, faster loops.
               </p>
             </motion.div>
           </div>
@@ -610,8 +531,10 @@ function ConveningSection() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className={`px-8 md:px-10 lg:px-8 py-6 md:py-8 ${
-                    i > 0 ? "border-l border-t lg:border-t-0 border-white/[0.06]" : "border-t lg:border-t-0 border-white/[0.06]"
-                  } ${i >= 2 ? "" : ""}`}
+                    i > 0
+                      ? "border-l border-t lg:border-t-0 border-white/[0.06]"
+                      : "border-t lg:border-t-0 border-white/[0.06]"
+                  }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <CIcon className="w-3.5 h-3.5 text-[#FF4D00]/50" />
@@ -871,389 +794,130 @@ function EventDetailModal({
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   6. VOICES — Testimonials
+   5. DISPATCHES + PASSPORT — Signal from the field + Access
    ══════════════════════════════════════════════════════════════════════════ */
-function VoicesSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section ref={ref} className="py-16 md:py-24 px-6 md:px-12 lg:px-20">
-      <div className="w-full max-w-[1400px] mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto text-center mb-14 md:mb-20"
-        >
-          <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00] mb-6 block">
-            Voices from the Route
-          </span>
-          <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.02em]">
-            The people who{" "}
-            <span className="italic font-serif text-[#FF4D00]">compound</span>.
-          </h2>
-        </motion.div>
-
-        {/* Testimonials — editorial pull-quote layout */}
-        <div className="max-w-4xl mx-auto space-y-0">
-          {voices.map((voice, i) => (
-            <motion.div
-              key={voice.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: 0.1 + i * 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="py-10 md:py-14 border-t border-[#111111]/10 last:border-b"
-            >
-              <p className="text-[18px] sm:text-[22px] md:text-[26px] leading-[1.5] font-display font-medium tracking-[-0.01em] text-[#111111]/70 mb-8 max-w-3xl">
-                &ldquo;{voice.quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div className="w-px h-8 bg-[#FF4D00]/30" />
-                <div>
-                  <div className="text-[14px] font-display font-medium tracking-tight text-[#111111]/90">
-                    {voice.name}
-                  </div>
-                  <div className="text-[11px] text-[#111111]/40 font-medium">
-                    {voice.role} · {voice.location}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   7. THE PASSPORT — Access to the Route
-   ══════════════════════════════════════════════════════════════════════════ */
-function PassportSection() {
+function DispatchesPassportSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8">
       <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        <div className="grid lg:grid-cols-2">
-          {/* Left — Passport visual */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="px-8 md:px-14 lg:px-16 py-14 md:py-20 lg:border-r border-white/[0.06] flex flex-col justify-center"
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-6 block">
-              The Passport
-            </span>
-            <h2 className="text-[26px] sm:text-[34px] md:text-[44px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-md mb-6">
-              One pass. Full{" "}
-              <span className="italic text-[#FF4D00]">circulation</span>.
-            </h2>
-            <p className="text-[14px] md:text-[15px] leading-[1.75] text-white/35 font-medium max-w-md mb-10">
-              The xCitizen Passport isn't a membership card — it's access to
-              the entire operating system. Every hub. Every event. Every
-              connection in the network. No tiers. No gatekeeping beyond the
-              initial activation.
-            </p>
-
-            {/* Passport card */}
-            <div className="bg-[#111111] border border-white/[0.06] overflow-hidden max-w-sm">
-              <div className="h-1.5 bg-[#FF4D00]" />
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 border border-[#FF4D00]/30 flex items-center justify-center">
-                    <Shield
-                      className="w-5 h-5 text-[#FF4D00]"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
-                      xCelero
-                    </div>
-                    <div className="text-[15px] font-display font-medium tracking-tight text-white/80">
-                      xCitizen Passport
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <div className="text-[9px] font-mono font-bold tracking-[0.15em] uppercase text-white/25">
-                        Activation
-                      </div>
-                      <div className="text-[32px] font-display font-medium tracking-[-0.02em] leading-none text-white/90">
-                        $25
-                      </div>
-                    </div>
-                    <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase text-white/15 border border-white/[0.06] px-2 py-0.5">
-                      Lifetime
-                    </span>
-                  </div>
-                  <div className="h-px bg-white/[0.06]" />
-                  <div className="flex items-baseline justify-between">
-                    <div>
-                      <div className="text-[9px] font-mono font-bold tracking-[0.15em] uppercase text-white/25">
-                        Annual
-                      </div>
-                      <div className="text-[32px] font-display font-medium tracking-[-0.02em] leading-none text-white/90">
-                        $9<span className="text-[14px] text-white/30">/yr</span>
-                      </div>
-                    </div>
-                    <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase text-[#FF4D00]/60 border border-[#FF4D00]/20 px-2 py-0.5">
-                      Low Barrier
-                    </span>
-                  </div>
-                </div>
-
-                <Link
-                  to="/join"
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF4D00] text-white text-[11px] font-mono font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
-                >
-                  Get the Passport
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+        <div className="grid lg:grid-cols-12">
+          {/* Left — Dispatches */}
+          <div className="lg:col-span-7 border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+            <div className="px-8 md:px-14 lg:px-16 pt-14 md:pt-20 pb-6 md:pb-8 border-b border-white/[0.06]">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
+                  Signal from the Field
+                </span>
+                <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90 max-w-xl">
+                  Not testimonials.{" "}
+                  <span className="italic text-[#FF4D00]">Readings</span>.
+                </h2>
+              </motion.div>
             </div>
-          </motion.div>
 
-          {/* Right — Benefits */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="px-8 md:px-14 lg:px-16 py-14 md:py-20 flex flex-col justify-center"
-          >
-            <h3 className="text-[18px] md:text-[22px] font-display font-medium tracking-tight text-white/80 mb-3">
-              What the passport unlocks
-            </h3>
-            <p className="text-[13px] md:text-[14px] text-white/30 font-medium leading-[1.65] mb-10 max-w-md">
-              Intentionally flat pricing. The Route stays open to every serious
-              builder, regardless of background.
-            </p>
-
-            <div className="space-y-0">
-              {passportBenefits.map((benefit, i) => (
+            <div className="divide-y divide-white/[0.06]">
+              {dispatches.map((d, i) => (
                 <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  key={d.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{
-                    duration: 0.4,
-                    delay: 0.3 + i * 0.07,
+                    duration: 0.6,
+                    delay: 0.15 + i * 0.12,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="flex items-start gap-3 py-4 border-t border-white/[0.04]"
+                  className="group px-8 md:px-14 lg:px-16 py-8 md:py-10 hover:bg-white/[0.02] transition-colors duration-300"
                 >
-                  <Check
-                    className="w-4 h-4 text-[#FF4D00] flex-shrink-0 mt-0.5"
-                    strokeWidth={2.5}
-                  />
-                  <span className="text-[13px] md:text-[14px] text-white/50 font-medium leading-snug">
-                    {benefit}
+                  <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/50 mb-4">
+                    {d.tag}
                   </span>
+                  <p className="text-[15px] md:text-[16px] leading-[1.7] text-white/45 font-medium mb-6">
+                    &ldquo;{d.signal}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-px h-6 bg-[#FF4D00]/30" />
+                    <div>
+                      <div className="text-[13px] font-display font-medium text-white/70">
+                        {d.name}
+                      </div>
+                      <div className="text-[10px] text-white/25 font-medium">
+                        {d.role} · {d.location}
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
+          </div>
 
-            {/* Mini stats */}
-            <div className="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-white/[0.06]">
-              {[
-                { value: "1,200+", label: "Holders" },
-                { value: "39+", label: "Countries" },
-                { value: "1", label: "Flat rate" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-[22px] md:text-[26px] font-display font-medium tracking-[-0.02em] text-white/70">
-                    {s.value}
-                  </div>
-                  <div className="text-[9px] font-mono font-bold tracking-[0.15em] uppercase text-white/20 mt-1">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   8. THE COMMONS — Shared space / forum
-   ══════════════════════════════════════════════════════════════════════════ */
-function CommonsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  const discussions = [
-    {
-      community: "Energy & Infrastructure",
-      title:
-        "Mini-grid economics in Northern Nigeria: unit economics from Cohort 7",
-      author: "Yusuf Hassan",
-      upvotes: 142,
-      color: "bg-[#FF4D00]",
-    },
-    {
-      community: "Digital Finance",
-      title:
-        "Cross-border payments infrastructure: what we learned building across 3 corridors",
-      author: "Fatima Al-Rashid",
-      upvotes: 204,
-      color: "bg-amber-600",
-    },
-    {
-      community: "Capital & Deals",
-      title: "SPV deployment update: Q1 2026 portfolio construction",
-      author: "Amara Diallo",
-      upvotes: 312,
-      color: "bg-rose-600",
-    },
-  ];
-
-  return (
-    <section ref={ref} className="py-16 md:py-24 px-6 md:px-12 lg:px-20">
-      <div className="w-full max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
-          {/* Left — Copy */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00] mb-6 block">
-              The Commons
-            </span>
-            <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] leading-[1.05] font-display font-medium tracking-[-0.02em] mb-6">
-              Where the bloodstream{" "}
-              <span className="italic font-serif text-[#FF4D00]">
-                exchanges
-              </span>
-              .
-            </h2>
-            <p className="text-[16px] md:text-[18px] leading-[1.7] text-[#111111]/50 font-medium max-w-xl mb-8">
-              The XCitizen forum. Not a feed. Not a broadcast. A structured
-              commons where operators share what they've learned, founders ask
-              the questions that matter, and investors find the signal in the
-              noise. Every post compounds. Every thread is searchable. Nothing
-              expires.
-            </p>
-
-            <div className="flex flex-wrap gap-2 mb-8">
-              {[
-                "Energy & Infrastructure",
-                "Life Sciences",
-                "Digital Finance",
-                "Route Operations",
-                "Capital & Deals",
-                "Founders Corner",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 text-[9px] font-mono font-bold tracking-[0.1em] uppercase border border-[#111111]/10 text-[#111111]/35"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <Link
-              to="/townsquare"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-[#FF4D00] text-white text-[11px] font-mono font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
-            >
-              <MessageSquare className="w-4 h-4" />
-              Enter the Commons
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </motion.div>
-
-          {/* Right — Preview cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{
-              duration: 0.7,
-              delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="space-y-3"
-          >
-            {/* Forum header */}
-            <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-[#111111]/10">
-              <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <div className="text-[14px] font-display font-medium tracking-tight">
-                  The Commons
-                </div>
-                <div className="text-[9px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
-                  XCitizen Forum
-                </div>
-              </div>
-              <div className="ml-auto text-[9px] font-mono font-bold text-[#111111]/20">
-                1,200+ members · 6 communities
-              </div>
-            </div>
-
-            {discussions.map((d, i) => (
+          {/* Right — Passport */}
+          <div className="lg:col-span-5">
+            <div className="px-8 md:px-12 lg:px-12 pt-14 md:pt-20 pb-6 md:pb-8 border-b border-white/[0.06]">
               <motion.div
-                key={d.title}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.25 + i * 0.1,
+                  duration: 0.9,
+                  delay: 0.15,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group border border-[#111111]/10 p-4 hover:border-[#FF4D00]/20 hover:bg-[#FAFAFA] transition-all cursor-pointer"
               >
-                <div className="flex items-center gap-2 text-[10px] text-[#111111]/30 mb-2">
-                  <div
-                    className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${d.color}`}
-                  >
-                    <span className="text-[7px] font-bold text-white uppercase">
-                      {d.community[0]}
-                    </span>
-                  </div>
-                  <span className="font-bold text-[#111111]/45">
-                    {d.community}
-                  </span>
-                  <span>·</span>
-                  <span>{d.author}</span>
-                </div>
-                <h4 className="text-[14px] md:text-[15px] font-display font-medium tracking-tight text-[#111111]/75 leading-snug group-hover:text-[#FF4D00] transition-colors">
-                  {d.title}
-                </h4>
-                <div className="flex items-center gap-3 mt-2.5 text-[10px] text-[#111111]/20 font-mono font-bold">
-                  <span className="flex items-center gap-1">
-                    <ArrowUp className="w-3 h-3 text-[#FF4D00]" />
-                    {d.upvotes}
-                  </span>
-                  <span>6 comments</span>
-                  <span className="ml-auto flex items-center gap-1 group-hover:text-[#FF4D00] transition-colors">
-                    View
-                    <ArrowRight className="w-3 h-3" />
-                  </span>
-                </div>
+                <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
+                  xCitizen Passport
+                </span>
+                <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90">
+                  Your access to the{" "}
+                  <span className="italic text-[#FF4D00]">Route</span>.
+                </h2>
               </motion.div>
-            ))}
-          </motion.div>
+            </div>
+
+            <div className="px-8 md:px-12 lg:px-12 py-10 md:py-14">
+              <p className="text-[14px] md:text-[15px] text-white/35 font-medium leading-[1.7] mb-8">
+                One passport. Full network. The xCitizen Passport isn&apos;t
+                membership — it&apos;s clearance. Access to every hub, every
+                deal room, every peer circle on the Route.
+              </p>
+
+              <div className="space-y-4">
+                {passportBenefits.map((benefit, i) => (
+                  <motion.div
+                    key={benefit}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.3 + i * 0.06,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="flex items-start gap-3"
+                  >
+                    <Check className="w-4 h-4 text-[#FF4D00] flex-shrink-0 mt-0.5" />
+                    <span className="text-[13px] md:text-[14px] text-white/50 font-medium leading-[1.5]">
+                      {benefit}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-10 pt-6 border-t border-white/[0.06]">
+                <Link
+                  to="/join"
+                  className="group inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase text-[#FF4D00] hover:text-white transition-colors"
+                >
+                  Apply for the Passport
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1261,40 +925,25 @@ function CommonsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   9. CTA — Closing
+   6. CTA — Dark closing
    ══════════════════════════════════════════════════════════════════════════ */
 function CTASection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 pb-6 md:pb-8">
-      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden relative">
-        {/* Dot grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, #fff 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        {/* Top accent line */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF4D00]/30 to-transparent" />
-
-        <div className="relative z-10 px-8 md:px-14 lg:px-20 py-16 md:py-24 text-center">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 mt-6 md:mt-8 pb-6 md:pb-8">
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+        <div className="px-8 md:px-14 lg:px-20 py-16 md:py-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center"
           >
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-8 block">
-              Join the Route
-            </span>
             <h2 className="text-[28px] sm:text-[38px] md:text-[48px] lg:text-[56px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-white/90 max-w-3xl mb-10 md:mb-12">
-              The architecture is set. The network is{" "}
-              <span className="italic text-[#FF4D00]">assembling</span>.
+              The organism is forming. Your seat is{" "}
+              <span className="italic text-[#FF4D00]">waiting</span>.
             </h2>
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 md:mb-14">
               <Link
@@ -1306,14 +955,14 @@ function CTASection() {
               </Link>
               <Link
                 to="/capital"
-                className="group inline-flex items-center gap-2 px-8 py-3.5 border border-white/[0.12] text-white/60 text-[11px] font-mono font-bold uppercase tracking-[0.12em] hover:border-white/25 hover:text-white transition-all"
+                className="group inline-flex items-center gap-2 px-8 py-3.5 border border-white/[0.15] text-white/70 text-[11px] font-mono font-bold uppercase tracking-[0.12em] hover:border-white/30 hover:text-white transition-all"
               >
                 Join as an Investor
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
               </Link>
             </div>
-            <p className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/15">
-              190 hubs · 39 countries · One metabolism
+            <p className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/20">
+              190 hubs · 39 countries · One organism
             </p>
           </motion.div>
         </div>
