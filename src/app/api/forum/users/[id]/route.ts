@@ -58,7 +58,7 @@ export async function PATCH(
     }
 
     const body = await request.json()
-    const { name, bio, location, communities, company, title } = body
+    const { name, bio, location, communities, company, title, avatarUrl } = body
 
     // Input length validation
     if (name !== undefined && !isValidInput(name, 200)) {
@@ -84,6 +84,7 @@ export async function PATCH(
     if (name !== undefined) updateData.name = name
     if (bio !== undefined) updateData.bio = bio
     if (location !== undefined) updateData.location = location
+    if (avatarUrl !== undefined) updateData.avatarUrl = avatarUrl || null
     if (communities !== undefined) {
       updateData.communities = Array.isArray(communities)
         ? communities.join(', ')

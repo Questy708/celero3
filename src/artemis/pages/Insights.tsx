@@ -45,7 +45,6 @@ export function Insights() {
 
   return (
     <div className="bg-white text-[#111111]">
-      <HeroSection />
       <CategoryFilter
         activeCategory={activeCategory}
         onChange={setActiveCategory}
@@ -57,70 +56,6 @@ export function Insights() {
         <ArticleGrid articles={rest} />
       )}
     </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   HERO, Centered editorial (matching Route/Capital page style)
-   ══════════════════════════════════════════════════════════════════════════ */
-function HeroSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  return (
-    <section className="relative bg-white text-[#111111] pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
-      <div ref={ref} className="w-full max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center"
-        >
-          <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00] mb-8 md:mb-12">
-            Insights
-          </span>
-
-          <h1 className="text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-[1.05] font-display font-medium tracking-[-0.02em] mb-8 md:mb-10">
-            Dispatches from the{" "}
-            <span className="italic font-serif text-[#FF4D00]">frontier</span>
-          </h1>
-
-          <p className="text-base sm:text-lg md:text-xl lg:text-[22px] leading-[1.6] text-[#111111]/50 font-medium max-w-2xl mb-10 sm:mb-14 md:mb-20">
-            News, analysis, and perspectives on critical technology,
-            infrastructure, and venture building in the markets that need it
-            most.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-5 sm:gap-x-10 md:gap-x-16">
-            {[
-              { value: String(insightsData.length), label: "Articles" },
-              { value: String(categories.length - 1), label: "Categories" },
-              { value: "13", label: "Critical Domains" },
-              { value: "39+", label: "Countries" },
-            ].map((m, i) => (
-              <motion.div
-                key={m.label}
-                initial={{ opacity: 0, y: 15 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.3 + i * 0.08,
-                  ease: "easeOut",
-                }}
-                className="text-center"
-              >
-                <div className="text-[26px] sm:text-[32px] md:text-[40px] font-display font-medium tracking-[-0.02em] text-[#111111]">
-                  {m.value}
-                </div>
-                <div className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#111111]/35 mt-1">
-                  {m.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
   );
 }
 

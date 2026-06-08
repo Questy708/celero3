@@ -117,6 +117,7 @@ model ForumUser {
   location    String?
   communities String   @default("") // comma-separated
   avatarColor String   @default("#6b7280")
+  avatarUrl   String?
   company     String?
   title       String?
   lastActiveAt DateTime @default(now())

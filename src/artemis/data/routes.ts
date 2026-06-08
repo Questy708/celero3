@@ -562,7 +562,11 @@ export interface ArcPricing {
   solidarityRate: number;
   durationWeeks: number;
   scholarshipsPerDeparture: number;
-  inclusions: string[];
+  lodging: string;
+  meals: string;
+  transport: string;
+  siteVisits: string;
+  extras: string[];
 }
 
 export const arcPricing: ArcPricing[] = [
@@ -572,7 +576,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 2800,
     durationWeeks: 8,
     scholarshipsPerDeparture: 3,
-    inclusions: ["Port access credentials", "Market immersion program", "Mobile money operator access", "Local operator network access", "Shared workspace in 5 hubs", "Cultural weaving program", "Route deal sprint materials"],
+    lodging: "Shared hub lodging in Lagos, Accra, Abidjan",
+    meals: "Breakfast + dinner daily; local lunches on site visit days",
+    transport: "All inter-city ground transport + airport transfers",
+    siteVisits: "12 venture site visits + 3 port facility tours",
+    extras: ["Mobile money operator access", "Market immersion program", "Route deal sprint materials"],
   },
   {
     legId: "sahel-band",
@@ -580,7 +588,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 3100,
     durationWeeks: 7,
     scholarshipsPerDeparture: 4,
-    inclusions: ["Desert transit logistics", "Mesh-network deployment kit", "Climate data independence tools", "Humanitarian corridor access", "Pastoral community immersion", "Heritage walk program", "Emergency covenant training"],
+    lodging: "Hub lodging + desert camp accommodations",
+    meals: "All meals included (remote terrain — no alternatives)",
+    transport: "4x4 convoy transport + charter flights for remote legs",
+    siteVisits: "8 infrastructure site visits + mesh-network deployments",
+    extras: ["Climate data tools", "Humanitarian corridor access", "Emergency covenant training"],
   },
   {
     legId: "east-african",
@@ -588,7 +600,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 3300,
     durationWeeks: 8,
     scholarshipsPerDeparture: 3,
-    inclusions: ["Corridor operator access", "M-Pesa integration workshop", "Cross-border freight tracking", "Agricultural pricing data feed", "Indian Ocean port access", "Swahili cultural immersion", "Tech hub coworking in 5 cities"],
+    lodging: "Co-working hub lodging in 5 cities + safari camp",
+    meals: "Breakfast + dinner daily; local lunches at hub",
+    transport: "Ground transport + internal flights (Nairobi–Dar–Kigali)",
+    siteVisits: "14 venture visits + 2 port facility tours + agricultural station",
+    extras: ["M-Pesa integration workshop", "Cross-border freight tracking", "Swahili cultural immersion"],
   },
   {
     legId: "central-african",
@@ -596,7 +612,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 3800,
     durationWeeks: 7,
     scholarshipsPerDeparture: 4,
-    inclusions: ["River logistics coordination", "Mineral traceability workshop", "Biodiversity data commons access", "Offline-first digital tools", "Rainforest immersion program", "Community research partnerships", "Emergency medical kit"],
+    lodging: "Hub lodging + rainforest research station stays",
+    meals: "All meals included (limited external options)",
+    transport: "River transport + charter flights + 4x4 for interior",
+    siteVisits: "10 site visits + river logistics coordination + biodiversity stations",
+    extras: ["Mineral traceability workshop", "Offline-first digital tools", "Emergency medical kit"],
   },
   {
     legId: "southern-arc",
@@ -604,7 +624,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 4200,
     durationWeeks: 8,
     scholarshipsPerDeparture: 2,
-    inclusions: ["Rail corridor access pass", "Energy-resilient manufacturing lab", "Mining-to-agri transition program", "Multi-currency settlement workshop", "Victoria Falls heritage experience", "Copperbelt industrial tour", "Skills transfer workshops"],
+    lodging: "Hotel + hub lodging in 6 cities across 4 countries",
+    meals: "Breakfast + lunch at hubs; per diem for dinners",
+    transport: "Rail corridor pass + ground transport + internal flights",
+    siteVisits: "16 venture + infrastructure visits + copperbelt industrial tour + energy lab",
+    extras: ["Energy-resilient manufacturing lab", "Multi-currency settlement workshop", "Skills transfer sessions"],
   },
   {
     legId: "north-africa-global",
@@ -612,7 +636,11 @@ export const arcPricing: ArcPricing[] = [
     solidarityRate: 5500,
     durationWeeks: 10,
     scholarshipsPerDeparture: 2,
-    inclusions: ["Data sovereignty workshop", "Regulatory harmonization convening", "Diaspora investment network access", "Maritime logistics dialogue", "Mediterranean port authority access", "Global gateway connections", "Compass ceremony program", "Year-end deal flow acceleration"],
+    lodging: "Business-class hub lodging in 5 cities + Mediterranean retreat",
+    meals: "Breakfast + lunch at hubs; hosted dinners with local partners",
+    transport: "All flights + ground transport + maritime port transfers",
+    siteVisits: "20+ visits: regulatory bodies, port authorities, tech hubs, diaspora networks",
+    extras: ["Data sovereignty workshop", "Regulatory harmonization convening", "Global gateway connections", "Compass ceremony program"],
   },
 ];
 
@@ -620,8 +648,11 @@ export const fullRoutePricing = {
   pricePerPerson: 22000,
   solidarityRate: 16000,
   durationMonths: 12,
-  inclusions: [
-    "All 6 arcs, full circumnavigation",
+  lodging: "Hub + hotel + camp lodging across all 6 arcs, 39 countries",
+  meals: "Breakfast + lunch at all hubs; dinner included on site-visit days; per diem elsewhere",
+  transport: "All inter-arc flights + ground transport + river/rail corridor passes + charter legs",
+  siteVisits: "80+ venture, infrastructure, and port visits across every arc",
+  extras: [
     "Lifetime Xcitizen ledger access",
     "Xcitizen status and credential",
     "Custom route compass",

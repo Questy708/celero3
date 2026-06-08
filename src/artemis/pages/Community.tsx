@@ -1039,14 +1039,17 @@ function EventDetailModal({
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   6. DISPATCHES — Horizontal sliding cards
+   6. DISPATCHES — Infinite marquee loop (left → right)
    ══════════════════════════════════════════════════════════════════════════ */
 function DispatchesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
+  // Duplicate the dispatches for seamless looping
+  const loopedDispatches = [...dispatches, ...dispatches];
+
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA]">
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA] overflow-hidden">
       <div className="max-w-[1400px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -1062,24 +1065,31 @@ function DispatchesSection() {
             <span className="italic text-[#FF4D00]">Readings</span>.
           </h2>
         </motion.div>
+      </div>
 
-        {/* Horizontal sliding cards */}
-        <div className="relative">
-          <div
-            className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      {/* Infinite marquee — two identical rows offset for seamless loop */}
+      <div className="relative">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+
+        <div className="flex overflow-hidden">
+          <motion.div
+            animate={{ x: ["-50%", 0] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30,
+                ease: "linear",
+              },
+            }}
+            className="flex gap-5 shrink-0"
           >
-            {dispatches.map((d, i) => (
-              <motion.div
-                key={d.name}
-                initial={{ opacity: 0, x: 60 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.15 + i * 0.15,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[460px] snap-start bg-white border border-[#111111]/10 p-6 md:p-8 hover:border-[#111111]/20 transition-colors group"
+            {loopedDispatches.map((d, i) => (
+              <div
+                key={`${d.name}-${i}`}
+                className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[460px] bg-white border border-[#111111]/10 p-6 md:p-8 hover:border-[#111111]/20 transition-colors group"
               >
                 <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60 mb-5">
                   {d.tag}
@@ -1107,11 +1117,9 @@ function DispatchesSection() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
-          {/* Scroll hint gradient */}
-          <div className="absolute top-0 right-0 bottom-4 w-12 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none" />
+          </motion.div>
         </div>
       </div>
     </section>

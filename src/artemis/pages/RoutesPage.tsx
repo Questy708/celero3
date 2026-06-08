@@ -34,7 +34,7 @@ import {
   arcImages,
   MAP_LOCATIONS,
 } from "@/artemis/data/routes";
-import type { RouteLeg, KeyCity, MapLocation } from "@/artemis/data/routes";
+import type { RouteLeg, KeyCity, MapLocation, ArcPricing } from "@/artemis/data/routes";
 
 /* ══════════════════════════════════════════════════════════════════════════
    ROUTES BRIDGE: Cinematic hero + stat strip + editorial text/map layout
@@ -2223,6 +2223,14 @@ function JourneySection() {
 /* ══════════════════════════════════════════════════════════════════════════
    PRICING SECTION
    ══════════════════════════════════════════════════════════════════════════ */
+
+const coverageItems = [
+  { key: "lodging", label: "Lodging", icon: "🏠" },
+  { key: "meals", label: "Meals", icon: "🍽" },
+  { key: "transport", label: "Transport", icon: "🚛" },
+  { key: "siteVisits", label: "Site Visits", icon: "🏭" },
+] as const;
+
 function PricingSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -2233,6 +2241,7 @@ function PricingSection() {
       className="py-20 md:py-32 px-6 md:px-12 lg:px-20 border-t border-[#111111]/10 bg-white"
     >
       <div className="w-full max-w-[1400px] mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -2246,13 +2255,13 @@ function PricingSection() {
             Invest in the Journey
           </h2>
           <p className="text-lg md:text-xl text-[#111111]/50 font-medium leading-relaxed max-w-2xl">
-            Each arc is a complete journey. The full route is a transformation.
-            Choose your entry point.
+            Each arc covers lodging, meals, transport, and site visits. Pricing
+            reflects the terrain.
           </p>
         </motion.div>
 
-        {/* 6 per-arc pricing cards in 2x3 / 3x2 grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12">
+        {/* Per-arc pricing — horizontal cards stacked vertically */}
+        <div className="space-y-4 md:space-y-6 mb-12">
           {arcPricing.map((pricing, i) => {
             const leg = routeLegs.find((l) => l.id === pricing.legId);
             if (!leg) return null;
@@ -2261,88 +2270,126 @@ function PricingSection() {
                 key={pricing.legId}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.05 * i, ease: "easeOut" }}
-                className="border border-[#111111]/10 p-6 hover:border-[#111111]/20 transition-colors flex flex-col"
+                transition={{
+                  duration: 0.5,
+                  delay: 0.08 * i,
+                  ease: "easeOut",
+                }}
+                className="border border-[#111111]/10 hover:border-[#111111]/20 transition-colors overflow-hidden"
+                style={{ borderLeftWidth: 4, borderLeftColor: leg.color }}
               >
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div
-                    className="w-3 h-3 shrink-0"
-                    style={{ backgroundColor: leg.color }}
-                  />
-                  <span className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
-                    Leg {leg.legNumber}
-                  </span>
-                </div>
-                <h3 className="text-xl font-display font-medium mb-1">
-                  {leg.name}
-                </h3>
-                <p className="text-sm text-[#111111]/40 font-medium mb-6">
-                  {leg.subtitle}
-                </p>
-
-                {/* Price */}
-                <div className="mb-4">
-                  <div className="text-3xl font-display font-medium">
-                    ${pricing.pricePerPerson.toLocaleString()}
-                  </div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mt-1">
-                    Per Person
-                  </div>
-                </div>
-                <div className="mb-6">
-                  <div
-                    className="text-lg font-display font-medium"
-                    style={{ color: leg.color }}
-                  >
-                    ${pricing.solidarityRate.toLocaleString()}
-                  </div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mt-0.5">
-                    Solidarity Rate (Groups)
-                  </div>
-                </div>
-
-                {/* Details */}
-                <div className="flex gap-4 mb-6 text-sm">
-                  <div>
-                    <span className="font-display font-medium">
-                      {pricing.durationWeeks}
-                    </span>{" "}
-                    <span className="text-[#111111]/40">weeks</span>
-                  </div>
-                  <div>
-                    <span className="font-display font-medium">
-                      {pricing.scholarshipsPerDeparture}
-                    </span>{" "}
-                    <span className="text-[#111111]/40">scholarships</span>
-                  </div>
-                </div>
-
-                {/* Inclusions */}
-                <div className="space-y-2 mb-6 flex-1">
-                  {pricing.inclusions.map((inc, j) => (
-                    <div
-                      key={j}
-                      className="flex items-start gap-2 text-sm text-[#111111]/60"
-                    >
-                      <Check
-                        className="w-3.5 h-3.5 shrink-0 mt-0.5"
-                        style={{ color: leg.color }}
+                <div className="grid lg:grid-cols-[340px_1fr] gap-0">
+                  {/* Left: Arc info */}
+                  <div className="p-6 md:p-8 lg:border-r border-[#111111]/10 flex flex-col">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-3 h-3 shrink-0"
+                        style={{ backgroundColor: leg.color }}
                       />
-                      <span>{inc}</span>
+                      <span className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#FF4D00]">
+                        Leg {leg.legNumber}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <h3 className="text-xl md:text-2xl font-display font-medium mb-1">
+                      {leg.name}
+                    </h3>
+                    <p className="text-sm text-[#111111]/40 font-medium mb-6">
+                      {leg.subtitle}
+                    </p>
 
-                {/* CTA */}
-                <a
-                  href={`#leg-${leg.id}`}
-                  className="inline-flex items-center justify-center gap-2 border px-6 py-3 text-sm font-mono font-bold tracking-wider uppercase transition-colors hover:bg-[#111111] hover:text-white"
-                  style={{ borderColor: leg.color, color: leg.color }}
-                >
-                  Explore This Arc
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
+                    {/* Price block */}
+                    <div className="mb-3">
+                      <div className="text-3xl md:text-4xl font-display font-medium">
+                        ${pricing.pricePerPerson.toLocaleString()}
+                      </div>
+                      <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mt-1">
+                        Per Person
+                      </div>
+                    </div>
+                    <div className="mb-6">
+                      <div
+                        className="text-lg font-display font-medium"
+                        style={{ color: leg.color }}
+                      >
+                        ${pricing.solidarityRate.toLocaleString()}
+                      </div>
+                      <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mt-0.5">
+                        Solidarity Rate
+                      </div>
+                    </div>
+
+                    {/* Duration + scholarships */}
+                    <div className="flex gap-5 mb-6 text-sm">
+                      <div>
+                        <span className="font-display font-medium">
+                          {pricing.durationWeeks}
+                        </span>{" "}
+                        <span className="text-[#111111]/40">weeks</span>
+                      </div>
+                      <div>
+                        <span className="font-display font-medium">
+                          {pricing.scholarshipsPerDeparture}
+                        </span>{" "}
+                        <span className="text-[#111111]/40">scholarships</span>
+                      </div>
+                    </div>
+
+                    {/* CTA */}
+                    <a
+                      href={`#leg-${leg.id}`}
+                      className="mt-auto inline-flex items-center justify-center gap-2 border px-5 py-2.5 text-xs font-mono font-bold tracking-wider uppercase transition-colors hover:bg-[#111111] hover:text-white"
+                      style={{ borderColor: leg.color, color: leg.color }}
+                    >
+                      Explore This Arc
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+
+                  {/* Right: Coverage breakdown */}
+                  <div className="p-6 md:p-8">
+                    <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/30 mb-4">
+                      What&apos;s Covered
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                      {coverageItems.map((item) => (
+                        <div key={item.key}>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm">{item.icon}</span>
+                            <span className="text-[10px] font-mono font-bold tracking-[0.12em] uppercase text-[#111111]/50">
+                              {item.label}
+                            </span>
+                          </div>
+                          <p className="text-sm text-[#111111]/70 font-medium leading-relaxed pl-6">
+                            {pricing[item.key as keyof ArcPricing] as string}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Extras */}
+                    {pricing.extras.length > 0 && (
+                      <div>
+                        <div className="text-[10px] font-mono font-bold tracking-[0.12em] uppercase text-[#111111]/30 mb-3">
+                          Arc-Specific Extras
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {pricing.extras.map((extra, j) => (
+                            <span
+                              key={j}
+                              className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 border border-[#111111]/10 text-[#111111]/60"
+                            >
+                              <Check
+                                className="w-3 h-3 shrink-0"
+                                style={{ color: leg.color }}
+                              />
+                              {extra}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </motion.div>
             );
           })}
@@ -2352,77 +2399,104 @@ function PricingSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="bg-[#1B1C1E] text-white p-8 md:p-12 border border-[#1B1C1E]"
+          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          className="bg-[#1B1C1E] text-white overflow-hidden"
+          style={{ borderLeftWidth: 4, borderLeftColor: "#FF4D00" }}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Sparkles className="w-5 h-5 text-[#FF4D00]" />
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
-              Full Route Package
-            </span>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-            <div>
-              <h3 className="text-[28px] sm:text-[36px] md:text-[48px] font-display font-medium tracking-[-0.02em] leading-[0.95] mb-4">
-                The Full Circumnavigation
-              </h3>
-              <p className="text-base md:text-lg text-white/40 font-medium leading-[1.7] mb-8">
-                All six arcs. Twelve months. The complete journey from Lagos to
-                Cairo, from the Gulf of Guinea to the Mediterranean gateways.
-                One continuous route that builds on itself with every leg.
-              </p>
-
-              <div className="flex flex-wrap gap-8 mb-8">
-                <div>
-                  <div className="text-4xl md:text-5xl font-display font-medium text-[#FF4D00]">
-                    ${fullRoutePricing.pricePerPerson.toLocaleString()}
-                  </div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
-                    Per Person
-                  </div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-display font-medium text-[#FF4D00]/80">
-                    ${fullRoutePricing.solidarityRate.toLocaleString()}
-                  </div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
-                    Solidarity Rate
-                  </div>
-                </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-display font-medium text-white">
-                    {fullRoutePricing.durationMonths}
-                  </div>
-                  <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
-                    Months
-                  </div>
-                </div>
-              </div>
-
-              <button
-                suppressHydrationWarning
-                className="inline-flex items-center gap-2 bg-[#FF4D00] hover:bg-[#FF4D00]/90 text-white px-8 py-4 text-sm font-mono font-bold tracking-wider uppercase transition-colors"
-              >
-                Book for the Full Route
-                <ArrowRight className="w-4 h-4" />
-              </button>
+          <div className="p-8 md:p-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Sparkles className="w-5 h-5 text-[#FF4D00]" />
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
+                Full Route Package
+              </span>
             </div>
 
-            <div>
-              <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mb-4">
-                Inclusions
-              </div>
-              <div className="space-y-3">
-                {fullRoutePricing.inclusions.map((inc, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 text-sm text-white/60"
-                  >
-                    <Check className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#FF4D00]" />
-                    <span>{inc}</span>
+            <div className="grid lg:grid-cols-[380px_1fr] gap-8 lg:gap-16 items-start">
+              {/* Left: Info + pricing */}
+              <div>
+                <h3 className="text-[28px] sm:text-[36px] md:text-[48px] font-display font-medium tracking-[-0.02em] leading-[0.95] mb-4">
+                  The Full Circumnavigation
+                </h3>
+                <p className="text-base md:text-lg text-white/40 font-medium leading-[1.7] mb-8">
+                  All six arcs. Twelve months. The complete journey from Lagos
+                  to Cairo, from the Gulf of Guinea to the Mediterranean
+                  gateways. One continuous route that builds on itself with every
+                  leg.
+                </p>
+
+                <div className="flex flex-wrap gap-8 mb-8">
+                  <div>
+                    <div className="text-4xl md:text-5xl font-display font-medium text-[#FF4D00]">
+                      ${fullRoutePricing.pricePerPerson.toLocaleString()}
+                    </div>
+                    <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
+                      Per Person
+                    </div>
                   </div>
-                ))}
+                  <div>
+                    <div className="text-3xl md:text-4xl font-display font-medium text-[#FF4D00]/80">
+                      ${fullRoutePricing.solidarityRate.toLocaleString()}
+                    </div>
+                    <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
+                      Solidarity Rate
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-3xl md:text-4xl font-display font-medium text-white">
+                      {fullRoutePricing.durationMonths}
+                    </div>
+                    <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mt-1">
+                      Months
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  suppressHydrationWarning
+                  className="inline-flex items-center gap-2 bg-[#FF4D00] hover:bg-[#FF4D00]/90 text-white px-8 py-4 text-sm font-mono font-bold tracking-wider uppercase transition-colors"
+                >
+                  Book for the Full Route
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Right: Coverage breakdown + extras */}
+              <div>
+                <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/30 mb-4">
+                  What&apos;s Covered
+                </div>
+                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-8">
+                  {coverageItems.map((item) => (
+                    <div key={item.key}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm">{item.icon}</span>
+                        <span className="text-[10px] font-mono font-bold tracking-[0.12em] uppercase text-white/40">
+                          {item.label}
+                        </span>
+                      </div>
+                      <p className="text-sm text-white/50 font-medium leading-relaxed pl-6">
+                        {fullRoutePricing[
+                          item.key as keyof typeof fullRoutePricing
+                        ] as string}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-[10px] font-mono font-bold tracking-[0.12em] uppercase text-white/30 mb-3">
+                  Full Route Extras
+                </div>
+                <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
+                  {fullRoutePricing.extras.map((extra, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-2.5 text-sm text-white/55"
+                    >
+                      <Check className="w-3.5 h-3.5 shrink-0 mt-0.5 text-[#FF4D00]" />
+                      <span>{extra}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

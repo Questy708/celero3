@@ -81,7 +81,7 @@ const timelineEras = [
     title: "The Thesis Is Drafted",
     subtitle: "Amina Osei-Mensah drafts the xCelero thesis",
     description:
-      "After a decade leading Africa investments at a sovereign wealth fund, and building three venture-backed companies, Amina Osei-Mensah drafts the founding thesis: the Global South doesn't need more incubators or more aid. It needs infrastructure, ventures, capital, and community, integrated as a single platform. The four engines.",
+      "After a decade leading Africa investments at a sovereign wealth fund, and building three venture-backed companies, Amina Osei-Mensah drafts the founding thesis: the Global South doesn't need more incubators or more aid. It needs infrastructure, ventures, capital, and community, integrated as a single platform. The four pillars.",
     icon: Lightbulb,
     isCurrentDay: true,
   },
@@ -99,7 +99,7 @@ const timelineEras = [
     title: "The Flywheel Is Building",
     subtitle: "Assembling 190 hubs, 39 countries, 40+ ventures on the Route",
     description:
-      "xCelero is assembling the infrastructure to operate across 190 hubs in 39 countries. 40+ ventures are projected to build on the Route. Seven accelerator cohorts are planned. The XCitizen network is designed to exceed 1,200 members at scale. The four engines will compound with every cycle.",
+      "xCelero is assembling the infrastructure to operate across 190 hubs in 39 countries. 40+ ventures are projected to build on the Route. Seven accelerator cohorts are planned. The XCitizen network is designed to exceed 1,200 members at scale. The four pillars will compound with every cycle.",
     icon: Users,
     isCurrentDay: true,
   },
@@ -244,7 +244,7 @@ function OpeningSection() {
           <h1 className="text-[32px] sm:text-[42px] md:text-[52px] lg:text-[60px] leading-[1.08] font-display font-medium tracking-[-0.02em] mb-6">
             From the first{" "}
             <em className="italic font-serif text-[#FF4D00]">circle</em> to the
-            four engines.
+            four pillars.
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl leading-[1.6] text-[#111111]/45 font-medium max-w-2xl">

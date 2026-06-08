@@ -33,6 +33,9 @@ import {
   Briefcase,
   ExternalLink,
   Loader2,
+  Camera,
+  Pencil,
+  Save,
 } from "lucide-react";
 
 /* ── Types (matching API responses) ── */
@@ -45,6 +48,7 @@ interface ForumUser {
   location: string | null;
   communities: string; // comma-separated from DB
   avatarColor: string;
+  avatarUrl?: string;
   company: string | null;
   title: string | null;
   lastActiveAt: string;
@@ -78,7 +82,7 @@ interface ForumComment {
   likes: number;
   createdAt: string;
   updatedAt: string;
-  author: { id: string; name: string; avatarColor: string; role: string };
+  author: { id: string; name: string; avatarColor: string; avatarUrl?: string; role: string };
   replies: ForumComment[];
 }
 
@@ -213,7 +217,11 @@ function CommentNode({
             className="w-[28px] h-[28px] rounded-full overflow-hidden flex items-center justify-center font-bold text-white text-[10px] z-10"
             style={{ backgroundColor: comment.author.avatarColor }}
           >
-            {comment.author.name[0]}
+            {comment.author.avatarUrl ? (
+              <img src={comment.author.avatarUrl} alt="" className="w-full h-full object-cover" />
+            ) : (
+              comment.author.name[0]
+            )}
           </div>
           {comment.replies && comment.replies.length > 0 && (
             <div className="w-[2px] bg-[#111111]/10 group-hover/line:bg-[#111111]/20 transition-colors absolute top-8 bottom-[-8px] sm:bottom-[-16px]" />
@@ -319,6 +327,8 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
   const [location, setLocation] = useState("");
   const [selectedCommunities, setSelectedCommunities] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string>("");
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const goNext = () => { setDirection(1); setStep((s) => s + 1); };
   const goBack = () => { setDirection(-1); setStep((s) => s - 1); };
@@ -333,6 +343,21 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
     setIsSubmitting(true);
     try {
       const avatarColor = ROLE_COLORS[role] || "#6b7280";
+      let finalAvatarUrl = avatarUrl;
+
+      // Upload avatar file if selected
+      if (avatarFile) {
+        const formData = new FormData();
+        formData.append("file", avatarFile);
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (uploadRes.ok) {
+          const uploadData = await uploadRes.json();
+          finalAvatarUrl = uploadData.url;
+        }
+      }
 
       // Create user via API
       const res = await fetch("/api/forum/users", {
@@ -346,6 +371,7 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
           location: location || undefined,
           communities: selectedCommunities,
           avatarColor,
+          avatarUrl: finalAvatarUrl || undefined,
         }),
       });
 
@@ -385,7 +411,7 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
         </div>
         {/* Step indicator */}
         <div className="flex items-center gap-2">
-          {[0, 1, 2].map((i) => (
+          {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
               className={`h-1 rounded-full transition-all duration-300 ${
@@ -535,6 +561,88 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
             )}
 
             {step === 2 && (
+              <div className="flex flex-col items-center text-center">
+                <h2 className="text-2xl font-display font-medium tracking-tight text-[#111111] mb-2">
+                  Profile Picture
+                </h2>
+                <p className="text-[14px] text-[#111111]/40 mb-8">
+                  Add a photo so others can recognize you.
+                </p>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="avatar-upload-onboarding"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setAvatarFile(file);
+                      setAvatarUrl(URL.createObjectURL(file));
+                    }
+                  }}
+                />
+
+                <button
+                  onClick={() => document.getElementById("avatar-upload-onboarding")?.click()}
+                  className="relative group mb-6"
+                >
+                  <div
+                    className="w-[120px] h-[120px] rounded-full overflow-hidden flex items-center justify-center border-2 border-dashed border-[#111111]/20 group-hover:border-[#FF4D00]/40 transition-colors"
+                    style={avatarUrl ? {} : { backgroundColor: ROLE_COLORS[role] || "#6b7280" }}
+                  >
+                    {avatarUrl ? (
+                      <img src={avatarUrl} alt="Avatar preview" className="w-full h-full object-cover" />
+                    ) : (
+                      <Camera className="w-10 h-10 text-white/70" />
+                    )}
+                  </div>
+                  {avatarUrl && (
+                    <div className="absolute inset-0 rounded-full bg-[#111111]/0 group-hover:bg-[#111111]/30 flex items-center justify-center transition-colors">
+                      <Camera className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  )}
+                </button>
+
+                {avatarUrl && (
+                  <button
+                    onClick={() => {
+                      setAvatarUrl("");
+                      setAvatarFile(null);
+                    }}
+                    className="text-[11px] font-mono font-bold tracking-[0.1em] uppercase text-[#111111]/30 hover:text-[#FF4D00] transition-colors mb-4"
+                  >
+                    Remove photo
+                  </button>
+                )}
+
+                <div className="flex items-center justify-between w-full mt-4">
+                  <button
+                    onClick={goBack}
+                    className="px-5 py-2 text-sm font-bold text-[#111111]/50 hover:bg-[#111111]/5 rounded transition"
+                  >
+                    Back
+                  </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={goNext}
+                      className="px-5 py-2 text-sm font-bold text-[#111111]/30 hover:text-[#111111]/50 transition"
+                    >
+                      Skip
+                    </button>
+                    <button
+                      onClick={goNext}
+                      className="flex items-center gap-2 px-6 py-2.5 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-[0.1em] hover:bg-[#FF4D00]/90 transition-colors"
+                    >
+                      Continue
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
               <div className="flex flex-col">
                 <h2 className="text-2xl font-display font-medium tracking-tight text-[#111111] mb-2">
                   Choose Your Communities
@@ -611,10 +719,275 @@ function OnboardingFlow({ onComplete }: { onComplete: (user: ForumUser) => void 
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   EDIT PROFILE MODAL
+   ══════════════════════════════════════════════════════════════════════════ */
+function EditProfileModal({
+  user,
+  onClose,
+  onSave,
+}: {
+  user: ForumUser;
+  onClose: () => void;
+  onSave: (updatedUser: ForumUser) => void;
+}) {
+  const [name, setName] = useState(user.name);
+  const [bio, setBio] = useState(user.bio || "");
+  const [location, setLocation] = useState(user.location || "");
+  const [role, setRole] = useState(user.role);
+  const [selectedCommunities, setSelectedCommunities] = useState<string[]>(
+    parseCommunities(user.communities)
+  );
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl || "");
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const toggleCommunity = (c: string) => {
+    setSelectedCommunities((prev) =>
+      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]
+    );
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      let finalAvatarUrl = avatarUrl;
+
+      // Upload new avatar if a file was selected
+      if (avatarFile) {
+        const formData = new FormData();
+        formData.append("file", avatarFile);
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (uploadRes.ok) {
+          const uploadData = await uploadRes.json();
+          finalAvatarUrl = uploadData.url;
+        }
+      }
+
+      const res = await fetch("/api/forum/users", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: user.id,
+          name,
+          bio: bio || null,
+          role,
+          location: location || null,
+          avatarUrl: finalAvatarUrl || null,
+          communities: selectedCommunities,
+        }),
+      });
+
+      if (res.ok) {
+        const updatedUser: ForumUser = await res.json();
+        onSave(updatedUser);
+        onClose();
+      }
+    } catch (err) {
+      console.error("Failed to save profile:", err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#111111]/50" onClick={onClose}>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="bg-white w-full max-w-[520px] max-h-[90vh] overflow-y-auto mx-4 shadow-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#111111]/10">
+          <h2 className="text-lg font-display font-medium tracking-tight text-[#111111]">
+            Edit Profile
+          </h2>
+          <button onClick={onClose} className="p-1 hover:bg-[#111111]/5 rounded transition-colors">
+            <X className="w-5 h-5 text-[#111111]/40" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 space-y-5">
+          {/* Avatar */}
+          <div className="flex flex-col items-center">
+            <input
+              type="file"
+              accept="image/*"
+              id="avatar-upload-edit"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setAvatarFile(file);
+                  setAvatarUrl(URL.createObjectURL(file));
+                }
+              }}
+            />
+            <button
+              onClick={() => document.getElementById("avatar-upload-edit")?.click()}
+              className="relative group mb-3"
+            >
+              <div
+                className="w-[80px] h-[80px] rounded-full overflow-hidden flex items-center justify-center border-2 border-dashed border-[#111111]/20 group-hover:border-[#FF4D00]/40 transition-colors"
+                style={avatarUrl ? {} : { backgroundColor: user.avatarColor }}
+              >
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Avatar preview" className="w-full h-full object-cover" />
+                ) : (
+                  <Camera className="w-7 h-7 text-white/70" />
+                )}
+              </div>
+              {avatarUrl && (
+                <div className="absolute inset-0 rounded-full bg-[#111111]/0 group-hover:bg-[#111111]/30 flex items-center justify-center transition-colors">
+                  <Camera className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              )}
+            </button>
+            <span className="text-[11px] text-[#111111]/30">Click to change photo</span>
+          </div>
+
+          {/* Name */}
+          <div>
+            <label className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mb-2">
+              <User className="w-3.5 h-3.5" />
+              Display Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-white border border-[#111111]/10 focus:border-[#FF4D00]/30 focus:ring-1 focus:ring-[#FF4D00]/20 rounded px-4 py-3 text-[14px] text-[#111111] outline-none transition"
+            />
+          </div>
+
+          {/* Role */}
+          <div>
+            <label className="text-[11px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mb-3 block">
+              Role
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {ROLES.map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setRole(r)}
+                  className={`flex items-center gap-2 px-4 py-2.5 border text-[12px] font-bold uppercase tracking-[0.05em] transition-all ${
+                    role === r
+                      ? "border-[#FF4D00] bg-[#FF4D00]/5 text-[#FF4D00]"
+                      : "border-[#111111]/10 text-[#111111]/40 hover:border-[#111111]/20 hover:text-[#111111]/60"
+                  }`}
+                >
+                  {role === r && <Check className="w-3.5 h-3.5" />}
+                  {r}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Bio */}
+          <div>
+            <label className="text-[11px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mb-2 block">
+              Bio
+            </label>
+            <textarea
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="A short bio about yourself"
+              rows={3}
+              className="w-full bg-white border border-[#111111]/10 focus:border-[#FF4D00]/30 focus:ring-1 focus:ring-[#FF4D00]/20 rounded px-4 py-3 text-[14px] text-[#111111] placeholder-[#111111]/30 outline-none transition resize-y"
+            />
+          </div>
+
+          {/* Location */}
+          <div>
+            <label className="flex items-center gap-1.5 text-[11px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mb-2">
+              <MapPin className="w-3.5 h-3.5" />
+              Location
+            </label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Lagos, Nairobi, Accra..."
+              className="w-full bg-white border border-[#111111]/10 focus:border-[#FF4D00]/30 focus:ring-1 focus:ring-[#FF4D00]/20 rounded px-4 py-3 text-[14px] text-[#111111] placeholder-[#111111]/30 outline-none transition"
+            />
+          </div>
+
+          {/* Communities */}
+          <div>
+            <label className="text-[11px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/40 mb-3 block">
+              Communities
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {COMMUNITIES.map((c) => {
+                const isSelected = selectedCommunities.includes(c.name);
+                return (
+                  <button
+                    key={c.name}
+                    onClick={() => toggleCommunity(c.name)}
+                    className={`flex items-center gap-2 p-3 border text-left transition-all ${
+                      isSelected
+                        ? "border-[#FF4D00] bg-[#FF4D00]/5"
+                        : "border-[#111111]/10 hover:border-[#111111]/20"
+                    }`}
+                  >
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${c.color} relative`}
+                    >
+                      <span className="text-[8px] font-bold text-white uppercase">
+                        {c.name[0]}
+                      </span>
+                    </div>
+                    <span
+                      className={`text-[11px] font-medium block truncate ${
+                        isSelected ? "text-[#111111]" : "text-[#111111]/60"
+                      }`}
+                    >
+                      {c.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#111111]/10">
+          <button
+            onClick={onClose}
+            className="px-5 py-2 text-sm font-bold text-[#111111]/50 hover:bg-[#111111]/5 rounded transition"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={!name.trim() || isSaving}
+            className="flex items-center gap-2 px-6 py-2.5 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-[0.1em] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#FF4D00]/90 transition-colors"
+          >
+            {isSaving ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
+            {isSaving ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    FORUM CONTENT (separated to avoid hooks-after-return issues)
    ══════════════════════════════════════════════════════════════════════════ */
-function ForumContent({ user }: { user: ForumUser }) {
+function ForumContent({ user: initialUser }: { user: ForumUser }) {
   const { navigate } = useRouter();
+  const [user, setUser] = useState<ForumUser>(initialUser);
   const userId = user.id;
   const userName = user.name;
   const userAvatarColor = user.avatarColor;
@@ -635,7 +1008,6 @@ function ForumContent({ user }: { user: ForumUser }) {
   const [submittingPost, setSubmittingPost] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  const [bannerDismissed, setBannerDismissed] = useState(false);
   const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
   const [selectedMember, setSelectedMember] = useState<(ForumUser & { posts: ForumPost[]; commentCount: number }) | null>(null);
   const [memberDetailLoading, setMemberDetailLoading] = useState(false);
@@ -646,6 +1018,7 @@ function ForumContent({ user }: { user: ForumUser }) {
     COMMUNITIES[0].name
   );
   const [actionLoading, setActionLoading] = useState<Record<string, boolean>>({});
+  const [showEditProfile, setShowEditProfile] = useState(false);
 
   // Fetch posts from API
   const fetchPosts = useCallback(async () => {
@@ -919,7 +1292,18 @@ function ForumContent({ user }: { user: ForumUser }) {
 
   const userCommunities = parseCommunities(user.communities);
 
+  // Edit Profile Modal
+  const editProfileModal = showEditProfile && (
+    <EditProfileModal
+      user={user}
+      onClose={() => setShowEditProfile(false)}
+      onSave={(updatedUser) => setUser(updatedUser)}
+    />
+  );
+
   return (
+    <>
+    {editProfileModal}
     <div className="flex flex-col h-screen bg-white text-[#111111] font-sans text-sm">
       {/* ── TOP HEADER ── */}
       <header className="h-[56px] bg-white border-b border-[#111111]/10 px-4 md:px-8 flex items-center justify-between shrink-0 z-50">
@@ -980,10 +1364,14 @@ function ForumContent({ user }: { user: ForumUser }) {
           <div className="relative">
             <button
               onClick={(e) => { e.stopPropagation(); setShowProfile(!showProfile); }}
-              className="w-8 h-8 flex items-center justify-center font-bold text-white text-xs ml-1 hover:ring-2 hover:ring-[#FF4D00]/30 transition-all"
+              className="w-8 h-8 flex items-center justify-center font-bold text-white text-xs ml-1 hover:ring-2 hover:ring-[#FF4D00]/30 transition-all overflow-hidden"
               style={{ backgroundColor: userAvatarColor }}
             >
-              {userName[0]}
+              {user.avatarUrl ? (
+                <img src={user.avatarUrl} alt="" className="w-full h-full object-cover" />
+              ) : (
+                userName[0]
+              )}
             </button>
 
             {/* Profile dropdown */}
@@ -1001,10 +1389,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                   <div className="p-4 border-b border-[#111111]/10">
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-10 h-10 flex items-center justify-center font-bold text-white text-sm"
+                        className="w-10 h-10 flex items-center justify-center font-bold text-white text-sm overflow-hidden"
                         style={{ backgroundColor: userAvatarColor }}
                       >
-                        {userName[0]}
+                        {user.avatarUrl ? (
+                          <img src={user.avatarUrl} alt="" className="w-full h-full object-cover" />
+                        ) : (
+                          userName[0]
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-[14px] font-display font-medium text-[#111111] truncate">
@@ -1070,6 +1462,16 @@ function ForumContent({ user }: { user: ForumUser }) {
                   <div className="border-t border-[#111111]/10">
                     <button
                       onClick={() => {
+                        setShowProfile(false);
+                        setShowEditProfile(true);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.1em] text-[#111111]/40 hover:bg-[#111111]/5 hover:text-[#FF4D00] transition-colors"
+                    >
+                      <Pencil className="w-3.5 h-3.5" />
+                      Edit Profile
+                    </button>
+                    <button
+                      onClick={() => {
                         localStorage.removeItem("xcelero_townsquare_user_id");
                         window.location.reload();
                       }}
@@ -1085,35 +1487,6 @@ function ForumContent({ user }: { user: ForumUser }) {
           </div>
         </div>
       </header>
-
-      {/* ── PLATFORM STATUS BANNER ── */}
-      <AnimatePresence>
-        {!bannerDismissed && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="bg-[#FF4D00]/5 border-b border-[#FF4D00]/10 overflow-hidden"
-          >
-            <div className="px-4 md:px-8 py-1.5 flex items-center justify-between">
-              <span className="text-[10px] font-mono tracking-[0.08em] text-[#FF4D00]/70">
-                <span className="tracking-[0.15em] uppercase font-bold">Community Preview</span>
-                <span className="text-[#FF4D00]/40 mx-2">·</span>
-                Forum data persists in database
-                <span className="text-[#FF4D00]/40 mx-2">·</span>
-                <span className="tracking-[0.15em] uppercase font-bold">Full platform</span> coming soon
-              </span>
-              <button
-                onClick={() => setBannerDismissed(true)}
-                className="text-[#FF4D00]/40 hover:text-[#FF4D00]/70 transition-colors p-0.5"
-              >
-                <X className="w-3 h-3" />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ── MAIN CONTENT ── */}
       <div className="flex flex-1 overflow-hidden relative">
@@ -1205,10 +1578,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                       >
                         <div className="relative shrink-0">
                           <div
-                            className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-[10px]"
+                            className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-[10px] overflow-hidden"
                             style={{ backgroundColor: member.avatarColor }}
                           >
-                            {getInitials(member.name)}
+                            {member.avatarUrl ? (
+                              <img src={member.avatarUrl} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              getInitials(member.name)
+                            )}
                           </div>
                           {isRecentlyActive(member.lastActiveAt) && (
                             <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-white" />
@@ -1288,10 +1665,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                       <div className="h-16 bg-[#111111] relative">
                         <div className="absolute -bottom-6 left-6">
                           <div
-                            className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-white text-lg border-4 border-white"
+                            className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-white text-lg border-4 border-white overflow-hidden"
                             style={{ backgroundColor: selectedMember.avatarColor }}
                           >
-                            {getInitials(selectedMember.name)}
+                            {selectedMember.avatarUrl ? (
+                              <img src={selectedMember.avatarUrl} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              getInitials(selectedMember.name)
+                            )}
                           </div>
                         </div>
                       </div>
@@ -1429,10 +1810,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                                 <div className="absolute -bottom-4 left-4">
                                   <div className="relative">
                                     <div
-                                      className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-[12px] border-2 border-white"
+                                      className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-[12px] border-2 border-white overflow-hidden"
                                       style={{ backgroundColor: member.avatarColor }}
                                     >
-                                      {getInitials(member.name)}
+                                      {member.avatarUrl ? (
+                                        <img src={member.avatarUrl} alt="" className="w-full h-full object-cover" />
+                                      ) : (
+                                        getInitials(member.name)
+                                      )}
                                     </div>
                                     {isRecentlyActive(member.lastActiveAt) && (
                                       <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
@@ -1616,10 +2001,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                       <div className="px-4 md:px-6 py-3 border-t border-[#111111]/5">
                         <div className="flex gap-3 items-start">
                           <div
-                            className="w-8 h-8 flex items-center justify-center font-bold text-white text-xs shrink-0"
+                            className="w-8 h-8 flex items-center justify-center font-bold text-white text-xs shrink-0 overflow-hidden"
                             style={{ backgroundColor: userAvatarColor }}
                           >
-                            {userName[0]}
+                            {user.avatarUrl ? (
+                              <img src={user.avatarUrl} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              userName[0]
+                            )}
                           </div>
                           <div className="flex-1 flex flex-col gap-2">
                             <textarea
@@ -1683,10 +2072,14 @@ function ForumContent({ user }: { user: ForumUser }) {
                   {/* Compact Create Post */}
                   <div className="bg-white border border-[#111111]/10 p-3 flex gap-3 items-center sticky top-0 z-40">
                     <div
-                      className="w-9 h-9 flex items-center justify-center font-bold text-white text-sm shrink-0"
+                      className="w-9 h-9 flex items-center justify-center font-bold text-white text-sm shrink-0 overflow-hidden"
                       style={{ backgroundColor: userAvatarColor }}
                     >
-                      {userName[0]}
+                      {user.avatarUrl ? (
+                        <img src={user.avatarUrl} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        userName[0]
+                      )}
                     </div>
                     <input
                       type="text"
@@ -2061,6 +2454,7 @@ function ForumContent({ user }: { user: ForumUser }) {
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }
 

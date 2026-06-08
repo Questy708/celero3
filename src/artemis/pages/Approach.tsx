@@ -13,8 +13,8 @@ const heroMetrics = [
   { value: "$1-7M", label: "Initial Investment Range" },
 ];
 
-/* ── The 4 Engines ── */
-const engines = [
+/* ── The 4 Pillars ── */
+const pillars = [
   {
     num: "01",
     title: "Infrastructure",
@@ -128,7 +128,7 @@ export function Approach() {
     <div className="bg-white text-[#111111]">
       <HeroSection />
       <ApproachBridge />
-      <ThreeEnginesSection />
+      <ThreePillarsSection />
       <WhoWeBackSection />
       <HowWeWorkSection />
       <CriticalDomainsSection />
@@ -201,8 +201,8 @@ function HeroSection() {
   );
 }
 
-/* ── Engine taglines ── */
-const engineTaglines: Record<string, string> = {
+/* ── Pillar taglines ── */
+const pillarTaglines: Record<string, string> = {
   Infrastructure: "The physical OS",
   Ventures: "Commercialization at scale",
   Capital: "Patient, blended, non-dilutive",
@@ -379,7 +379,7 @@ function ApproachBridge() {
 /* ══════════════════════════════════════════════════════════════════════════
    4 ENGINES, Horizontal Pipeline / Flywheel Diagram
    ══════════════════════════════════════════════════════════════════════════ */
-function ThreeEnginesSection() {
+function ThreePillarsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [active, setActive] = useState<number | null>(null);
@@ -398,28 +398,28 @@ function ThreeEnginesSection() {
           className="max-w-3xl mb-16 md:mb-24"
         >
           <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00] mb-6 block">
-            The 4 Engines
+            The 4 Pillars
           </span>
           <h2 className="text-[32px] md:text-[48px] lg:text-[60px] font-display font-medium tracking-tight leading-[1.05] mb-6">
-            Four engines, <span className="text-[#111111]/40">one machine.</span>
+            Four pillars, <span className="text-[#111111]/40">one machine.</span>
           </h2>
           <p className="text-[17px] md:text-[19px] text-[#111111]/50 font-medium leading-relaxed">
-            xCelero operates through four integrated engines, Infrastructure, Ventures, Capital, and Community, each reinforcing the others to unblock commercialization at civilizational scale.
+            xCelero operates through four integrated pillars, Infrastructure, Ventures, Capital, and Community, each reinforcing the others to unblock commercialization at civilizational scale.
           </p>
         </motion.div>
 
         {/* Desktop: Horizontal pipeline with flowing arrows */}
         <div className="hidden lg:block">
           <div className="flex items-stretch gap-0">
-            {engines.map((engine, i) => {
-              const Icon = engine.icon;
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
               const isActive = active === i;
               const isNextActive = active !== null && active === i + 1;
-              const isLast = i === engines.length - 1;
+              const isLast = i === pillars.length - 1;
 
               return (
                 <div key={i} className="flex items-stretch flex-1">
-                  {/* Engine card */}
+                  {/* Pillar card */}
                   <motion.button
                     suppressHydrationWarning
                     initial={{ opacity: 0, y: 30 }}
@@ -434,7 +434,7 @@ function ThreeEnginesSection() {
                         : "border-[#111111]/10 bg-white hover:border-[#FF4D00]/30 hover:-mt-1"
                     }`}
                   >
-                    {/* Engine number + icon */}
+                    {/* Pillar number + icon */}
                     <div className="flex items-center gap-3 mb-4">
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 shrink-0 ${
@@ -451,7 +451,7 @@ function ThreeEnginesSection() {
                         />
                       </div>
                       <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
-                        Engine {engine.num}
+                        Pillar {pillar.num}
                       </span>
                     </div>
 
@@ -459,17 +459,17 @@ function ThreeEnginesSection() {
                     <h3 className={`text-[20px] md:text-[24px] font-display font-medium tracking-tight leading-[1.15] mb-1 transition-colors duration-300 ${
                       isActive ? "text-[#FF4D00]" : "text-[#111111]"
                     }`}>
-                      {engine.title}
+                      {pillar.title}
                     </h3>
                     <div className="text-[10px] font-mono tracking-wider uppercase text-[#111111]/40 mb-4">
-                      {engineTaglines[engine.title]}
+                      {pillarTaglines[pillar.title]}
                     </div>
 
                     {/* Description (always visible, more prominent on active) */}
                     <p className={`text-[14px] leading-[1.6] font-medium transition-all duration-300 ${
                       isActive ? "text-[#111111]/70" : "text-[#111111]/40 group-hover:text-[#111111]/55"
                     }`}>
-                      {engine.desc}
+                      {pillar.desc}
                     </p>
 
                     {/* Explore link (visible on active) */}
@@ -477,10 +477,10 @@ function ThreeEnginesSection() {
                       isActive ? "max-h-12 opacity-100" : "max-h-0 opacity-0"
                     }`}>
                       <Link
-                        to={engine.link}
+                        to={pillar.link}
                         className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF4D00] hover:text-[#111111] transition-colors group/link"
                       >
-                        Explore {engine.title}
+                        Explore {pillar.title}
                         <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                       </Link>
                     </div>
@@ -535,8 +535,8 @@ function ThreeEnginesSection() {
 
         {/* Tablet: 2x2 grid with connection lines */}
         <div className="hidden md:grid lg:hidden md:grid-cols-2 gap-6">
-          {engines.map((engine, i) => {
-            const Icon = engine.icon;
+          {pillars.map((pillar, i) => {
+            const Icon = pillar.icon;
             const isActive = active === i;
             return (
               <motion.button
@@ -562,21 +562,21 @@ function ThreeEnginesSection() {
                       isActive ? "text-[#FF4D00]" : "text-[#111111]/40 group-hover:text-[#FF4D00]"
                     }`} strokeWidth={1.5} />
                   </div>
-                  <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">Engine {engine.num}</span>
+                  <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">Pillar {pillar.num}</span>
                 </div>
                 <h3 className={`text-[20px] font-display font-medium tracking-tight leading-[1.15] mb-1 transition-colors ${
                   isActive ? "text-[#FF4D00]" : "text-[#111111]"
-                }`}>{engine.title}</h3>
-                <div className="text-[10px] font-mono tracking-wider uppercase text-[#111111]/40 mb-3">{engineTaglines[engine.title]}</div>
+                }`}>{pillar.title}</h3>
+                <div className="text-[10px] font-mono tracking-wider uppercase text-[#111111]/40 mb-3">{pillarTaglines[pillar.title]}</div>
                 <p className={`text-[14px] leading-[1.6] font-medium transition-colors ${
                   isActive ? "text-[#111111]/70" : "text-[#111111]/40"
-                }`}>{engine.desc}</p>
+                }`}>{pillar.desc}</p>
                 {isActive && (
                   <Link
-                    to={engine.link}
+                    to={pillar.link}
                     className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF4D00] hover:text-[#111111] transition-colors mt-4 group/link"
                   >
-                    Explore {engine.title}
+                    Explore {pillar.title}
                     <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                   </Link>
                 )}
@@ -590,10 +590,10 @@ function ThreeEnginesSection() {
 
         {/* Mobile: Vertical stack with flowing connectors */}
         <div className="md:hidden flex flex-col">
-          {engines.map((engine, i) => {
-            const Icon = engine.icon;
+          {pillars.map((pillar, i) => {
+            const Icon = pillar.icon;
             const isActive = active === i;
-            const isLast = i === engines.length - 1;
+            const isLast = i === pillars.length - 1;
             return (
               <div key={i}>
                 <motion.button
@@ -619,24 +619,24 @@ function ThreeEnginesSection() {
                       }`} strokeWidth={1.5} />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00] block">Engine {engine.num}</span>
+                      <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00] block">Pillar {pillar.num}</span>
                       <h3 className={`text-[18px] font-display font-medium tracking-tight leading-[1.15] transition-colors ${
                         isActive ? "text-[#FF4D00]" : "text-[#111111]"
-                      }`}>{engine.title}</h3>
+                      }`}>{pillar.title}</h3>
                     </div>
                     <div className="ml-auto text-[10px] font-mono tracking-wider uppercase text-[#111111]/40">
-                      {engineTaglines[engine.title]}
+                      {pillarTaglines[pillar.title]}
                     </div>
                   </div>
                   <p className={`text-[14px] leading-[1.6] font-medium transition-all duration-300 ${
                     isActive ? "text-[#111111]/70" : "text-[#111111]/40"
-                  }`}>{engine.desc}</p>
+                  }`}>{pillar.desc}</p>
                   {isActive && (
                     <Link
-                      to={engine.link}
+                      to={pillar.link}
                       className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FF4D00] hover:text-[#111111] transition-colors mt-4 group/link"
                     >
-                      Explore {engine.title}
+                      Explore {pillar.title}
                       <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   )}

@@ -124,3 +124,37 @@ Stage Summary:
 - Community page reduced from 12 sections to 6 focused, editorial sections
 - Design matches site aesthetic: dark containers, editorial typography, Framer Motion animations, #FF4D00 brand color
 - Page feels like a manifesto for collective momentum rather than a generic community page
+
+---
+Task ID: 5
+Agent: Main Agent
+Task: Redesign Routes page pricing section to be region-specific and practical
+
+Work Log:
+- Updated ArcPricing interface in routes.ts: replaced `inclusions: string[]` with 5 new region-specific fields (`lodging`, `meals`, `transport`, `siteVisits`, `extras: string[]`)
+- Replaced all 6 arc pricing entries with differentiated coverage reflecting actual terrain/logistics:
+  - Gulf of Guinea ($3,800): hub lodging in 3 cities, breakfast+dinner, ground transport+airport transfers, 12 venture visits+3 port tours
+  - Sahel Band ($4,200): hub+desert camp, all meals included, 4x4 convoy+charter flights, 8 infrastructure visits+mesh-network deployments
+  - East African ($4,500): co-working hub in 5 cities+safari camp, ground+internal flights, 14 venture visits+2 port+agricultural station
+  - Central African ($5,200): hub+rainforest research station, all meals, river transport+charter+4x4, 10 visits+river logistics+biodiversity stations
+  - Southern Arc ($5,800): hotel+hub in 6 cities/4 countries, breakfast+lunch+per diem dinner, rail corridor+ground+flights, 16 visits+copperbelt+energy lab
+  - North Africa–Global ($7,500): business-class hub+Mediterranean retreat, all flights+ground+maritime, 20+ visits across regulatory/port/tech/diaspora
+- Updated fullRoutePricing: replaced `inclusions` with `lodging`, `meals`, `transport`, `siteVisits` fields + `extras` array for the 11 program-level benefits
+- Added `ArcPricing` type import to RoutesPage.tsx
+- Completely redesigned PricingSection component:
+  - Replaced 3-column uniform card grid with vertical stack of horizontal 2-column cards
+  - Each arc card: left side (340px) with leg name, color dot, price, solidarity rate, duration, CTA; right side with 2×2 coverage breakdown (🏠 Lodging, 🍽 Meals, 🚛 Transport, 🏭 Site Visits) + arc-specific extras as tag chips
+  - Each card has colored left border accent (4px) matching the arc's color
+  - Full Route Package card updated with same 2-column layout: left side (info+pricing+CTA), right side with coverage breakdown + extras list in 2-column grid
+  - Full Route card also has #FF4D00 left border accent
+  - Subtitle updated to: "Each arc covers lodging, meals, transport, and site visits. Pricing reflects the terrain."
+  - All Framer Motion animations preserved (staggered entrance, useInView triggers)
+  - All styling conventions maintained (font-display, font-mono, tracking, border patterns)
+- Lint passes cleanly
+- Dev server compiles successfully
+
+Stage Summary:
+- Pricing data now region-specific with differentiated lodging/meals/transport/siteVisits per arc
+- Pricing UI redesigned from uniform 3-column cards to horizontal 2-column cards with coverage breakdown
+- Each arc visually differentiated with colored left border accent
+- Full Route Package card updated with matching breakdown layout

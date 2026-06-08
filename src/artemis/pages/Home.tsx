@@ -118,7 +118,7 @@ const pillars = [
     subtext:
       "The XCitizens network, operators, founders, investors & mentors across the Route",
     description:
-      "The fourth engine. Community is the connective tissue that will turn individual efforts into collective momentum. The XCitizens network is designed to span every hub on the Route: operators who run infrastructure, founders building ventures, investors deploying capital, and mentors transferring knowledge. Compound network effects mean every new member strengthens the whole, creating a flywheel that can accelerate commercialization for everyone.",
+      "The fourth pillar. Community is the connective tissue that will turn individual efforts into collective momentum. The XCitizens network is designed to span every hub on the Route: operators who run infrastructure, founders building ventures, investors deploying capital, and mentors transferring knowledge. Compound network effects mean every new member strengthens the whole, creating a flywheel that can accelerate commercialization for everyone.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1573496267526-08a69e46a409?auto=format&fit=crop&w=1200&q=80",
@@ -600,7 +600,7 @@ function BentoGrid() {
                 The Platform
               </span>
               <h2 className="text-[32px] sm:text-[44px] md:text-[56px] lg:text-[64px] font-display font-medium tracking-[-0.035em] leading-[0.92] text-white mb-8 md:mb-10">
-                Four engines,{" "}
+                Four pillars,{" "}
                 <em className="italic font-serif text-[#FF4D00]">one thesis</em>.
               </h2>
               <div className="space-y-5">
