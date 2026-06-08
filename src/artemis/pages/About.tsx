@@ -263,7 +263,7 @@ function OpeningSection() {
    WHAT IS XCELERO LABS: Clean single-column editorial layout
    ══════════════════════════════════════════════════════════════════════════ */
 const whatIsStats = [
-  { value: "4", label: "Integrated Engines" },
+  { value: "4", label: "Integrated Pillars" },
   { value: "190", label: "Projected Hubs" },
   { value: "39+", label: "Countries in Scope" },
 ];
@@ -297,7 +297,7 @@ function WhatIsXceleroSection() {
             </p>
 
             <p className="text-[15px] md:text-[17px] leading-[1.7] text-[#111111]/55 font-medium">
-              We are building xCelero to fill that gap. Four integrated engines — Infrastructure, Ventures, Capital, and Community — are designed to operate as a single machine. M1 Core campuses will provide 50,000+ sq ft of lab and maker space. Structured commercialization programs will take ventures from prototype to revenue. Six investment vehicles are designed to deploy capital from $500 to $250K+. And the XCitizen network will connect every operator, founder, investor, and mentor across 190 hubs and 39 countries.
+              We are building xCelero to fill that gap. Four integrated pillars — Infrastructure, Ventures, Capital, and Community — are designed to operate as a single machine. M1 Core campuses will provide 50,000+ sq ft of lab and maker space. Structured commercialization programs will take ventures from prototype to revenue. Six investment vehicles are designed to deploy capital from $500 to $250K+. And the XCitizen network will connect every operator, founder, investor, and mentor across 190 hubs and 39 countries.
             </p>
 
             <p className="text-[15px] md:text-[17px] leading-[1.7] text-[#111111]/55 font-medium">
@@ -490,7 +490,7 @@ function HowWeWorkSection() {
       </div>
 
       {/* Filter tabs + Team grid: wider for the card grid */}
-      <div className="w-full max-w-[1200px] mx-auto">
+      <div className="w-full max-w-[1400px] mx-auto">
         {/* Filter tabs */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -506,7 +506,7 @@ function HowWeWorkSection() {
                 setActiveCategory(cat.key);
                 setExpandedId(null);
               }}
-              className={`px-3 py-1.5 text-[10px] font-mono font-bold tracking-widest uppercase border transition-all ${
+              className={`px-3 py-1.5 text-[10px] font-mono font-bold tracking-widest uppercase border transition-all min-h-[44px] ${
                 activeCategory === cat.key
                   ? "bg-[#111111] text-white border-[#111111]"
                   : "bg-white text-[#111111]/40 border-[#111111]/10 hover:border-[#111111]/20 hover:text-[#111111]/60"
@@ -679,7 +679,7 @@ function CriticalDomainsSection() {
       className="py-16 md:py-24"
     >
       <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-5 sm:px-6 md:px-12 lg:px-20 py-16 md:py-24 rounded-sm">
-      <div className="w-full max-w-[1200px] mx-auto">
+      <div className="w-full max-w-[1400px] mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

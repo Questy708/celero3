@@ -222,17 +222,21 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
 
         {/* Image indicators */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 z-10">
           {heroImages.map((_, i) => (
             <button
               key={i}
               suppressHydrationWarning
               onClick={() => setCurrentImage(i)}
-              className={`h-[2px] transition-all duration-500 ${
-                i === currentImage ? "bg-[#FF4D00] w-10" : "bg-black/30 w-6"
-              }`}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label={`Go to slide ${i + 1}`}
-            />
+            >
+              <span
+                className={`block h-[3px] transition-all duration-500 ${
+                  i === currentImage ? "bg-[#FF4D00] w-12 active:w-14" : "bg-black/30 w-8"
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -373,7 +377,7 @@ function MissionBridge() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex items-end justify-start gap-0 mb-16 md:mb-24"
+          className="relative grid grid-cols-3 md:flex md:items-end md:justify-start md:gap-0 gap-3 md:gap-0 mb-16 md:mb-24"
         >
           {bridgeImages.map((img, i) => (
             <motion.div
@@ -383,10 +387,10 @@ function MissionBridge() {
               transition={{ duration: 0.6, delay: 0.1 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
               className={`relative overflow-hidden bg-[#F5F5F5] shadow-lg ${
                 i === 0
-                  ? "w-[36%] md:w-[32%] aspect-[4/3] z-10"
+                  ? "w-full md:w-[32%] aspect-[4/3] z-10"
                   : i === 1
-                  ? "w-[44%] md:w-[40%] aspect-[4/3] z-30 -mt-3 -ml-[8%] md:-ml-[4%]"
-                  : "w-[36%] md:w-[32%] aspect-[4/3] z-10 -ml-[8%] md:-ml-[4%]"
+                  ? "w-full md:w-[40%] aspect-[4/3] z-30 md:-mt-3 md:-ml-[4%]"
+                  : "w-full md:w-[32%] aspect-[4/3] z-10 md:-ml-[4%]"
               }`}
             >
               <img
@@ -553,7 +557,7 @@ function BentoGrid() {
         <div className="border-b border-white/[0.06]">
           <div className="flex items-center">
             {/* Mission status indicator */}
-            <div className="flex items-center gap-2.5 px-6 md:px-10 py-5 border-r border-white/[0.06] shrink-0">
+            <div className="flex items-center gap-2 px-4 md:gap-2.5 md:px-10 py-3.5 md:py-5 border-r border-white/[0.06] shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D00] animate-pulse" />
               <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60">
                 T-0
@@ -566,14 +570,14 @@ function BentoGrid() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
-                className={`flex items-center gap-2.5 px-4 md:px-7 py-5 shrink-0 ${
+                className={`flex items-center gap-1.5 md:gap-2.5 px-2.5 md:px-7 py-3.5 md:py-5 shrink-0 ${
                   i < countdownUnits.length - 1 ? "border-r border-white/[0.06]" : ""
                 }`}
               >
-                <span className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white leading-none tabular-nums">
+                <span className="text-[18px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white leading-none tabular-nums">
                   {mounted ? pad2(unit.value) : "--"}
                 </span>
-                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
+                <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase text-white/25">
                   {unit.label}
                 </span>
               </motion.div>
@@ -590,7 +594,7 @@ function BentoGrid() {
         {/* ── Thesis + Pillars: side-by-side on desktop ── */}
         <div className="grid lg:grid-cols-12">
           {/* Left: Thesis statement — sticky on scroll */}
-          <div className="lg:col-span-5 px-8 md:px-14 lg:px-20 py-14 md:py-20 lg:py-24 lg:sticky lg:top-[80px] lg:self-start border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+          <div className="lg:col-span-5 px-6 md:px-14 lg:px-20 py-14 md:py-20 lg:py-24 lg:sticky lg:top-[80px] lg:self-start border-b lg:border-b-0 lg:border-r border-white/[0.06]">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -630,7 +634,7 @@ function BentoGrid() {
                     to={pillar.link}
                     className="group block"
                   >
-                    <div className={`relative overflow-hidden px-8 md:px-14 py-10 md:py-14 hover:bg-white/[0.02] transition-colors duration-500 ${
+                    <div className={`relative overflow-hidden px-6 md:px-14 py-10 md:py-14 hover:bg-white/[0.02] transition-colors duration-500 ${
                       i < pillars.length - 1 ? "border-b border-white/[0.06]" : ""
                     }`}>
                       {/* Watermark number */}
@@ -732,7 +736,7 @@ function AnimatedCounter({ value, prefix, suffix, duration = 2 }: {
 
   return (
     <div ref={ref} className="tabular-nums">
-      <span className="text-[48px] sm:text-[56px] md:text-[72px] lg:text-[88px] font-display font-medium tracking-[-0.03em] leading-[1]">
+      <span className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[88px] font-display font-medium tracking-[-0.03em] leading-[1]">
         {prefix}{displayValue}{suffix}
       </span>
     </div>
@@ -846,7 +850,7 @@ function PillarBlock({
             </span>
           </div>
 
-          <h2 className="text-[36px] sm:text-[48px] md:text-[64px] lg:text-[80px] font-display font-medium tracking-[-0.03em] leading-[0.9] mb-4">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[64px] lg:text-[80px] font-display font-medium tracking-[-0.03em] leading-[0.9] mb-4">
             {pillar.heading}
           </h2>
 
@@ -1124,7 +1128,7 @@ function UpcomingEventsSection() {
                     <h3 className="text-[15px] md:text-[17px] font-display font-medium tracking-tight leading-tight mb-1.5 group-hover:text-[#FF4D00] transition-colors">
                       {event.title}
                     </h3>
-                    <div className="flex items-center gap-3 text-[10px] text-[#111111]/40 font-mono font-bold tracking-[0.05em] uppercase">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-[#111111]/40 font-mono font-bold tracking-[0.05em] uppercase">
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#FF4D00]/60" />
                         {event.time}
@@ -1536,7 +1540,7 @@ function NewsletterSection() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-3 px-10 py-4 bg-[#FF4D00] text-white text-[12px] uppercase tracking-[0.12em] font-bold hover:bg-[#FF4D00]/90 transition-colors duration-300 shadow-lg shadow-[#FF4D00]/20 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 min-h-[44px] bg-[#FF4D00] text-white text-[12px] uppercase tracking-[0.12em] font-bold hover:bg-[#FF4D00]/90 transition-colors duration-300 shadow-lg shadow-[#FF4D00]/20 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Subscribing…" : "Subscribe Now"}
                   {!isSubmitting && <ArrowRight className="w-4 h-4" />}

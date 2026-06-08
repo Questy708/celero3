@@ -100,7 +100,7 @@ function FilterDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 mt-1 z-50 bg-white border border-[#111111]/15 shadow-lg min-w-[220px] max-h-[320px] overflow-y-auto scrollbar-thin"
+            className="absolute top-full left-0 mt-1 z-50 bg-white border border-[#111111]/15 shadow-lg min-w-[200px] sm:min-w-[220px] max-h-[320px] overflow-y-auto scrollbar-thin"
           >
             {selected.length > 0 && (
               <button
@@ -836,7 +836,7 @@ export function CareersPage() {
     <div className="bg-white text-[#111111]">
       {/* ── Masthead ─────────────────────────────────────────── */}
       <section>
-        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 pt-16 pb-12 rounded-sm">
+        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 lg:px-20 pt-16 pb-12 rounded-sm">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -845,7 +845,7 @@ export function CareersPage() {
             <p className="text-[10px] font-mono tracking-[0.4em] text-[#FF4D00] mb-4 uppercase">
               xCelero Careers
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight leading-[0.95] mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight leading-[0.95] mb-4">
               A leap in<br />
               <span className="text-[#FF4D00]">human progress.</span>
             </h1>
@@ -871,7 +871,7 @@ export function CareersPage() {
 
       {/* ── Editorial Values Section ──────────────────────────── */}
       <section className="bg-white border-b border-[#111111]/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -945,7 +945,7 @@ export function CareersPage() {
                 <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 py-10 md:py-14 border-t border-[#111111]/10 items-start">
                   {/* Number */}
                   <div className="lg:col-span-2">
-                    <span className="text-[48px] md:text-[64px] lg:text-[80px] font-display font-medium leading-none tracking-tighter text-[#FF4D00]/15 group-hover:text-[#FF4D00]/40 transition-colors duration-500">
+                    <span className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px] font-display font-medium leading-none tracking-tighter text-[#FF4D00]/15 group-hover:text-[#FF4D00]/40 transition-colors duration-500">
                       {value.num}
                     </span>
                   </div>
@@ -972,10 +972,10 @@ export function CareersPage() {
 
       {/* ── Dark Culture Section: Stats + Perks ───────────────── */}
       <section>
-        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 rounded-sm">
+        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 lg:px-20 rounded-sm">
           {/* Stats Row */}
           <div className="py-12 md:py-16 border-b border-white/10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8">
               {[
                 { value: "75%", label: "Promoted from within" },
                 { value: "39", label: "Countries" },
@@ -1093,7 +1093,7 @@ export function CareersPage() {
 
       {/* ── Search & Filters ─────────────────────────────────── */}
       <section className="sticky top-[80px] z-40 bg-white border-b border-[#111111]/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           {/* Search bar */}
           <div className="flex items-center gap-4 py-4 border-b border-[#111111]/8">
             <div className="flex items-center gap-3 flex-grow bg-[#FAFAFA] border border-[#111111]/10 px-4 py-2.5 focus-within:border-[#FF4D00] transition-colors">
@@ -1195,7 +1195,7 @@ export function CareersPage() {
       </section>
 
       {/* ── Active Filter Chips + Count ──────────────────────── */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-12">
+      <section className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2 flex-wrap">
             {hasActiveFilters && (
@@ -1230,7 +1230,7 @@ export function CareersPage() {
       </section>
 
       {/* ── Job Listings ─────────────────────────────────────── */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-12 pb-24">
+      <section className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pb-24">
         {filteredData.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -1282,7 +1282,7 @@ export function CareersPage() {
 
       {/* ── CTA Section ──────────────────────────────────────── */}
       <section>
-        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 py-20 rounded-sm text-center">
+        <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 lg:px-20 py-20 rounded-sm text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

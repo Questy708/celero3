@@ -182,14 +182,14 @@ function RoutesBridge() {
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-4 flex flex-col gap-3"
           >
-            <div className="aspect-[4/3] overflow-hidden bg-[#F5F5F5]">
+            <div className="aspect-[3/2] sm:aspect-[4/3] overflow-hidden bg-[#F5F5F5] max-h-[200px] sm:max-h-none">
               <img
                 src={routesBridgeImages[1].src}
                 alt={routesBridgeImages[1].alt}
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
-            <div className="aspect-[4/3] overflow-hidden bg-[#F5F5F5]">
+            <div className="aspect-[3/2] sm:aspect-[4/3] overflow-hidden bg-[#F5F5F5] max-h-[200px] sm:max-h-none">
               <img
                 src={routesBridgeImages[2].src}
                 alt={routesBridgeImages[2].alt}
@@ -590,7 +590,7 @@ function PreambleSection() {
                 { value: "300", label: "Years" },
                 { value: "1", label: "Covenant" },
               ].map((stat) => (
-                <div key={stat.label} className="bg-[#0A0A0A] px-4 py-5 text-center">
+                <div key={stat.label} className="bg-[#0A0A0A] px-2 sm:px-4 py-4 sm:py-5 text-center">
                   <span className="text-[24px] md:text-[30px] font-display font-medium tracking-[-0.02em] text-white leading-none">
                     {stat.value}
                   </span>
@@ -756,8 +756,8 @@ function PreambleSection() {
                 { value: "6", label: "Legs" },
                 { value: "10–100", label: "XCitizens" },
               ].map((stat) => (
-                <div key={stat.label} className="bg-[#0A0A0A] px-5 py-6">
-                  <span className="text-[28px] md:text-[34px] font-display font-medium tracking-[-0.03em] text-[#FF4D00] leading-none">
+                <div key={stat.label} className="bg-[#0A0A0A] px-3 sm:px-5 py-4 sm:py-6">
+                  <span className="text-[22px] sm:text-[28px] md:text-[34px] font-display font-medium tracking-[-0.03em] text-[#FF4D00] leading-none">
                     {stat.value}
                   </span>
                   <span className="block text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mt-2">
@@ -961,7 +961,10 @@ function BlueprintMap({
 
       {/* Map container with zoom */}
       <div
-        className="relative w-full overflow-hidden bg-white"
+        className="w-full overflow-x-auto bg-white [-webkit-overflow-scrolling:touch]"
+      >
+      <div
+        className="relative min-w-[600px] md:min-w-0"
         style={mapTransform}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
@@ -1100,9 +1103,9 @@ function BlueprintMap({
                   aria-label={`View ${loc.name}`}
                 />
 
-                {/* Always-visible label */}
+                {/* Always-visible label — hidden on small screens to prevent overlap */}
                 <div
-                  className={`absolute bg-[#111111] text-white font-mono text-[8px] md:text-[10px] font-bold tracking-[0.15em] px-2 py-1 md:px-3 md:py-1.5 whitespace-nowrap top-1/2 -translate-y-1/2 pointer-events-none shadow-sm transition-all duration-200 ${
+                  className={`hidden sm:block absolute bg-[#111111] text-white font-mono text-[8px] md:text-[10px] font-bold tracking-[0.15em] px-2 py-1 md:px-3 md:py-1.5 whitespace-nowrap top-1/2 -translate-y-1/2 pointer-events-none shadow-sm transition-all duration-200 ${
                     isActive ? "bg-black" : ""
                   } ${loc.labelPos === "left" ? "right-full mr-2 md:mr-3" : "left-full ml-2 md:ml-3"}`}
                 >
@@ -1121,7 +1124,7 @@ function BlueprintMap({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30, transition: { duration: 0.2 } }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-x-2 bottom-2 sm:inset-x-auto sm:left-auto top-4 bottom-4 sm:right-4 w-auto sm:w-72 md:w-80 lg:w-96 max-h-[60vh] sm:max-h-none bg-white border border-[#111111]/10 shadow-2xl p-5 sm:p-6 md:p-8 flex flex-col z-50 overflow-y-auto rounded sm:rounded-none"
+              className="absolute inset-x-0 bottom-0 top-auto sm:inset-x-auto sm:left-auto sm:top-4 sm:bottom-4 sm:right-4 w-full sm:w-72 md:w-80 lg:w-96 max-h-[85vh] sm:max-h-none bg-white border border-[#111111]/10 shadow-2xl p-5 sm:p-6 md:p-8 flex flex-col z-50 overflow-y-auto rounded-t-lg sm:rounded-none"
             >
               <button
                 onClick={() => setActiveLocId(null)}
@@ -1210,6 +1213,7 @@ function BlueprintMap({
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
       </div>
 
       {/* Legend */}
@@ -2278,9 +2282,9 @@ function PricingSection() {
                 className="border border-[#111111]/10 hover:border-[#111111]/20 transition-colors overflow-hidden"
                 style={{ borderLeftWidth: 4, borderLeftColor: leg.color }}
               >
-                <div className="grid lg:grid-cols-[340px_1fr] gap-0">
+                <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-0">
                   {/* Left: Arc info */}
-                  <div className="p-6 md:p-8 lg:border-r border-[#111111]/10 flex flex-col">
+                  <div className="p-5 sm:p-6 md:p-8 lg:border-r border-b lg:border-b-0 border-[#111111]/10 flex flex-col">
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-3 h-3 shrink-0"
@@ -2337,7 +2341,7 @@ function PricingSection() {
                     {/* CTA */}
                     <a
                       href={`#leg-${leg.id}`}
-                      className="mt-auto inline-flex items-center justify-center gap-2 border px-5 py-2.5 text-xs font-mono font-bold tracking-wider uppercase transition-colors hover:bg-[#111111] hover:text-white"
+                      className="mt-auto w-full lg:w-auto inline-flex items-center justify-center gap-2 border px-5 py-3 min-h-[44px] text-xs font-mono font-bold tracking-wider uppercase transition-colors hover:bg-[#111111] hover:text-white"
                       style={{ borderColor: leg.color, color: leg.color }}
                     >
                       Explore This Arc
@@ -2350,7 +2354,7 @@ function PricingSection() {
                     <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-[#111111]/30 mb-4">
                       What&apos;s Covered
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mb-6">
                       {coverageItems.map((item) => (
                         <div key={item.key}>
                           <div className="flex items-center gap-2 mb-1">
@@ -2411,7 +2415,7 @@ function PricingSection() {
               </span>
             </div>
 
-            <div className="grid lg:grid-cols-[380px_1fr] gap-8 lg:gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8 lg:gap-16 items-start">
               {/* Left: Info + pricing */}
               <div>
                 <h3 className="text-[28px] sm:text-[36px] md:text-[48px] font-display font-medium tracking-[-0.02em] leading-[0.95] mb-4">
@@ -2453,7 +2457,7 @@ function PricingSection() {
 
                 <button
                   suppressHydrationWarning
-                  className="inline-flex items-center gap-2 bg-[#FF4D00] hover:bg-[#FF4D00]/90 text-white px-8 py-4 text-sm font-mono font-bold tracking-wider uppercase transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FF4D00] hover:bg-[#FF4D00]/90 text-white px-8 py-4 min-h-[44px] text-sm font-mono font-bold tracking-wider uppercase transition-colors"
                 >
                   Book for the Full Route
                   <ArrowRight className="w-4 h-4" />
@@ -2546,7 +2550,7 @@ function InvitationSection() {
         >
           <Link
             to="/programs"
-            className="group flex items-center justify-between border border-white/20 px-8 py-6 hover:bg-white/5 transition-colors"
+            className="group flex items-center justify-between border border-white/20 px-5 sm:px-8 py-5 sm:py-6 min-h-[44px] hover:bg-white/5 transition-colors"
           >
             <div>
               <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mb-2">
@@ -2563,7 +2567,7 @@ function InvitationSection() {
 
           <Link
             to="/capital"
-            className="group flex items-center justify-between border border-white/20 px-8 py-6 hover:bg-white/5 transition-colors"
+            className="group flex items-center justify-between border border-white/20 px-5 sm:px-8 py-5 sm:py-6 min-h-[44px] hover:bg-white/5 transition-colors"
           >
             <div>
               <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mb-2">
@@ -2580,7 +2584,7 @@ function InvitationSection() {
 
           <Link
             to="/join"
-            className="group flex items-center justify-between border border-white/20 px-8 py-6 hover:bg-white/5 transition-colors"
+            className="group flex items-center justify-between border border-white/20 px-5 sm:px-8 py-5 sm:py-6 min-h-[44px] hover:bg-white/5 transition-colors"
           >
             <div>
               <div className="text-[10px] font-mono font-bold tracking-[0.15em] uppercase text-white/40 mb-2">

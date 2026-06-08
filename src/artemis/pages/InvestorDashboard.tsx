@@ -278,7 +278,7 @@ function PortfolioBreakdown() {
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.08, ease: "easeOut" }}
                   className="flex items-center gap-4"
                 >
-                  <span className="text-[13px] font-medium text-[#111111]/60 w-[140px] sm:w-[160px] shrink-0 text-right">
+                  <span className="text-[13px] font-medium text-[#111111]/60 w-[100px] sm:w-[140px] md:w-[160px] shrink-0 text-right">
                     {item.label}
                   </span>
                   <div className="flex-1 h-8 bg-[#111111]/5 relative overflow-hidden">
@@ -315,7 +315,7 @@ function PortfolioBreakdown() {
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.08, ease: "easeOut" }}
                   className="flex items-center gap-4"
                 >
-                  <span className="text-[13px] font-medium text-[#111111]/60 w-[140px] sm:w-[160px] shrink-0 text-right">
+                  <span className="text-[13px] font-medium text-[#111111]/60 w-[100px] sm:w-[140px] md:w-[160px] shrink-0 text-right">
                     {item.label}
                   </span>
                   <div className="flex-1 h-8 bg-[#111111]/5 relative overflow-hidden">

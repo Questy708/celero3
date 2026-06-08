@@ -75,7 +75,7 @@ function CategoryFilter({
   return (
     <section
       ref={ref}
-      className="py-6 md:py-8 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10 bg-[#FAFAFA]"
+      className="py-6 md:py-8 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10 bg-[#FAFAFA]"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         <motion.div
@@ -88,7 +88,7 @@ function CategoryFilter({
             <button
               key={cat}
               onClick={() => onChange(cat)}
-              className={`px-4 py-2 text-[11px] font-mono font-bold tracking-[0.12em] uppercase transition-all border ${
+              className={`px-4 py-2.5 text-[11px] font-mono font-bold tracking-[0.12em] uppercase transition-all border min-h-[44px] ${
                 activeCategory === cat
                   ? "bg-[#111111] text-white border-[#111111]"
                   : "bg-white text-[#111111]/40 border-[#111111]/10 hover:border-[#111111]/30 hover:text-[#111111]/70"
@@ -118,7 +118,7 @@ function FeaturedArticle({ article }: { article: typeof insightsData[0] }) {
   return (
     <section
       ref={ref}
-      className="py-16 md:py-24 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10"
+      className="py-16 md:py-24 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         <motion.div
@@ -203,7 +203,7 @@ function ArticleGrid({ articles }: { articles: typeof insightsData }) {
   return (
     <section
       ref={ref}
-      className="py-16 md:py-24 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10 bg-[#FAFAFA]"
+      className="py-16 md:py-24 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10 bg-[#FAFAFA]"
     >
       <div className="w-full max-w-[1400px] mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

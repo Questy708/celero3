@@ -57,14 +57,14 @@ export function Manifesto() {
     <div className="bg-[#FAFAFA] text-[#111111]">
       <ReadingProgressBar />
 
-      <section className="pt-32 pb-24 px-6 md:px-12 border-b border-[#111111]/10">
-        <div ref={heroRef} className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-end">
+      <section className="pt-32 pb-24 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
+        <div ref={heroRef} className="w-full max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 items-end">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-[60px] md:text-[90px] leading-[0.9] font-display font-medium tracking-tight mb-12 uppercase">
+            <h1 className="text-[36px] sm:text-[60px] md:text-[90px] leading-[0.9] font-display font-medium tracking-tight mb-12 uppercase">
               The<br />Manifesto.
             </h1>
             <p className="text-xl md:text-2xl leading-relaxed text-[#111111]/60 font-medium max-w-xl text-balance">
@@ -86,7 +86,7 @@ export function Manifesto() {
         </div>
       </section>
 
-      <section className="py-24 px-6 md:px-12">
+      <section className="py-24 px-6 md:px-12 lg:px-20">
         <div className="w-full max-w-3xl mx-auto space-y-32">
           
           <div className="border-t border-[#111111]/10 pt-8">

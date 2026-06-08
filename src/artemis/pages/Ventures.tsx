@@ -81,7 +81,7 @@ function CaseStudiesSection() {
 
   return (
     <section className="bg-white border-t border-[#111111]/10">
-      <div ref={sectionRef} className="px-6 md:px-12 w-full max-w-7xl mx-auto py-20 md:py-28">
+      <div ref={sectionRef} className="px-6 md:px-12 lg:px-20 w-full max-w-[1400px] mx-auto py-20 md:py-28">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -348,8 +348,8 @@ export function Ventures() {
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen pb-32">
       {/* Hero Section */}
-      <section className="pt-40 pb-20 px-6 md:px-12 w-full max-w-7xl mx-auto">
-        <h1 className="text-[50px] md:text-[80px] lg:text-[100px] leading-[0.9] font-display font-medium tracking-tight mb-8">
+      <section className="pt-24 sm:pt-32 md:pt-40 pb-20 px-6 md:px-12 lg:px-20 w-full max-w-[1400px] mx-auto">
+        <h1 className="text-[32px] sm:text-[50px] md:text-[80px] lg:text-[100px] leading-[0.9] font-display font-medium tracking-tight mb-8">
           We invest in companies long before anyone knows their name.
         </h1>
         <div className="text-xl md:text-2xl text-[#111111]/50 font-medium mb-20">
@@ -377,7 +377,7 @@ export function Ventures() {
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-2 rounded-full text-[13px] font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-[13px] font-medium transition-colors min-h-[44px] ${
                   activeCategory === cat
                     ? "bg-[#111111] text-white"
                     : "bg-white border border-[#111111]/10 text-[#111111]/60 hover:bg-[#111111]/5 hover:text-[#111111]"
@@ -391,7 +391,7 @@ export function Ventures() {
       </section>
 
       {/* Ventures Grid */}
-      <section className="px-6 md:px-12 w-full max-w-7xl mx-auto">
+      <section className="px-6 md:px-12 lg:px-20 w-full max-w-[1400px] mx-auto">
         {/* Count display */}
         <div className="mb-6 flex items-center justify-between">
           <span className="text-[11px] font-mono uppercase tracking-widest text-[#111111]/40">
@@ -400,7 +400,7 @@ export function Ventures() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {visibleVentures.map((venture) => (
             <VentureCard
               key={venture.id}

@@ -197,7 +197,7 @@ export function VentureDetail() {
   if (!venture) {
     return (
       <div className="bg-[#FAFAFA] min-h-screen text-[#111111] flex flex-col items-center justify-center">
-        <h1 className="text-[60px] font-display font-medium tracking-tight mb-8">
+        <h1 className="text-[36px] sm:text-[60px] font-display font-medium tracking-tight mb-8">
           Not Found
         </h1>
         <button
@@ -215,8 +215,8 @@ export function VentureDetail() {
   return (
     <div className="bg-[#FAFAFA] text-[#111111] min-h-screen">
       {/* Back Link */}
-      <section className="pt-32 pb-0 px-6 md:px-12">
-        <div className="w-full max-w-7xl mx-auto">
+      <section className="pt-32 pb-0 px-6 md:px-12 lg:px-20">
+        <div className="w-full max-w-[1400px] mx-auto">
           <Link
             to="/ventures"
             className="text-[11px] font-mono uppercase tracking-[0.1em] text-[#111111]/50 hover:text-[#FF4D00] flex items-center gap-2 mb-12 w-fit transition-colors"
@@ -227,8 +227,8 @@ export function VentureDetail() {
       </section>
 
       {/* Hero Section */}
-      <section className="pb-16 px-6 md:px-12 border-b border-[#111111]/10">
-        <div className="w-full max-w-7xl mx-auto">
+      <section className="pb-16 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
+        <div className="w-full max-w-[1400px] mx-auto">
           <div className="flex flex-wrap gap-3 mb-8">
             <span className="px-4 py-2 border border-[#111111] bg-[#FF4D00]/10 text-[#FF4D00] text-[11px] font-mono tracking-widest uppercase font-bold">
               {venture.vertical}
@@ -241,15 +241,15 @@ export function VentureDetail() {
             </span>
           </div>
 
-          <h1 className="text-[50px] md:text-[80px] lg:text-[100px] leading-[0.9] font-display font-medium tracking-tight mb-6 uppercase text-balance">
+          <h1 className="text-[32px] sm:text-[50px] md:text-[80px] lg:text-[100px] leading-[0.9] font-display font-medium tracking-tight mb-6 uppercase text-balance">
             {venture.name}
           </h1>
         </div>
       </section>
 
       {/* Two-Column Content */}
-      <section className="px-6 md:px-12 py-16">
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
+      <section className="px-6 md:px-12 lg:px-20 py-16">
+        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
 
           {/* Left Column, Main Content */}
           <div className="md:col-span-8">
@@ -307,7 +307,7 @@ export function VentureDetail() {
             </div>
 
             {/* CTA Section */}
-            <div className="pt-16 grid sm:grid-cols-2 gap-4">
+            <div className="pt-16 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 to="/join"
                 className="group block bg-[#FF4D00] text-white p-8 md:p-10 transition-all hover:brightness-110"

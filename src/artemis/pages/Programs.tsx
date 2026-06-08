@@ -88,7 +88,7 @@ function HeroSection() {
           </span>
 
           <h1 className="text-[36px] sm:text-[48px] md:text-[64px] lg:text-[80px] font-display font-medium tracking-[-0.03em] leading-[0.9] mb-6">
-            The engine of
+            The pillar of
             <br />
             transformation
           </h1>
@@ -329,6 +329,7 @@ function CTASection() {
   return (
     <section
       ref={ref}
+      className="px-6 md:px-12 lg:px-20"
     >
       <div className="w-full max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 lg:px-20 py-16 md:py-24 rounded-sm grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Left: CTA heading + buttons */}

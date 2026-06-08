@@ -740,14 +740,14 @@ function WhoWeBackSection() {
                     <div
                       className={`w-1 rounded-full transition-all duration-300 ${
                         activeTrait === i
-                          ? "h-[60px] md:h-[80px] bg-[#FF4D00]"
-                          : "h-[60px] md:h-[80px] bg-[#111111]/10 group-hover:bg-[#111111]/20"
+                          ? "h-[40px] sm:h-[60px] md:h-[80px] bg-[#FF4D00]"
+                          : "h-[40px] sm:h-[60px] md:h-[80px] bg-[#111111]/10 group-hover:bg-[#111111]/20"
                       }`}
                     />
                   </div>
                   {/* Number */}
                   <span
-                    className={`text-[60px] md:text-[80px] lg:text-[120px] font-display font-medium leading-none transition-all duration-300 ${
+                    className={`text-[36px] sm:text-[60px] md:text-[80px] lg:text-[120px] font-display font-medium leading-none transition-all duration-300 ${
                       activeTrait === i
                         ? "text-[#111111]"
                         : "text-[#111111]/15 group-hover:text-[#111111]/30"

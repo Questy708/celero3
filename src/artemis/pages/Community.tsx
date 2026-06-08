@@ -339,7 +339,7 @@ function HeroSection() {
                 <span className="italic text-[#FF4D00]">civilization</span>.
               </h1>
               <p className="text-[16px] md:text-[18px] lg:text-[20px] leading-[1.6] text-white/50 font-medium max-w-2xl">
-                XCitizens are the fourth engine — 1,200+ operators, founders,
+                XCitizens are the fourth pillar — 1,200+ operators, founders,
                 investors, and mentors across 190 hubs and 39 countries. Not a
                 network. A bloodstream.
               </p>
@@ -406,7 +406,7 @@ function GalleryCollage() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[180px] md:auto-rows-[200px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[200px]">
           {galleryImages.map((img, i) => (
             <motion.div
               key={i}
@@ -509,9 +509,7 @@ function PillarsSection() {
                   delay: 0.15 + i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`px-6 md:px-8 py-10 md:py-12 border-b sm:border-b-0 border-[#111111]/10 ${
-                  i > 0 ? "lg:border-l border-[#111111]/10" : ""
-                } ${i >= 2 ? "sm:border-t lg:border-t-0" : ""}`}
+                className={`px-6 md:px-8 py-10 md:py-12 border-b sm:border-b-0 border-[#111111]/10 ${i % 2 === 1 ? "sm:border-l" : ""} ${i >= 2 ? "sm:border-t lg:border-t-0" : ""} ${i > 0 ? "lg:border-l" : ""}`}
               >
                 <div className="w-10 h-10 flex items-center justify-center border border-[#111111]/10 mb-5">
                   <PIcon className="w-4.5 h-4.5 text-[#FF4D00]" />
@@ -584,7 +582,7 @@ function ArchetypeCardsSection() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] leading-[1.08] font-display font-medium tracking-[-0.03em] text-[#111111]/90">
               Four transformations. One{" "}
-              <span className="italic text-[#FF4D00]">engine</span>.
+              <span className="italic text-[#FF4D00]">pillar</span>.
             </h2>
             <p className="text-[14px] md:text-[15px] leading-[1.7] text-[#111111]/40 font-medium max-w-sm">
               Remove one, and the whole system slows. Founders without operators
@@ -609,7 +607,7 @@ function ArchetypeCardsSection() {
                 }}
                 className="bg-[#0A0A0A] rounded-sm overflow-hidden group"
               >
-                <div className="px-6 md:px-7 pt-8 md:pt-10 pb-6 border-b border-white/[0.06]">
+                <div className="px-5 md:px-7 pt-8 md:pt-10 pb-6 border-b border-white/[0.06]">
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/70">
                       {arch.callsign}
@@ -618,16 +616,16 @@ function ArchetypeCardsSection() {
                       <AIcon className="w-4 h-4 text-white/25 group-hover:text-[#FF4D00] transition-colors duration-300" />
                     </div>
                   </div>
-                  <p className="text-[14px] md:text-[15px] font-mono tracking-[0.05em] text-white/50">
+                  <p className="text-[13px] md:text-[15px] font-mono tracking-[0.05em] text-white/50">
                     {arch.transforms}
                   </p>
                 </div>
-                <div className="px-6 md:px-7 py-6 md:py-8 space-y-5">
+                <div className="px-5 md:px-7 py-6 md:py-8 space-y-5">
                   <div>
                     <span className="text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-white/20 mb-2 block">
                       Feeds in
                     </span>
-                    <p className="text-[12px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
+                    <p className="text-[11px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
                       {arch.feeds}
                     </p>
                   </div>
@@ -636,7 +634,7 @@ function ArchetypeCardsSection() {
                     <span className="text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/30 mb-2 block">
                       Draws out
                     </span>
-                    <p className="text-[12px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
+                    <p className="text-[11px] md:text-[13px] leading-[1.7] text-white/35 font-medium">
                       {arch.draws}
                     </p>
                   </div>
@@ -707,8 +705,8 @@ function CadenceEventsSection() {
           {/* Cadence timeline */}
           <div className="mb-12 md:mb-16">
             <div className="relative">
-              <div className="absolute top-4 left-0 right-0 h-px bg-[#111111]/10" />
-              <div className="grid grid-cols-4 gap-4 md:gap-6">
+              <div className="absolute top-4 left-0 right-0 h-px bg-[#111111]/10 hidden sm:block" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
                 {cadenceItems.map((c, i) => {
                   const CIcon = c.icon;
                   return (
@@ -796,7 +794,7 @@ function CadenceEventsSection() {
                     {event.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 text-[10px] text-white/30 font-medium">
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] text-white/30 font-medium">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
                         {event.location}
@@ -832,7 +830,7 @@ function CadenceEventsSection() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 onClick={() => setSelectedEvent(event)}
-                className="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-[320px] snap-start border border-[#111111]/10 bg-white p-5 md:p-6 hover:border-[#FF4D00]/30 hover:shadow-md transition-all duration-300 cursor-pointer"
+                className="group flex-shrink-0 w-[260px] sm:w-[300px] md:w-[320px] snap-start border border-[#111111]/10 bg-white p-5 md:p-6 hover:border-[#FF4D00]/30 hover:shadow-md transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span
@@ -956,7 +954,7 @@ function EventDetailModal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center sm:p-4"
       onClick={onClose}
     >
       <motion.div
@@ -964,12 +962,12 @@ function EventDetailModal({
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.92 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="bg-white text-[#111111] max-w-lg w-full max-h-[90vh] overflow-y-auto relative"
+        className="bg-white text-[#111111] w-full sm:max-w-lg sm:rounded-sm max-h-[90vh] sm:max-h-[90vh] overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-black/30 text-white hover:bg-black/60 transition-colors z-10"
+          className="absolute top-3 right-3 w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center bg-black/30 text-white hover:bg-black/60 transition-colors z-10"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
@@ -1013,13 +1011,13 @@ function EventDetailModal({
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   value={rsvpEmail}
                   onChange={(e) => setRsvpEmail(e.target.value)}
                   placeholder="Your email"
-                  className="flex-1 px-4 py-3 border border-[#111111]/15 text-[13px] font-medium placeholder:text-[#111111]/30 focus:outline-none focus:border-[#FF4D00] transition-colors"
+                  className="w-full px-4 py-3 border border-[#111111]/15 text-[13px] font-medium placeholder:text-[#111111]/30 focus:outline-none focus:border-[#FF4D00] transition-colors"
                 />
                 <button
                   onClick={handleRSVP}
@@ -1039,8 +1037,23 @@ function EventDetailModal({
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   6. DISPATCHES — Infinite marquee loop (left → right)
+   6. DISPATCHES — Infinite CSS marquee (left → right, pause on hover)
    ══════════════════════════════════════════════════════════════════════════ */
+
+/* CSS keyframes for the infinite marquee — defined inline via a style tag */
+const marqueeStyle = `
+@keyframes marquee {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-track {
+  animation: marquee 35s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+`;
+
 function DispatchesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -1049,77 +1062,70 @@ function DispatchesSection() {
   const loopedDispatches = [...dispatches, ...dispatches];
 
   return (
-    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 bg-[#FAFAFA] overflow-hidden">
-      <div className="max-w-[1400px] mx-auto">
+    <section ref={ref} className="py-20 md:py-28 px-6 md:px-12 lg:px-20 overflow-hidden">
+      {/* Inject CSS keyframes */}
+      <style dangerouslySetInnerHTML={{ __html: marqueeStyle }} />
+
+      <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10 md:mb-14"
+          className="px-8 md:px-12 lg:px-16 pt-14 md:pt-20 pb-10 md:pb-14"
         >
-          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/70 mb-4 block">
+          <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]/60 mb-4 block">
             Signal from the Field
           </span>
-          <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-[#111111]/90">
+          <h2 className="text-[22px] sm:text-[28px] md:text-[36px] leading-[1.1] font-display font-medium tracking-[-0.03em] text-white/90">
             Not testimonials.{" "}
             <span className="italic text-[#FF4D00]">Readings</span>.
           </h2>
         </motion.div>
-      </div>
 
-      {/* Infinite marquee — two identical rows offset for seamless loop */}
-      <div className="relative">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+        {/* Infinite marquee — CSS animation, pause on hover */}
+        <div className="relative group/marquee">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-        <div className="flex overflow-hidden">
-          <motion.div
-            animate={{ x: ["-50%", 0] }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 30,
-                ease: "linear",
-              },
-            }}
-            className="flex gap-5 shrink-0"
-          >
-            {loopedDispatches.map((d, i) => (
-              <div
-                key={`${d.name}-${i}`}
-                className="flex-shrink-0 w-[340px] sm:w-[400px] md:w-[460px] bg-white border border-[#111111]/10 p-6 md:p-8 hover:border-[#111111]/20 transition-colors group"
-              >
-                <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60 mb-5">
-                  {d.tag}
-                </span>
-                <p className="text-[16px] md:text-[18px] leading-[1.55] font-display font-medium tracking-[-0.01em] text-[#111111]/70 mb-8">
-                  &ldquo;{d.signal}&rdquo;
-                </p>
-                <div className="mt-auto pt-6 border-t border-[#111111]/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#FF4D00]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[11px] font-bold text-[#FF4D00]">
-                        {d.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="text-[13px] font-display font-medium text-[#111111]/80">
-                        {d.name}
+          <div className="flex overflow-hidden pb-14 md:pb-20">
+            <div className="marquee-track flex gap-5 shrink-0">
+              {loopedDispatches.map((d, i) => (
+                <div
+                  key={`${d.name}-${i}`}
+                  className="flex-shrink-0 w-[300px] sm:w-[360px] md:w-[420px] border border-white/[0.06] p-6 md:p-8 hover:border-white/[0.12] transition-colors group/card"
+                >
+                  <span className="inline-block text-[8px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/50 mb-5">
+                    {d.tag}
+                  </span>
+                  <p className="text-[15px] md:text-[17px] leading-[1.55] font-display font-medium tracking-[-0.01em] text-white/55 mb-8">
+                    &ldquo;{d.signal}&rdquo;
+                  </p>
+                  <div className="mt-auto pt-5 border-t border-white/[0.06]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-[#FF4D00]/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-[11px] font-bold text-[#FF4D00]">
+                          {d.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </span>
                       </div>
-                      <div className="text-[11px] text-[#111111]/40 font-medium">
-                        {d.role} · {d.location}
+                      <div>
+                        <div className="text-[13px] font-display font-medium text-white/70 group-hover/card:text-white transition-colors">
+                          {d.name}
+                        </div>
+                        <div className="text-[11px] text-white/30 font-medium">
+                          {d.role} · {d.location}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1211,11 +1217,11 @@ function TownSquareSection() {
               }}
             >
               {/* Forum header */}
-              <div className="flex items-center gap-2.5 mb-5 pb-4 border-b border-[#111111]/10">
-                <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center">
+              <div className="flex flex-wrap items-center gap-2.5 mb-5 pb-4 border-b border-[#111111]/10">
+                <div className="w-8 h-8 bg-[#FF4D00] flex items-center justify-center flex-shrink-0">
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-[14px] font-display font-medium tracking-tight">
                     Town Square
                   </div>
@@ -1223,10 +1229,10 @@ function TownSquareSection() {
                     XCitizen Forum
                   </div>
                 </div>
-                <div className="ml-auto flex items-center gap-2 text-[10px] text-[#111111]/25 font-mono font-bold">
+                <div className="ml-auto flex items-center gap-2 text-[9px] sm:text-[10px] text-[#111111]/25 font-mono font-bold">
                   <span>1,200+ members</span>
-                  <span>·</span>
-                  <span>6 communities</span>
+                  <span className="hidden sm:inline">·</span>
+                  <span className="hidden sm:inline">6 communities</span>
                 </div>
               </div>
 
@@ -1301,10 +1307,10 @@ function TownSquareSection() {
               </div>
 
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+              <div className="flex flex-col gap-3">
                 <Link
                   to="/townsquare"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-[0.12em] hover:bg-[#FF4D00]/90 transition-colors w-full sm:w-auto"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   Enter Town Square

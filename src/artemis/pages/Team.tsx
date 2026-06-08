@@ -129,7 +129,7 @@ function TeamGrid() {
                 setActiveCategory(cat.key);
                 setExpandedId(null);
               }}
-              className={`px-4 py-2 text-[11px] font-mono font-bold tracking-widest uppercase border transition-all ${
+              className={`px-4 py-2 text-[11px] font-mono font-bold tracking-widest uppercase border transition-all min-h-[44px] ${
                 activeCategory === cat.key
                   ? "bg-[#111111] text-white border-[#111111]"
                   : "bg-white text-[#111111]/50 border-[#111111]/10 hover:border-[#111111]/30"

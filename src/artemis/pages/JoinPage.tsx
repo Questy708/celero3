@@ -332,7 +332,7 @@ function ProcessSection() {
       ref={ref}
       className="py-16 md:py-24 px-6 md:px-12 lg:px-20 bg-[#FAFAFA] border-b border-[#111111]/10"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1400px] mx-auto">
         {/* Centered header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -356,7 +356,7 @@ function ProcessSection() {
         </motion.div>
 
         {/* 3-step grid */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <div className="grid md:grid-cols-3 gap-0">
             {processSteps.map((step, i) => (
               <ProcessCard key={i} step={step} index={i} />

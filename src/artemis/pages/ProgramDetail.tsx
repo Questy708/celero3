@@ -160,7 +160,7 @@ export function ProgramDetail() {
       <section className="pt-32 pb-16 px-6 lg:px-12 w-full max-w-[1400px] mx-auto">
         <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="flex-1">
-            <h1 className="text-5xl md:text-7xl lg:text-[100px] font-display font-medium uppercase leading-[0.9] text-[#1B1C1E] tracking-tighter mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[100px] font-display font-medium uppercase leading-[0.9] text-[#1B1C1E] tracking-tighter mb-6">
               {program.title}
             </h1>
             <p className="text-lg text-[#1B1C1E]/60 leading-relaxed max-w-xl">
@@ -223,7 +223,7 @@ export function ProgramDetail() {
            {(program.trackRecord || []).map((stat, i) => (
              <div key={i} className="border-l border-[#1B1C1E]/10 pl-6 space-y-4">
                <p className="font-mono text-sm tracking-widest text-[#1B1C1E]/60 uppercase">{stat.label}</p>
-               <p className="text-5xl lg:text-7xl font-display font-medium tracking-tighter">
+               <p className="text-3xl sm:text-5xl lg:text-7xl font-display font-medium tracking-tighter">
                  {stat.value}
                </p>
              </div>
@@ -261,7 +261,7 @@ export function ProgramDetail() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {program.applicationCycles!.map((cycle, i) => (
                 <div 
                   key={i} 
@@ -364,7 +364,7 @@ export function ProgramDetail() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {program.whatYouGet!.map((item, i) => {
               const IconComponent = iconMap[item.icon || 'Shield'] || Shield;
               return (
@@ -401,7 +401,7 @@ export function ProgramDetail() {
                 <span className="text-[#FF4D00] text-[10px] mr-2">&#9679;</span>
                 <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#1B1C1E]/60">The Program Journey</span>
               </div>
-              <h2 className="text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
                 YOUR PATH
               </h2>
               <p className="text-lg text-[#1B1C1E]/60 max-w-lg font-medium leading-relaxed">
@@ -491,7 +491,7 @@ export function ProgramDetail() {
                 </h2>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 mb-20 md:mb-28">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 mb-20 md:mb-28">
                  {program.features.map((feature, i) => {
                    const IconComponent = iconMap[feature.icon || 'Shield'] || Shield;
                    return (
@@ -584,7 +584,7 @@ export function ProgramDetail() {
                <span className="text-[#FF4D00] text-[10px] mr-2">&#9679;</span>
                <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#1B1C1E]/60">Opportunity Pipeline</span>
              </div>
-             <h2 className="text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
+             <h2 className="text-3xl sm:text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
                STARTUP IDEAS
              </h2>
              <p className="text-lg text-[#1B1C1E]/60 max-w-lg font-medium leading-relaxed">
@@ -592,9 +592,9 @@ export function ProgramDetail() {
              </p>
            </div>
 
-           <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#1B1C1E]/10 bg-[#FAFAFA]">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#1B1C1E]/10 bg-[#FAFAFA]">
               {program.ideas.map((idea, i) => (
-                 <div key={i} className="p-8 border-r border-b border-[#1B1C1E]/10 flex flex-col transition-colors duration-300 cursor-pointer group min-h-[400px] hover:bg-white hover:shadow-xl relative z-10 bg-[#FAFAFA]">
+                 <div key={i} className="p-6 sm:p-8 border-r border-b border-[#1B1C1E]/10 flex flex-col transition-colors duration-300 cursor-pointer group min-h-[280px] sm:min-h-[400px] hover:bg-white hover:shadow-xl relative z-10 bg-[#FAFAFA]">
                     <div className="flex items-center gap-4 mb-24">
                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0 border border-[#1B1C1E]/10">
                           <img src={idea.partnerImage || `https://i.pravatar.cc/100?img=${i+10}`} alt={idea.partner} className="w-full h-full object-cover" />
@@ -629,7 +629,7 @@ export function ProgramDetail() {
                <span className="text-[#FF4D00] text-[10px] mr-2">&#9679;</span>
                <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#1B1C1E]/60">Portfolio</span>
              </div>
-              <h2 className="text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-[64px] lg:text-[80px] font-display font-medium leading-[0.9] text-[#1B1C1E] uppercase tracking-tighter mb-4">
                  FROM IDEA TO COMPANY
               </h2>
               <p className="text-lg text-[#1B1C1E]/60 max-w-md font-medium leading-relaxed">
@@ -637,7 +637,7 @@ export function ProgramDetail() {
               </p>
            </div>
 
-           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {programVentures.map((venture) => venture && (
                  <Link key={venture.id} to={`/ventures/${venture.id}`} className="group block">
                    <div className="relative bg-[#111111] text-white overflow-hidden transition-all duration-200 group-hover:scale-[1.02] group-hover:ring-1 group-hover:ring-[#FF4D00] group-hover:brightness-110">
@@ -731,7 +731,7 @@ export function ProgramDetail() {
                       <span className="text-[#FF4D00] text-[10px] mr-2">&#9679;</span>
                       <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#1B1C1E]/60">FAQ</span>
                     </div>
-                    <h2 className="text-6xl md:text-[80px] lg:text-[100px] font-display font-medium uppercase tracking-tighter leading-[0.8] mb-12">ALL YOU NEED<br/>TO KNOW</h2>
+                    <h2 className="text-4xl sm:text-6xl md:text-[80px] lg:text-[100px] font-display font-medium uppercase tracking-tighter leading-[0.8] mb-12">ALL YOU NEED<br/>TO KNOW</h2>
                     
                     <button className="inline-flex items-center justify-center bg-[#1B1C1E] text-white px-6 py-4 rounded-full text-sm font-medium hover:bg-black transition-colors">
                        View the full FAQ <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2"><path d="M11 1L17 7M17 7L11 13M17 7H0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -781,7 +781,7 @@ export function ProgramDetail() {
                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" alt="Build" className="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
             </div>
             <div className="relative z-10 text-center space-y-12">
-               <h2 className="text-5xl md:text-[80px] lg:text-[120px] font-display font-medium text-white uppercase leading-[0.9] tracking-tighter">
+               <h2 className="text-3xl sm:text-5xl md:text-[80px] lg:text-[120px] font-display font-medium text-white uppercase leading-[0.9] tracking-tighter">
                   BUILD THE <br /> EXCEPTIONAL <br /> TODAY AND <br /> LAUNCH NOW
                </h2>
                <button onClick={openApplyModal} className="button relative inline-flex items-center justify-center bg-white text-[#1B1C1E] px-12 py-5 text-sm font-bold uppercase tracking-widest transition-transform hover:scale-105 group overflow-hidden rounded-md">

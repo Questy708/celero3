@@ -217,7 +217,7 @@ function CaseForInfrastructure() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="grid lg:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {caseComparisons.map((item, i) => (
             <div
@@ -334,7 +334,7 @@ function XEmbassySection() {
             className="lg:col-span-5 flex flex-col gap-8"
           >
             <div className="bg-[#111111] text-[#FAFAFA] p-10 md:p-12 flex flex-col items-center justify-center text-center">
-              <div className="text-[100px] md:text-[140px] font-display font-medium leading-none tracking-tighter">42K</div>
+              <div className="text-[60px] sm:text-[100px] md:text-[140px] font-display font-medium leading-none tracking-tighter">42K</div>
               <div className="text-[11px] font-mono text-[#FAFAFA]/50 uppercase tracking-widest mt-2">Square Feet</div>
               <div className="text-[10px] font-mono text-[#FAFAFA]/30 uppercase tracking-widest mt-4">Per XEmbassy Node</div>
             </div>
@@ -439,7 +439,7 @@ function M1CoreSection() {
                 key={i}
                 suppressHydrationWarning
                 onClick={() => setActiveTier(i)}
-                className={`px-4 py-2.5 text-[11px] font-mono font-bold tracking-[0.15em] uppercase border transition-all ${
+                className={`px-4 py-2.5 text-[11px] font-mono font-bold tracking-[0.15em] uppercase border transition-all min-h-[44px] ${
                   activeTier === i
                     ? "bg-[#111111] text-white border-[#111111]"
                     : "bg-white text-[#111111]/40 border-[#111111]/10 hover:border-[#111111]/30"
@@ -616,7 +616,7 @@ function RouteHubsSection() {
           <button
             suppressHydrationWarning
             onClick={() => setActiveLeg(null)}
-            className={`px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase border transition-colors ${
+            className={`px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase border transition-colors min-h-[44px] ${
               activeLeg === null
                 ? "bg-[#111111] text-white border-[#111111]"
                 : "bg-white text-[#111111]/50 border-[#111111]/15 hover:border-[#111111]/30"
@@ -629,7 +629,7 @@ function RouteHubsSection() {
               key={leg.id}
               suppressHydrationWarning
               onClick={() => setActiveLeg(activeLeg === leg.id ? null : leg.id)}
-              className={`px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase border transition-colors ${
+              className={`px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase border transition-colors min-h-[44px] ${
                 activeLeg === leg.id
                   ? "text-white border-transparent"
                   : "bg-white text-[#111111]/50 border-[#111111]/15 hover:border-[#111111]/30"

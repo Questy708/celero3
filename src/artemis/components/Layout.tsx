@@ -226,7 +226,7 @@ function Nav() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-md border-b border-[#111111]/10 h-[80px] flex items-center px-6 md:px-12">
-        <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+        <div className="w-full max-w-[1400px] mx-auto flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-6 h-6 bg-[#FF4D00] flex items-center justify-center transition-transform group-hover:scale-105">
               <span className="text-white font-bold text-[10px]">X</span>
@@ -315,10 +315,10 @@ function Nav() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md flex flex-col"
           >
             {/* Close button */}
@@ -331,7 +331,7 @@ function Nav() {
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-white/60 hover:text-white transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-white/60 hover:text-white transition-colors rounded-sm hover:bg-white/10"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6" />
@@ -384,10 +384,13 @@ function Nav() {
             </div>
 
             {/* Bottom CTAs */}
-            <div className="px-6 pb-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div
+              className="px-6 pb-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+              style={{ paddingBottom: 'max(4rem, calc(4rem + env(safe-area-inset-bottom, 0px)))' }}
+            >
               <Link
                 to="/townsquare"
-                className="px-8 py-4 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#FF4D00]/90 transition-colors inline-flex items-center gap-2"
+                className="min-h-[44px] px-8 py-3 bg-[#FF4D00] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#FF4D00]/90 transition-colors inline-flex items-center justify-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <LogIn className="w-4 h-4" />
@@ -395,14 +398,14 @@ function Nav() {
               </Link>
               <Link
                 to="/capital"
-                className="px-8 py-4 border border-white/20 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-[#111111] transition-colors"
+                className="min-h-[44px] px-8 py-3 border border-white/20 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-[#111111] transition-colors inline-flex items-center justify-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Invest Now
               </Link>
               <Link
                 to="/join"
-                className="px-8 py-4 border border-white/20 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-[#111111] transition-colors"
+                className="min-h-[44px] px-8 py-3 border border-white/20 text-white text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-[#111111] transition-colors inline-flex items-center justify-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Join
@@ -462,21 +465,23 @@ function StickyInvestBar() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 48, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-0 left-0 right-0 z-40 h-12 bg-[#111111] text-white flex items-center justify-between px-4 md:px-6"
+          className="fixed bottom-0 left-0 right-0 z-40 bg-[#111111] text-white flex items-center justify-between px-4 md:px-6 min-h-[48px] md:h-12"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <span className="text-[11px] sm:text-[13px] font-medium text-white/70 truncate mr-4">
-            Invest in critical technology from $500
+          <span className="text-[11px] sm:text-[13px] font-medium text-white/70 truncate mr-2 sm:mr-4">
+            <span className="hidden sm:inline">Invest in critical technology from $500</span>
+            <span className="sm:hidden">Invest in critical tech from $500</span>
           </span>
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <Link
               to="/capital"
-              className="px-4 py-1.5 bg-[#FF4D00] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#FF4D00]/90 transition-colors whitespace-nowrap"
+              className="min-h-[44px] px-4 py-2 bg-[#FF4D00] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#FF4D00]/90 transition-colors whitespace-nowrap inline-flex items-center"
             >
               Invest Now →
             </Link>
             <button
               onClick={handleDismiss}
-              className="p-1 text-white/30 hover:text-white/70 transition-colors"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center text-white/30 hover:text-white/70 transition-colors"
               aria-label="Dismiss"
             >
               <X className="w-3.5 h-3.5" />
@@ -515,7 +520,7 @@ function ScrollToTopButton() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-20 right-6 z-30 w-10 h-10 bg-white border border-[#111111]/10 flex items-center justify-center hover:bg-[#111111] hover:text-white transition-colors shadow-sm"
+          className="fixed bottom-24 md:bottom-20 right-4 md:right-6 z-30 w-11 h-11 bg-white border border-[#111111]/10 flex items-center justify-center hover:bg-[#111111] hover:text-white transition-colors shadow-sm"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-4 h-4" />
@@ -543,7 +548,7 @@ function Footer() {
                   </div>
                </div>
                <div>
-                  <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mb-4">From thesis to operating company in 24 months.</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-medium tracking-tight mb-4">From thesis to operating company in 24 months.</h2>
                   <p className="text-white/50 font-medium">High-intensity venture building with funding, mentorship, and Route infrastructure built in.</p>
                </div>
             </div>
@@ -558,7 +563,7 @@ function Footer() {
                   </div>
                </div>
                <div>
-                  <h2 className="text-3xl md:text-5xl font-display font-medium tracking-tight mb-4">Invest in critical technology from $500.</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-5xl font-display font-medium tracking-tight mb-4">Invest in critical technology from $500.</h2>
                   <p className="text-white/50 font-medium">Six vehicles, one thesis: back the technology the next century needs, in the markets that need it most.</p>
                </div>
             </div>
@@ -567,12 +572,12 @@ function Footer() {
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-24">
           <div className="lg:col-span-6">
-            <div className="text-[60px] md:text-[80px] lg:text-[100px] font-display font-medium leading-[0.9] tracking-tight uppercase mb-8">
+            <div className="text-[36px] sm:text-[50px] md:text-[80px] lg:text-[100px] font-display font-medium leading-[0.9] tracking-tight uppercase mb-8">
               xCelero<br />Labs
             </div>
           </div>
 
-          <div className="lg:col-span-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="lg:col-span-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8">
             <div className="flex flex-col gap-4">
               <span className="text-[10px] font-bold tracking-widest uppercase text-white/30">xCelero Labs</span>
               <Link to="/about" className="text-[13px] font-bold text-white/60 hover:text-white transition-colors">About</Link>

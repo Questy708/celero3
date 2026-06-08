@@ -393,7 +393,7 @@ function Hero({ onSubscribe }: { onSubscribe: () => void }) {
   ];
 
   return (
-    <section className="relative bg-white text-[#111111] pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28 px-5 sm:px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
+    <section className="relative bg-white text-[#111111] pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-44 md:pb-28 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
       <div ref={ref} className="w-full max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -798,7 +798,7 @@ function InvestmentVehicles() {
                 </div>
 
                 {/* Key terms bar */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8 border-t border-b border-[#111111]/5 py-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8 border-t border-b border-[#111111]/5 py-5">
                   {activeVehicle.details.map((detail, i) => (
                     <div key={i}>
                       <span className="text-[9px] font-mono font-bold tracking-widest uppercase text-[#111111]/25 block mb-1">
@@ -1209,7 +1209,7 @@ function InvestmentTiers() {
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
                   {investmentTiers.map((tier, i) => {
                     const Icon = tier.icon;
                     const isSelected = selectedTierId === tier.id;
@@ -1749,7 +1749,7 @@ function InvestmentTiers() {
                 </div>
 
                 {/* Payment method cards: selectable */}
-                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                   {paymentMethods.map((method, i) => {
                     const isSelected = selectedPaymentId === method.id;
                     return (
@@ -2539,7 +2539,7 @@ function SubscribeModal({
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-[#111111]/5 transition-colors"
+                    className="min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-[#111111]/5 transition-colors"
                     aria-label="Close modal"
                   >
                     <X className="w-5 h-5 text-[#111111]/40" />

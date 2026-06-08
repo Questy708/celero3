@@ -176,7 +176,7 @@ export const routeLegs: RouteLeg[] = [
       ritualClosing: "Libation pouring ritual: an offering to the ancestors of trade, to the waters that carried both pain and profit, and to the soil that receives what returns. Each cohort member pours for what they came to build and what they leave behind.",
     },
     keyCities: [
-      { name: "Lagos", lat: 6.5, lng: 3.4, description: "The arc's velocity engine: 20M people, where prototypes become infrastructure at scale" },
+      { name: "Lagos", lat: 6.5, lng: 3.4, description: "The arc's velocity pillar: 20M people, where prototypes become infrastructure at scale" },
       { name: "Accra", lat: 5.6, lng: -0.2, description: "Stable gateway for the arc's fintech and creative ventures, designed to deploy what Lagos prototypes" },
       { name: "Abidjan", lat: 5.3, lng: -4.0, description: "Francophone node: financial services and cocoa logistics, bridging Anglophone and Francophone flow" },
       { name: "Dakar", lat: 14.7, lng: -17.4, description: "The arc's western anchor: maritime gateway and digital arts capital, where the Atlantic meets the Sahel" },
@@ -318,7 +318,7 @@ export const routeLegs: RouteLeg[] = [
       ritualClosing: "Dhow sailing ceremony: the cohort boards a traditional lateen-rigged vessel at sunset, letting the monsoon wind determine direction. An act of surrender to the original routing wisdom. The wind does not negotiate with borders.",
     },
     keyCities: [
-      { name: "Nairobi", lat: -1.3, lng: 36.8, description: "The corridor's prototyping engine: where M-Pesa proved a venture can become shared infrastructure" },
+      { name: "Nairobi", lat: -1.3, lng: 36.8, description: "The corridor's prototyping pillar: where M-Pesa proved a venture can become shared infrastructure" },
       { name: "Kigali", lat: -1.9, lng: 30.1, description: "The governance node: proof that coordination without uniformity is possible at national scale" },
       { name: "Dar es Salaam", lat: -6.8, lng: 39.3, description: "The corridor's maritime gateway: where Indian Ocean flow meets inland freight" },
       { name: "Kampala", lat: 0.3, lng: 32.6, description: "Lake Victoria hub: mobile money and agricultural trade, where inland flow seeks the coast" },
@@ -532,7 +532,7 @@ export const routeLegs: RouteLeg[] = [
     },
     keyCities: [
       { name: "Cairo", lat: 30.0, lng: 31.2, description: "20 million people: Africa's largest city and the league's energy corridor, where ancient and modern flow converge" },
-      { name: "Casablanca", lat: 33.6, lng: -7.6, description: "Morocco's economic engine: maritime and financial gateway, designed to route between Africa and Europe" },
+      { name: "Casablanca", lat: 33.6, lng: -7.6, description: "Morocco's economic pillar: maritime and financial gateway, designed to route between Africa and Europe" },
       { name: "Tunis", lat: 36.8, lng: 10.2, description: "Carthage's heir: where Mediterranean trade and digital governance can be prototyped at civilizational scale" },
       { name: "Dubai", lat: 25.2, lng: 55.3, description: "Global capital hub: where diaspora investment and logistics infrastructure can be structured for the league" },
       { name: "London", lat: 51.5, lng: -0.1, description: "Financial gateway: capital markets and regulatory bridge, the league's interface with global institutional flow" },
@@ -717,7 +717,7 @@ export const MAP_LOCATIONS: MapLocation[] = [
   { id: "bulawayo", name: "BULAWAYO", x: 55.1, y: 72.7, labelPos: "right", legId: "southern-arc", legNumber: 5, legColor: "#99854D", description: "Zimbabwe's second city: rail heritage and industrial base", countries: ["Zimbabwe", "Zambia", "Angola", "Lesotho", "Eswatini", "Malawi"] },
   // Leg 6 – North Africa & Global Gateways
   { id: "cairo", name: "CAIRO", x: 55.8, y: 40.8, labelPos: "right", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "20 million people: Africa's largest city and energy corridor", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
-  { id: "casablanca", name: "CASABLANCA", x: 45.3, y: 38.5, labelPos: "left", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "Morocco's economic engine: maritime and financial gateway", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
+  { id: "casablanca", name: "CASABLANCA", x: 45.3, y: 38.5, labelPos: "left", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "Morocco's economic pillar: maritime and financial gateway", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
   { id: "tunis", name: "TUNIS", x: 50.1, y: 36.5, labelPos: "right", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "Carthage's heir: Mediterranean trade and digital governance", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
   { id: "dubai", name: "DUBAI", x: 62.3, y: 43.9, labelPos: "right", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "Global capital hub: diaspora investment and logistics", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
   { id: "london", name: "LONDON", x: 47.4, y: 27.2, labelPos: "right", legId: "north-africa-global", legNumber: 6, legColor: "#FF6B2B", description: "Financial gateway: capital markets and regulatory bridge", countries: ["Egypt", "Morocco", "Algeria", "Tunisia", "+ 19 global jurisdictions"] },
