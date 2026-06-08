@@ -467,8 +467,7 @@ function MissionBridge() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   MISSION CLOCK: Countdown to Year One of the Ba-Hanse
-   SpaceX-style mission architecture — not a pitch, a launch sequence
+   THE PLATFORM: Countdown ticker + thesis + pillar cards
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* Live countdown hook — ticks every second toward a target date */
@@ -500,34 +499,38 @@ function BentoGrid() {
 
   // Year One launch: March 15, 2027 — first cohort departs the Gulf of Guinea
   const launchDate = new Date("2027-03-15T00:00:00Z");
-  const { days, hours, minutes, seconds, elapsed } = useCountdown(launchDate);
+  const { days, hours, minutes, seconds } = useCountdown(launchDate);
 
-  const missionSystems = [
+  const pillars = [
     {
-      callsign: "GROUND",
       title: "Infrastructure",
-      description: "190 launch pads across 39 countries. Physical spaces, legal frameworks, shared systems — the pads from which everything lifts off.",
+      stat: "190",
+      statLabel: "Hubs · 39 Countries",
+      description: "Physical spaces, legal frameworks, and shared systems that let ventures deploy faster and compound across borders.",
       icon: Building2,
       link: "/platform",
     },
     {
-      callsign: "PAYLOAD",
       title: "Ventures",
-      description: "40+ ventures building critical technology. This is what we're carrying — the technology the next century requires.",
+      stat: "40+",
+      statLabel: "Portfolio Companies",
+      description: "From energy to space — critical technology designed for the markets that need it most and the century that demands it.",
       icon: Rocket,
       link: "/ventures",
     },
     {
-      callsign: "FUEL",
       title: "Capital",
-      description: "6 investment vehicles, $500 to $250K+. Aligned capital for every stage — because breakthroughs don't wait for funding.",
+      stat: "6",
+      statLabel: "Investment Vehicles",
+      description: "From $500 to $250K+, aligned capital designed for every stage — so breakthroughs don't stall for funding.",
       icon: Coins,
       link: "/capital",
     },
     {
-      callsign: "CREW",
       title: "Community",
-      description: "XCitizens, fellows, operators. The people who fly the mission — a mobile university for civilizational prototyping.",
+      stat: "100",
+      statLabel: "XCitizens per Cohort",
+      description: "Operators and builders moving through the Route together — a mobile university for civilizational prototyping.",
       icon: Users,
       link: "/programs",
     },
@@ -543,145 +546,131 @@ function BentoGrid() {
   return (
     <section ref={ref} className="py-20 md:py-32 px-6 md:px-12 lg:px-20">
       <div className="max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm overflow-hidden">
-        {/* ── Mission header: callsign + countdown ── */}
-        <div className="px-8 md:px-16 lg:px-24 pt-14 md:pt-20 pb-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex items-center gap-3 mb-10"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#FF4D00] animate-pulse" />
-            <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00]">
-              Mission Clock Active
-            </span>
-          </motion.div>
-        </div>
-
-        {/* ── Countdown ── */}
-        <div className="px-8 md:px-16 lg:px-24 pb-12 md:pb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
+        {/* ── Countdown ticker bar ── */}
+        <div className="border-b border-white/[0.06]">
+          <div className="flex items-center">
+            {/* Mission status indicator */}
+            <div className="flex items-center gap-2.5 px-6 md:px-10 py-5 border-r border-white/[0.06] shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF4D00] animate-pulse" />
+              <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/60">
+                T-0
+              </span>
+            </div>
             {/* Countdown digits */}
-            <div className="flex items-baseline gap-2 md:gap-3 mb-8 md:mb-10">
-              {countdownUnits.map((unit, i) => (
-                <div key={unit.label} className="flex items-baseline">
-                  <span className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[100px] font-display font-medium tracking-[-0.04em] text-white leading-none tabular-nums">
-                    {pad2(unit.value)}
-                  </span>
-                  {i < countdownUnits.length - 1 && (
-                    <span className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[100px] font-display font-medium tracking-[-0.04em] text-white/15 leading-none mx-1 md:mx-2">
-                      :
-                    </span>
-                  )}
-                </div>
-              ))}
+            {countdownUnits.map((unit, i) => (
+              <motion.div
+                key={unit.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
+                className={`flex items-center gap-2.5 px-4 md:px-7 py-5 shrink-0 ${
+                  i < countdownUnits.length - 1 ? "border-r border-white/[0.06]" : ""
+                }`}
+              >
+                <span className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white leading-none tabular-nums">
+                  {pad2(unit.value)}
+                </span>
+                <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/25">
+                  {unit.label}
+                </span>
+              </motion.div>
+            ))}
+            {/* Launch date label */}
+            <div className="hidden md:flex items-center ml-auto px-6 md:px-10 py-5 shrink-0">
+              <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/15">
+                Mar 15, 2027 · Gulf of Guinea · Leg 1
+              </span>
             </div>
-
-            {/* Unit labels */}
-            <div className="flex gap-2 md:gap-3 mb-12 md:mb-16 -mt-4">
-              {countdownUnits.map((unit, i) => (
-                <div key={unit.label} className="flex items-baseline">
-                  <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-white/20 w-[48px] sm:w-[64px] md:w-[80px] lg:w-[100px] text-center">
-                    {unit.label}
-                  </span>
-                  {i < countdownUnits.length - 1 && (
-                    <span className="w-1 md:w-2 mx-1 md:mx-2" />
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Mission statement */}
-            <div className="max-w-2xl">
-              <h2 className="text-[28px] sm:text-[40px] md:text-[52px] lg:text-[60px] font-display font-medium tracking-[-0.03em] leading-[0.92] text-white mb-6 md:mb-8">
-                The next civilization<br />
-                <span className="text-white/20">is not a prediction.</span><br />
-                <em className="italic font-serif text-[#FF4D00]">It&apos;s a launch.</em>
-              </h2>
-              <p className="text-[15px] md:text-[17px] leading-[1.65] text-white/25 font-medium mb-4">
-                Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South — youngest populations, fastest-growing markets, boldest ambitions.
-              </p>
-              <p className="text-[14px] md:text-[16px] leading-[1.65] text-white/20 font-medium">
-                But isolated breakthroughs won&apos;t compound.{" "}
-                <span className="text-white/60 font-semibold">Connected ones can.</span> On March 15, 2027, the first Ba-Hanse cohort departs the Gulf of Guinea — 190 hubs, 39 countries, one circulatory system where prosperity doesn&apos;t remain a promise but becomes a product. Four mission systems. One countdown.
-              </p>
-            </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* ── Divider ── */}
-        <div className="border-t border-white/[0.06]" />
+        {/* ── Thesis + Pillars: side-by-side on desktop ── */}
+        <div className="grid lg:grid-cols-12">
+          {/* Left: Thesis statement — sticky on scroll */}
+          <div className="lg:col-span-5 px-8 md:px-14 lg:px-20 py-14 md:py-20 lg:py-24 lg:sticky lg:top-[80px] lg:self-start border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#FF4D00] mb-6 block">
+                The Platform
+              </span>
+              <h2 className="text-[32px] sm:text-[44px] md:text-[56px] lg:text-[64px] font-display font-medium tracking-[-0.035em] leading-[0.92] text-white mb-8 md:mb-10">
+                Four engines,{" "}
+                <em className="italic font-serif text-[#FF4D00]">one thesis</em>.
+              </h2>
+              <div className="space-y-5">
+                <p className="text-[17px] md:text-[19px] leading-[1.6] text-white/40 font-medium">
+                  Critical technology creates industries, builds cities, and unlocks wealth for generations. The next century belongs to the Global South — youngest populations, fastest-growing markets, boldest ambitions.
+                </p>
+                <p className="text-[14px] md:text-[16px] leading-[1.65] text-white/25 font-medium">
+                  But isolated breakthroughs won&apos;t compound on their own.{" "}
+                  <span className="text-white/70 font-semibold">Connected ones can.</span> xCelero unites 190 hubs across 39 countries into one commercialization engine — infrastructure, ventures, capital, community — so prosperity doesn&apos;t remain a promise but can become a product.
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
-        {/* ── Mission systems ── */}
-        <div className="px-8 md:px-16 lg:px-24 py-12 md:py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="mb-8"
-          >
-            <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-white/15">
-              Mission Systems
-            </span>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-px bg-white/[0.04]">
-            {missionSystems.map((system, i) => {
-              const Icon = system.icon;
+          {/* Right: Pillar cards stacked vertically */}
+          <div className="lg:col-span-7">
+            {pillars.map((pillar, i) => {
+              const Icon = pillar.icon;
               return (
                 <motion.div
-                  key={system.callsign}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  key={pillar.title}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.7, delay: 0.3 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Link
-                    to={system.link}
-                    className="group block bg-[#0A0A0A] hover:bg-white/[0.02] transition-colors duration-500"
+                    to={pillar.link}
+                    className="group block"
                   >
-                    <div className="p-6 md:p-8 lg:p-10">
-                      {/* Callsign + Icon */}
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 flex items-center justify-center border border-white/[0.08] group-hover:border-[#FF4D00]/30 transition-colors duration-300">
-                            <Icon className="w-4 h-4 text-white/15 group-hover:text-[#FF4D00] transition-colors duration-300" strokeWidth={1.5} />
-                          </div>
-                          <span className="text-[9px] font-mono font-bold tracking-[0.25em] uppercase text-[#FF4D00]/40 group-hover:text-[#FF4D00]/70 transition-colors duration-300">
-                            {system.callsign}
-                          </span>
+                    <div className={`relative overflow-hidden px-8 md:px-14 py-10 md:py-14 hover:bg-white/[0.02] transition-colors duration-500 ${
+                      i < pillars.length - 1 ? "border-b border-white/[0.06]" : ""
+                    }`}>
+                      {/* Watermark number */}
+                      <span className="absolute top-6 right-8 text-[72px] md:text-[96px] font-display font-medium tracking-[-0.04em] text-white/[0.03] leading-none select-none pointer-events-none">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+
+                      <div className="relative flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
+                        {/* Icon */}
+                        <div className="w-11 h-11 shrink-0 flex items-center justify-center border border-white/10 group-hover:border-[#FF4D00]/30 transition-colors duration-300">
+                          <Icon className="w-[18px] h-[18px] text-white/20 group-hover:text-[#FF4D00] transition-colors duration-300" strokeWidth={1.5} />
                         </div>
-                        <ArrowRight className="w-4 h-4 text-white/0 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all duration-300" />
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline gap-4 mb-4">
+                            <h3 className="text-[22px] md:text-[28px] font-display font-medium tracking-[-0.02em] text-white group-hover:text-[#FF4D00] transition-colors duration-300">
+                              {pillar.title}
+                            </h3>
+                            <ArrowRight className="w-4 h-4 text-white/0 group-hover:text-[#FF4D00] group-hover:translate-x-1 transition-all duration-300 shrink-0" />
+                          </div>
+
+                          <p className="text-[13px] md:text-[14px] leading-[1.75] text-white/20 group-hover:text-white/40 transition-colors duration-300 mb-6 max-w-md">
+                            {pillar.description}
+                          </p>
+
+                          {/* Stat badge */}
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-[32px] md:text-[40px] font-display font-medium tracking-[-0.03em] text-white/80 leading-none">
+                              {pillar.stat}
+                            </span>
+                            <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]/40">
+                              {pillar.statLabel}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-
-                      {/* Title */}
-                      <h3 className="text-[20px] md:text-[24px] font-display font-medium tracking-[-0.02em] text-white/80 group-hover:text-white transition-colors duration-300 mb-3">
-                        {system.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-[12px] md:text-[13px] leading-[1.75] text-white/15 group-hover:text-white/35 transition-colors duration-300">
-                        {system.description}
-                      </p>
                     </div>
                   </Link>
                 </motion.div>
               );
             })}
           </div>
-        </div>
-
-        {/* ── Footer strip ── */}
-        <div className="border-t border-white/[0.06] px-8 md:px-16 lg:px-24 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/10">
-            T-0 · March 15, 2027 · Gulf of Guinea · Leg 1 Departure
-          </span>
-          <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-white/10">
-            Ba-Hanse Year One
-          </span>
         </div>
       </div>
     </section>
