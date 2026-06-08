@@ -98,3 +98,29 @@ Work Log:
 Stage Summary:
 - Platform section now uses a modern cinematic dark layout with stat ticker + thesis + 2×2 card grid
 - Design is cohesive and professional with smooth hover animations and accent gradients
+
+---
+Task ID: 5
+Agent: Main Agent
+Task: Completely rewrite Community page with a new modern 6-section layout
+
+Work Log:
+- Analyzed existing Community.tsx: 12 sections with heavy redundancy (Gallery, Stats, Events, Testimonials, Pillars, Rhythm, Past Highlights, Passport, Town Square, CTA)
+- Studied PreambleSection in RoutesPage.tsx for dark immersive manifesto style reference
+- Completely rewrote Community.tsx with a tighter, more editorial 6-section layout:
+  1. HERO — Cinematic dark hero with full-bleed Unsplash image, gradient overlay, display heading "Alone, you build a product. Together, we build a civilization.", stat strip at bottom (1,200+ XCitizens · 190 Hubs · 39 Countries · 840+ Connections/mo)
+  2. THE MANIFESTO — Dark container with "The Fourth Engine" label, thesis about community as the bloodstream, 4-column pillar grid (Trust-Based Introductions, Borderless Collaboration, Knowledge Transfer, Compound Returns) with icons
+  3. THE ARCHETYPES — 7/5 split layout, left side with "Four roles, one flywheel" thesis, right side with stacked callsign-style archetype cards (FOUNDER, OPERATOR, INVESTOR, MENTOR) with icons and taglines
+  4. THE RHYTHM — Dark container with "Cadence" label, heading "The community compounds when it convenes", 4-column rhythm grid with orange cadence badges (Weekly, Monthly, Quarterly, Annually)
+  5. TESTIMONIALS + PASSPORT — Light background split layout, left side with 3 stacked testimonials (Chioma Adekunle, Dr. Kofi Mensah, Amara Diallo), right side with xCitizen Passport benefits checklist with orange check icons
+  6. CTA — Dark closing with heading "The network is forming. Your seat is waiting.", two buttons (Join as a Founder → /join, Join as an Investor → /capital), bottom mono text "190 hubs · 39 countries · One flywheel"
+- Removed EventDetailModal, gallery collage, past highlights, town square, and all old data constants
+- All sections use consistent dark container pattern: `px-6 md:px-12 lg:px-20` > `max-w-[1400px] mx-auto bg-[#0A0A0A] rounded-sm`
+- All sections use `useInView` for scroll animations with `[0.22, 1, 0.36, 1]` easing
+- Lint passes cleanly
+- Dev server compiles successfully
+
+Stage Summary:
+- Community page reduced from 12 sections to 6 focused, editorial sections
+- Design matches site aesthetic: dark containers, editorial typography, Framer Motion animations, #FF4D00 brand color
+- Page feels like a manifesto for collective momentum rather than a generic community page
