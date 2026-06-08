@@ -615,7 +615,7 @@ function MapSection({
     <section ref={ref} className="border-b border-[#111111]/10">
       {/* Section label + filter buttons */}
       <div className="py-12 md:py-16 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full max-w-[1400px] mx-auto">
           <div className="flex items-center gap-4 mb-6">
             <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
               The Six Legs, Interactive Map
@@ -663,7 +663,7 @@ function MapSection({
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="py-8 md:py-12 px-6 md:px-12 lg:px-20 bg-white"
       >
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-[1400px] mx-auto">
           <BlueprintMap activeLeg={activeLeg} setActiveLeg={setActiveLeg} onLegSelectFromMap={onLegSelectFromMap} isAutoPlaying={isAutoPlaying} />
         </div>
       </motion.div>
@@ -1074,9 +1074,11 @@ function ArcAccordion({
   return (
     <section ref={ref} className="border-b border-[#111111]/10">
       <div className="py-12 md:py-16 px-6 md:px-12 lg:px-20 border-b border-[#111111]/10">
-        <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
-          The Arcs, In Detail
-        </span>
+        <div className="w-full max-w-[1400px] mx-auto">
+          <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#FF4D00]">
+            The Arcs, In Detail
+          </span>
+        </div>
       </div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -1084,7 +1086,7 @@ function ArcAccordion({
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="px-6 md:px-12 lg:px-20 py-6 md:py-8"
       >
-        <div className="w-full max-w-7xl mx-auto space-y-2">
+        <div className="w-full max-w-[1400px] mx-auto space-y-2">
           {routeLegs.map((leg) => {
             const isExpanded = expandedLeg === leg.id;
             return (
@@ -2261,7 +2263,7 @@ function InvitationSection() {
       ref={ref}
     >
       <div className="max-w-[1400px] mx-auto bg-[#111111] text-white px-6 md:px-12 lg:px-20 py-20 md:py-32 rounded-sm">
-      <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="w-full max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

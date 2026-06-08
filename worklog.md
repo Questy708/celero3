@@ -30,3 +30,23 @@ Stage Summary:
 - API routes functional
 - Admin dashboard accessible at #/admin
 - Town Square community forum at #/townsquare
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Fix alignment issue on Routes/The Ba-Hanse page - sections not mid/full width
+
+Work Log:
+- Analyzed the standard width pattern used across the site: `max-w-[1400px] mx-auto` with `px-6 md:px-12 lg:px-20` padding
+- Identified 5 deviations in RoutesPage.tsx where narrower containers were used:
+  1. MapSection filter bar: `max-w-7xl` (1280px) → `max-w-[1400px]`
+  2. MapSection map container: `max-w-6xl` (1152px) → `max-w-[1400px]`
+  3. ArcAccordion header row: missing max-width container → added `max-w-[1400px] mx-auto`
+  4. ArcAccordion accordion panels: `max-w-7xl` (1280px) → `max-w-[1400px]`
+  5. InvitationSection grid: `max-w-7xl` (1280px) → `max-w-[1400px]`
+- Verified with VLM vision analysis: all sections now consistently aligned at full width
+- Lint passes cleanly
+
+Stage Summary:
+- All 5 alignment deviations fixed in RoutesPage.tsx
+- Routes page now uses consistent `max-w-[1400px]` containers matching the site standard
